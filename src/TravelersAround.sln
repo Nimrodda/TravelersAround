@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Model", "TravelersAround.Model\TravelersAround.Model.csproj", "{72284192-C787-4F25-A88B-EBDF769EE695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Repository", "TravelersAround.Repository\TravelersAround.Repository.csproj", "{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Test", "TravelersAround.Test\TravelersAround.Test.csproj", "{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6B733214-4CB1-4AAB-883D-26AFB82A8D0D}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		TravelersAround1.vsmdi = TravelersAround1.vsmdi
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TravelersAround1.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72284192-C787-4F25-A88B-EBDF769EE695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72284192-C787-4F25-A88B-EBDF769EE695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72284192-C787-4F25-A88B-EBDF769EE695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72284192-C787-4F25-A88B-EBDF769EE695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
