@@ -17,6 +17,6 @@ namespace TravelersAround.Model
         void Add<TEntity>(TEntity entity) where TEntity : class;
         void Remove<TEntity>(TEntity entity) where TEntity : class;
 
-        OperationStatus Commit();
+        int Commit();
     }
 }

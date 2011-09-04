@@ -12,5 +12,6 @@ namespace TravelersAround.Model.Entities
         public bool IsRead { get; set; }
         public virtual Traveler Traveler { get; set; }
         public virtual Message Message { get; set; }
+        public virtual Folder Folder { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using TravelersAround.Model.Entities;
 
 namespace TravelersAround.Repository
 {
-    internal partial class TravelersAroundEntities : ObjectContext
+    internal class TravelersAroundEntities : ObjectContext
     {
         #region Constructors
 
@@ -46,7 +46,7 @@ namespace TravelersAround.Repository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        internal ObjectSet<Message> Messages
+        internal IObjectSet<Message> Messages
         {
             get
             {
@@ -57,12 +57,12 @@ namespace TravelersAround.Repository
                 return _Messages;
             }
         }
-        private ObjectSet<Message> _Messages;
+        private IObjectSet<Message> _Messages;
 
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        internal ObjectSet<Traveler> Travelers
+        internal IObjectSet<Traveler> Travelers
         {
             get
             {
@@ -73,12 +73,12 @@ namespace TravelersAround.Repository
                 return _Travelers;
             }
         }
-        private ObjectSet<Traveler> _Travelers;
+        private IObjectSet<Traveler> _Travelers;
 
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        internal ObjectSet<TravelerMessage> TravelerMessages
+        internal IObjectSet<TravelerMessage> TravelerMessages
         {
             get
             {
@@ -89,7 +89,7 @@ namespace TravelersAround.Repository
                 return _TravelerMessages;
             }
         }
-        private ObjectSet<TravelerMessage> _TravelerMessages;
+        private IObjectSet<TravelerMessage> _TravelerMessages;
 
         #endregion
     } 

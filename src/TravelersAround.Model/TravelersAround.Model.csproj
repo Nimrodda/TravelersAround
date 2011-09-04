@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Folder.cs" />
+    <Compile Include="Factories\FolderFactory.cs" />
+    <Compile Include="Factories\TravelerMessageFactory.cs" />
+    <Compile Include="Factories\OperationStatusFactory.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IUnitOfWorkRepository.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Traveler.cs" />
     <Compile Include="Entities\TravelerMessage.cs" />
@@ -50,6 +56,10 @@
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\ProfileService.cs" />
+    <Compile Include="Services\RelationshipService.cs" />
+    <Compile Include="Services\SearchService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

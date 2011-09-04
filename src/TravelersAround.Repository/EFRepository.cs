@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using TravelersAround.Model;
+using System.Data.Objects;
 
 namespace TravelersAround.Repository
 {
     public class EFRepository : IRepository
     {
-        private TravelersAroundEntities _dataContext;
+        private ObjectContext _dataContext;
 
         public EFRepository()
         {
             _dataContext = new TravelersAroundEntities();
+        }
+
+        public EFRepository(ObjectContext dataContext)
+        {
+            _dataContext = dataContext;
         }
 
         public TEntity FindBy<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
@@ -80,19 +86,9 @@ namespace TravelersAround.Repository
             }
         }
 
-        public OperationStatus Commit()
+        public int Commit()
         {
-            OperationStatus operStat;
-            try
-            {
-                operStat = new OperationStatus { Succeeded = _dataContext.SaveChanges() > 0 };
-            }
-            catch (Exception ex)
-            {
-                operStat = OperationStatus.CreateFromException("Save changes failed", ex);
-            }
-            
-            return operStat;
+            return _dataContext.SaveChanges();
         }
         
     }
