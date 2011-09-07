@@ -11,12 +11,11 @@ namespace TravelersAround.Model.Factories
         public static TravelerMessage CreateTravelerMessageFrom(Traveler traveler, Message message)
         {
             TravelerMessage travelerMsg = new TravelerMessage();
-            travelerMsg.MessageID = message.MessageID;
             travelerMsg.Message = message;
             travelerMsg.Traveler = traveler;
             travelerMsg.TravelerID = traveler.TravelerID;
             travelerMsg.IsRead = false;
-            travelerMsg.Folder = FolderFactory.CreateFolderFrom(traveler, message);
+            travelerMsg.FolderID = FolderFactory.CreateFolderFrom(traveler, message);
             return travelerMsg;
         }
     }

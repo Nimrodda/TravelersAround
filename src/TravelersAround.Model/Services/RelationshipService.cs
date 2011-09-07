@@ -22,34 +22,24 @@ namespace TravelersAround.Model.Services
             _repository = repository;
         }
 
-        public OperationStatus ModifyFriendsList(Operation operation, Guid travelerID, Guid friendID)
+        public void ModifyFriendsList(Operation operation, Guid travelerID, Guid friendID)
         {
-            OperationStatus operStat;
+            
+            Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
+            Traveler friend = _repository.FindBy<Traveler>(f => f.TravelerID == friendID);
 
-            try
+            switch (operation)
             {
-                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-                Traveler friend = _repository.FindBy<Traveler>(f => f.TravelerID == friendID);
-
-                switch (operation)
-                {
-                    case Operation.RemoveFriend:
-                        traveler.RemoveFriend(friend);
-                        break;
-                    case Operation.AddFriend:
-                        traveler.AddFriend(friend);
-                        break;
-                }
+                case Operation.RemoveFriend:
+                    traveler.RemoveFriend(friend);
+                    break;
+                case Operation.AddFriend:
+                    traveler.AddFriend(friend);
+                    break;
+            }
                 
-                _repository.Save<Traveler>(traveler);
-                operStat = OperationStatusFactory.CreateFromBoolean(_repository.Commit() > 0);
-            }
-            catch (Exception ex)
-            {
-                operStat = OperationStatusFactory.CreateFromException(ex);
-            }
-
-            return operStat;
+            _repository.Save<Traveler>(traveler);
+            _repository.Commit();
         }
     }
 }

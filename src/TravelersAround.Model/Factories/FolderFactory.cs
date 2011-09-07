@@ -8,21 +8,16 @@ namespace TravelersAround.Model.Factories
 {
     public static class FolderFactory
     {
-        public static Folder CreateFolderFrom(Traveler traveler, Message message)
+        public static int CreateFolderFrom(Traveler traveler, Message message)
         {
             if (traveler.TravelerID == message.AuthorID)
             {
-                return new Folder
-                {
-                    FolderID = (int)FolderType.Sent
-                };
+                return (int)FolderType.Sent;
+                
             }
             else
             {
-                return new Folder
-                {
-                    FolderID = (int)FolderType.Inbox
-                };
+                return (int)FolderType.Inbox;
             }
         }
     }

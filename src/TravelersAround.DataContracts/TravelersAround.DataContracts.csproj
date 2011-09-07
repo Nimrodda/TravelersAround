@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{72284192-C787-4F25-A88B-EBDF769EE695}</ProjectGuid>
+    <ProjectGuid>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TravelersAround.Model</RootNamespace>
-    <AssemblyName>TravelersAround.Model</AssemblyName>
+    <RootNamespace>TravelersAround.DataContracts</RootNamespace>
+    <AssemblyName>TravelersAround.DataContracts</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,9 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,32 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Folder.cs" />
-    <Compile Include="Exceptions\InvalidEntityTypeException.cs" />
-    <Compile Include="Exceptions\InvalidPredicateException.cs" />
-    <Compile Include="Exceptions\TravelerNotFoundException.cs" />
-    <Compile Include="Factories\MessageFactory.cs" />
-    <Compile Include="Factories\FolderFactory.cs" />
-    <Compile Include="Factories\TravelerMessageFactory.cs" />
-    <Compile Include="Factories\OperationStatusFactory.cs" />
-    <Compile Include="Exceptions\FriendAlreadyExistsException.cs" />
-    <Compile Include="Exceptions\FriendDoesNotExistException.cs" />
-    <Compile Include="Exceptions\FriendListEmptyException.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IUnitOfWorkRepository.cs" />
-    <Compile Include="Entities\Message.cs" />
-    <Compile Include="Entities\Traveler.cs" />
-    <Compile Include="Entities\TravelerMessage.cs" />
-    <Compile Include="Entities\OperationStatus.cs" />
-    <Compile Include="IAggregateRoot.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Exceptions\MessageDoesNotExistException.cs" />
-    <Compile Include="Exceptions\NoMessagesExistException.cs" />
+    <Compile Include="Responses\AddFriendResponse.cs" />
+    <Compile Include="Responses\ListMessagesResponse.cs" />
+    <Compile Include="Responses\ReadMessageResponse.cs" />
+    <Compile Include="Responses\RemoveFriendResponse.cs" />
+    <Compile Include="Responses\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\MessageService.cs" />
-    <Compile Include="Services\ProfileService.cs" />
-    <Compile Include="Services\RelationshipService.cs" />
-    <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Responses\SearchResponse.cs" />
+    <Compile Include="Responses\SendMessageResponse.cs" />
+    <Compile Include="Responses\UpdateProfileResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

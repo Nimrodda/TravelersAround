@@ -16,8 +16,17 @@ namespace TravelersAround.Model.Entities
         public virtual Traveler Author { get; set; }
         public virtual IList<TravelerMessage> Recipients { get; set; }
 
+        public bool HasRecipients()
+        {
+            return Recipients != null;
+        }
+
         public void AddRecipient(Traveler recipient)
         {
+            if (!HasRecipients())
+            {
+                Recipients = new List<TravelerMessage>();
+            }
             Recipients.Add(TravelerMessageFactory.CreateTravelerMessageFrom(recipient, this));
         }
 

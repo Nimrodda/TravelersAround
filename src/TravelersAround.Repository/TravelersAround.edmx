@@ -161,30 +161,30 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TravelersAround.Model.Entities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="TravelersAroundEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="TravelersAroundEntities" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Messages" EntityType="TravelersAround.Model.Entities.Message" />
           <EntitySet Name="Travelers" EntityType="TravelersAround.Model.Entities.Traveler" />
-          <EntitySet Name="TravelerMessages" EntityType="TravelersAround.Model.Entities.TravelerMessage" />
           <AssociationSet Name="FK_tra_Messages_tra_Travelers" Association="TravelersAround.Model.Entities.FK_tra_Messages_tra_Travelers">
             <End Role="tra_Travelers" EntitySet="Travelers" />
             <End Role="tra_Messages" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tra_TravelersMessages_tra_Messages" Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages">
-            <End Role="tra_Messages" EntitySet="Messages" />
-            <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tra_TravelersMessages_tra_Travelers" Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers">
-            <End Role="tra_Travelers" EntitySet="Travelers" />
-            <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
           </AssociationSet>
           <AssociationSet Name="tra_TravelersRelationships" Association="TravelersAround.Model.Entities.tra_TravelersRelationships">
             <End Role="tra_Travelers" EntitySet="Travelers" />
             <End Role="tra_Travelers1" EntitySet="Travelers" />
           </AssociationSet>
           <EntitySet Name="Folders" EntityType="TravelersAround.Model.Entities.Folder" />
+          <EntitySet Name="TravelerMessages" EntityType="TravelersAround.Model.Entities.TravelerMessage" />
           <AssociationSet Name="FK_tra_TravelersMessages_Folders" Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_Folders">
             <End Role="tra_Folders" EntitySet="Folders" />
-            <End Role="TravelerMessage" EntitySet="TravelerMessages" />
+            <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tra_TravelersMessages_tra_Messages" Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tra_TravelersMessages_tra_Travelers" Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers">
+            <End Role="Traveler" EntitySet="Travelers" />
+            <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Message">
@@ -196,7 +196,7 @@
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SentDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Author" Relationship="TravelersAround.Model.Entities.FK_tra_Messages_tra_Travelers" FromRole="tra_Messages" ToRole="tra_Travelers" />
-          <NavigationProperty Name="Recipients" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" FromRole="tra_Messages" ToRole="tra_TravelersMessages" />
+          <NavigationProperty Name="Recipients" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" FromRole="Message" ToRole="tra_TravelersMessages" />
         </EntityType>
         <EntityType Name="Traveler">
           <Key>
@@ -211,48 +211,12 @@
           <Property Name="IsAvailable" Type="Boolean" />
           <Property Name="Longtitude" Type="Double" />
           <Property Name="Latitude" Type="Double" />
-          <NavigationProperty Name="Messages" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" FromRole="tra_Travelers" ToRole="tra_TravelersMessages" />
           <NavigationProperty Name="Relationships" Relationship="TravelersAround.Model.Entities.tra_TravelersRelationships" FromRole="tra_Travelers" ToRole="tra_Travelers1" />
-        </EntityType>
-        <EntityType Name="TravelerMessage">
-          <Key>
-            <PropertyRef Name="MessageID" />
-            <PropertyRef Name="TravelerID" />
-          </Key>
-          <Property Name="MessageID" Type="Guid" Nullable="false" />
-          <Property Name="TravelerID" Type="Guid" Nullable="false" />
-          <Property Name="IsRead" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Message" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" FromRole="tra_TravelersMessages" ToRole="tra_Messages" />
-          <NavigationProperty Name="Traveler" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" FromRole="tra_TravelersMessages" ToRole="tra_Travelers" />
-          <NavigationProperty Name="Folder" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_Folders" FromRole="TravelerMessage" ToRole="tra_Folders" />
+          <NavigationProperty Name="Messages" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" FromRole="Traveler" ToRole="tra_TravelersMessages" />
         </EntityType>
         <Association Name="FK_tra_Messages_tra_Travelers">
           <End Role="tra_Travelers" Type="TravelersAround.Model.Entities.Traveler" Multiplicity="1" />
           <End Role="tra_Messages" Type="TravelersAround.Model.Entities.Message" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_tra_TravelersMessages_tra_Messages">
-          <End Role="tra_Messages" Type="TravelersAround.Model.Entities.Message" Multiplicity="1" />
-          <End Role="tra_TravelersMessages" Type="TravelersAround.Model.Entities.TravelerMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tra_Messages">
-              <PropertyRef Name="MessageID" />
-            </Principal>
-            <Dependent Role="tra_TravelersMessages">
-              <PropertyRef Name="MessageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tra_TravelersMessages_tra_Travelers">
-          <End Role="tra_Travelers" Type="TravelersAround.Model.Entities.Traveler" Multiplicity="1" />
-          <End Role="tra_TravelersMessages" Type="TravelersAround.Model.Entities.TravelerMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tra_Travelers">
-              <PropertyRef Name="TravelerID" />
-            </Principal>
-            <Dependent Role="tra_TravelersMessages">
-              <PropertyRef Name="TravelerID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <Association Name="tra_TravelersRelationships">
           <End Role="tra_Travelers" Type="TravelersAround.Model.Entities.Traveler" Multiplicity="*" />
@@ -265,9 +229,53 @@
           <Property Type="Int32" Name="FolderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TravelerMessage">
+          <Key>
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="TravelerID" />
+          </Key>
+          <Property Type="Guid" Name="MessageID" Nullable="false" />
+          <Property Type="Guid" Name="TravelerID" Nullable="false" />
+          <Property Type="Boolean" Name="IsRead" Nullable="false" />
+          <Property Type="Int32" Name="FolderID" Nullable="false" />
+          <NavigationProperty Name="Message" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" FromRole="tra_TravelersMessages" ToRole="Message" />
+          <NavigationProperty Name="Traveler" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" FromRole="tra_TravelersMessages" ToRole="Traveler" />
+        </EntityType>
         <Association Name="FK_tra_TravelersMessages_Folders">
           <End Type="TravelersAround.Model.Entities.Folder" Role="tra_Folders" Multiplicity="1" />
-          <End Type="TravelersAround.Model.Entities.TravelerMessage" Role="TravelerMessage" Multiplicity="*" />
+          <End Type="TravelersAround.Model.Entities.TravelerMessage" Role="tra_TravelersMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tra_Folders">
+              <PropertyRef Name="FolderID" />
+            </Principal>
+            <Dependent Role="tra_TravelersMessages">
+              <PropertyRef Name="FolderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tra_TravelersMessages_tra_Messages">
+          <End Type="TravelersAround.Model.Entities.Message" Role="Message" Multiplicity="1" />
+          <End Type="TravelersAround.Model.Entities.TravelerMessage" Role="tra_TravelersMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="MessageID" />
+            </Principal>
+            <Dependent Role="tra_TravelersMessages">
+              <PropertyRef Name="MessageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tra_TravelersMessages_tra_Travelers">
+          <End Type="TravelersAround.Model.Entities.Traveler" Role="Traveler" Multiplicity="1" />
+          <End Type="TravelersAround.Model.Entities.TravelerMessage" Role="tra_TravelersMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traveler">
+              <PropertyRef Name="TravelerID" />
+            </Principal>
+            <Dependent Role="tra_TravelersMessages">
+              <PropertyRef Name="TravelerID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -291,11 +299,6 @@
             <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
             <ScalarProperty Name="Longtitude" ColumnName="Longtitude" />
             <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="TravelerMessages"><EntityTypeMapping TypeName="TravelersAround.Model.Entities.TravelerMessage"><MappingFragment StoreEntitySet="tra_TravelersMessages">
-            <ScalarProperty Name="MessageID" ColumnName="MessageID" />
-            <ScalarProperty Name="TravelerID" ColumnName="TravelerID" />
-            <ScalarProperty Name="IsRead" ColumnName="IsRead" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <AssociationSetMapping Name="FK_tra_Messages_tra_Travelers" TypeName="TravelersAround.Model.Entities.FK_tra_Messages_tra_Travelers" StoreEntitySet="tra_Messages">
             <EndProperty Name="tra_Travelers">
@@ -321,16 +324,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FK_tra_TravelersMessages_Folders" TypeName="TravelersAround.Model.Entities.FK_tra_TravelersMessages_Folders" StoreEntitySet="tra_TravelersMessages">
-            <EndProperty Name="TravelerMessage">
-              <ScalarProperty Name="TravelerID" ColumnName="TravelerID" />
-              <ScalarProperty Name="MessageID" ColumnName="MessageID" />
-            </EndProperty>
-            <EndProperty Name="tra_Folders">
-              <ScalarProperty Name="FolderID" ColumnName="FolderID" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="TravelerMessages">
+            <EntityTypeMapping TypeName="TravelersAround.Model.Entities.TravelerMessage">
+              <MappingFragment StoreEntitySet="tra_TravelersMessages">
+                <ScalarProperty Name="FolderID" ColumnName="FolderID" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="TravelerID" ColumnName="TravelerID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -345,7 +349,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -353,20 +357,10 @@
       <Diagram Name="TravelersAround">
         <EntityTypeShape EntityType="TravelersAround.Model.Entities.Message" Width="1.75" PointX="4" PointY="4.5" Height="2.172587890625" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelersAround.Model.Entities.Traveler" Width="1.5" PointX="0.75" PointY="1" Height="3.1340950520833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelersAround.Model.Entities.TravelerMessage" Width="1.5" PointX="7.125" PointY="1.375" Height="1.9802864583333331" IsExpanded="true" />
         <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_Messages_tra_Travelers" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.6124886067708331" />
-          <ConnectorPoint PointX="4.40625" PointY="3.6124886067708331" />
-          <ConnectorPoint PointX="4.40625" PointY="4.5" />
-        </AssociationConnector>
-        <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.6406275" PointY="4.5" />
-          <ConnectorPoint PointX="4.6406275" PointY="3.3192350260416665" />
-          <ConnectorPoint PointX="7.125" PointY="3.3192350260416665" />
-        </AssociationConnector>
-        <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="1.46875" />
-          <ConnectorPoint PointX="7.125" PointY="1.46875" />
+          <ConnectorPoint PointX="2.25" PointY="3.5836393229166661" />
+          <ConnectorPoint PointX="5.34375" PointY="3.5836393229166661" />
+          <ConnectorPoint PointX="5.34375" PointY="4.5" />
         </AssociationConnector>
         <AssociationConnector Association="TravelersAround.Model.Entities.tra_TravelersRelationships" ManuallyRouted="false">
           <ConnectorPoint PointX="1.2819230769230767" PointY="4.1340950520833326" />
@@ -374,12 +368,23 @@
           <ConnectorPoint PointX="1.7284615384615383" PointY="4.3840950520833326" />
           <ConnectorPoint PointX="1.7284615384615383" PointY="4.1340950520833326" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="TravelersAround.Model.Entities.Folder" Width="1.5" PointX="4.875" PointY="1.625" Height="1.4033821614583331" />
+        <EntityTypeShape EntityType="TravelersAround.Model.Entities.Folder" Width="1.5" PointX="9.25" PointY="1.375" Height="1.4033821614583331" />
+        <EntityTypeShape EntityType="TravelersAround.Model.Entities.TravelerMessage" Width="1.5" PointX="6.5" PointY="2.625" Height="2.1725878906249996" />
         <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_Folders" >
-          <ConnectorPoint PointX="6.375" PointY="2.3266910807291667" />
-          <ConnectorPoint PointX="7.125" PointY="2.3266910807291667" />
+          <ConnectorPoint PointX="9.25" PointY="1.9999995" />
+          <ConnectorPoint PointX="7.25" PointY="1.9999995" />
+          <ConnectorPoint PointX="7.25" PointY="2.625" />
         </AssociationConnector>
-      </Diagram>
+        <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Messages" >
+          <ConnectorPoint PointX="5.75" PointY="5.735088390625" />
+          <ConnectorPoint PointX="7.25" PointY="5.735088390625" />
+          <ConnectorPoint PointX="7.25" PointY="4.797587890625" />
+        </AssociationConnector>
+        <AssociationConnector Association="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" >
+          <ConnectorPoint PointX="2.25" PointY="3.0418196614583328" />
+          <ConnectorPoint PointX="6.5" PointY="3.0418196614583328" />
+        </AssociationConnector>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

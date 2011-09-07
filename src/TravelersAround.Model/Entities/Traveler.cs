@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TravelersAround.Model.Exceptions;
 
 namespace TravelersAround.Model.Entities
 {
@@ -19,9 +20,17 @@ namespace TravelersAround.Model.Entities
         public virtual IList<Traveler> Relationships { get; set; }
         public virtual IList<TravelerMessage> Messages { get; set; }
 
+        public string Fullname
+        {
+            get
+            {
+                return String.Format("{0} {1}", Firstname, Lastname);
+            }
+        }
+
         public void AddFriend(Traveler friend)
         {
-            if (Relationships == null)
+            if (!HasFriends())
             {
                 Relationships = new List<Traveler>();
             }
@@ -31,15 +40,15 @@ namespace TravelersAround.Model.Entities
             }
             else
             {
-                throw new ApplicationException(String.Format("Friend with ID:{0} already exists in the friend list of traveler {1}", friend.TravelerID, TravelerID));
+                throw new FriendAlreadyExistsException();
             }
         }
 
         public void RemoveFriend(Traveler friend)
         {
-            if (Relationships == null)
+            if (!HasFriends())
             {
-                throw new ApplicationException(String.Format("Cannot remove friend, no friends exist in the list of traveler {0}", TravelerID));
+                throw new FriendListEmptyException();
             }
             if (Relationships.Contains(friend))
             {
@@ -47,61 +56,68 @@ namespace TravelersAround.Model.Entities
             }
             else
             {
-                throw new ApplicationException(String.Format("Cannot remove friend with ID:{0}, no such friend exists in the friend list of traveler {1}", friend.TravelerID, TravelerID));
+                throw new FriendDoesNotExistException();
             }
         }
 
-        public void MarkMessageRead(Message message)
+        public bool HasMessages()
         {
-            if (Messages == null)
+            return Messages != null;
+        }
+
+        public bool HasMessagesInFolder(FolderType folder)
+        {
+            return HasMessages() && Messages.Count(f => f.FolderID == (int)folder) > 0;
+        }
+
+        public int GetHowManyNewMessages()
+        {
+            if (HasMessages())
             {
-                throw new ApplicationException(String.Format("Cannot mark message read, no messages exists for traveler {0}", TravelerID));
-            }
-            TravelerMessage travelerMsg = Messages.FirstOrDefault(m => m.MessageID == message.MessageID);
-            if (travelerMsg != null)
-            {
-                travelerMsg.IsRead = true;
+                return Messages.Count(m => m.IsRead == false);
             }
             else
             {
-                throw new ApplicationException(String.Format("Cannot mark message ID: {0} as read, no such message exists in the list of traveler {1}", message.MessageID, TravelerID));
+                throw new NoMessagesExistException();
             }
+
         }
 
-        public void MarkMessageUnread(Message message)
+        public bool HasFriends()
         {
-            if (Messages == null)
+            return Relationships != null;
+        }
+
+        public virtual Message ReadMessage(Guid messageID)
+        {
+            if (HasMessages())
             {
-                throw new ApplicationException(String.Format("Cannot mark message read, no messages exists for traveler {0}", TravelerID));
-            }
-            TravelerMessage travelerMsg = Messages.FirstOrDefault(m => m.MessageID == message.MessageID);
-            if (travelerMsg != null)
-            {
-                travelerMsg.IsRead = false;
+                TravelerMessage travelerMessage = Messages.FirstOrDefault(m => m.MessageID == messageID);
+                if (travelerMessage != null)
+                {
+                    MarkMessageRead(travelerMessage);
+                    return travelerMessage.Message;
+                }
+                else
+                {
+                    throw new MessageDoesNotExistException();
+                }
+                
             }
             else
             {
-                throw new ApplicationException(String.Format("Cannot mark message ID: {0} as unread, no such message exists in the list of traveler {1}", message.MessageID, TravelerID));
+                throw new NoMessagesExistException();
             }
         }
 
-        public void SendMessage(Traveler recipient)
+        public void MarkMessageRead(TravelerMessage travelerMessage)
         {
-
+            travelerMessage.IsRead = true;
         }
 
-        public Message ReadMessage(TravelerMessage travelerMessage)
+        public void MarkMessageUnread(TravelerMessage travelerMessage)
         {
-            TravelerMessage message = Messages.FirstOrDefault(m => m.MessageID == travelerMessage.MessageID);
-            if (message != null)
-            {
-                return message.Message;
-            }
-            else
-            {
-                throw new ApplicationException(String.Format("No message with ID:{0} exist for this user", travelerMessage.MessageID));
-            }
+            travelerMessage.IsRead = false;
         }
-
     }
 }

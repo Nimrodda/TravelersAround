@@ -16,21 +16,10 @@ namespace TravelersAround.Model.Services
             _repository = repository;
         }
 
-        public OperationStatus UpdateProfile(Traveler traveler)
+        public void UpdateProfile(Traveler traveler)
         {
-            OperationStatus operStat;
-
-            try
-            {
-                _repository.Save<Traveler>(traveler);
-                operStat = OperationStatusFactory.CreateFromBoolean(_repository.Commit() > 0);
-            }
-            catch (Exception ex)
-            {
-                operStat = OperationStatusFactory.CreateFromException(ex);
-            }
-
-            return operStat;
+            _repository.Save<Traveler>(traveler);
+            _repository.Commit();
         }
     }
 }

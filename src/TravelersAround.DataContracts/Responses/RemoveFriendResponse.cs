@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TravelersAround.Model.Services
+namespace TravelersAround.DataContracts.Responses
 {
-    public class SearchService
+    public class RemoveFriendResponse : Response
     {
     }
 }

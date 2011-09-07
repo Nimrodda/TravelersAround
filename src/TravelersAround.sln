@@ -14,6 +14,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TravelersAround1.vsmdi = TravelersAround1.vsmdi
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service Layer", "Service Layer", "{7C977746-8C38-4555-B564-C74988F201FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Contracts", "TravelersAround.Contracts\TravelersAround.Contracts.csproj", "{74642909-E6FD-4984-BC1A-748EEA39F064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Service", "TravelersAround.Service\TravelersAround.Service.csproj", "{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.DataContracts", "TravelersAround.DataContracts\TravelersAround.DataContracts.csproj", "{77D25D95-C514-4AD6-B763-E52F1ABA4C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.HTTPHost", "TravelersAround.HTTPHost\TravelersAround.HTTPHost.csproj", "{36DA9243-33A7-4959-9B42-B3B05BC386F9}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TravelersAround1.vsmdi
@@ -35,8 +45,30 @@ Global
 		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01F0BCFA-49C5-42C1-882C-0FC32B678AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74642909-E6FD-4984-BC1A-748EEA39F064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74642909-E6FD-4984-BC1A-748EEA39F064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74642909-E6FD-4984-BC1A-748EEA39F064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74642909-E6FD-4984-BC1A-748EEA39F064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77D25D95-C514-4AD6-B763-E52F1ABA4C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D25D95-C514-4AD6-B763-E52F1ABA4C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D25D95-C514-4AD6-B763-E52F1ABA4C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D25D95-C514-4AD6-B763-E52F1ABA4C05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36DA9243-33A7-4959-9B42-B3B05BC386F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36DA9243-33A7-4959-9B42-B3B05BC386F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36DA9243-33A7-4959-9B42-B3B05BC386F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36DA9243-33A7-4959-9B42-B3B05BC386F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74642909-E6FD-4984-BC1A-748EEA39F064} = {7C977746-8C38-4555-B564-C74988F201FE}
+		{89EB0B88-2A30-4153-98B6-E63BB52D8ACF} = {7C977746-8C38-4555-B564-C74988F201FE}
+		{77D25D95-C514-4AD6-B763-E52F1ABA4C05} = {7C977746-8C38-4555-B564-C74988F201FE}
+		{36DA9243-33A7-4959-9B42-B3B05BC386F9} = {7C977746-8C38-4555-B564-C74988F201FE}
 	EndGlobalSection
 EndGlobal

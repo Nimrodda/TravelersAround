@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq.Expressions;
 using TravelersAround.Model;
 using System.Data.Objects;
+using TravelersAround.Model.Exceptions;
 
 namespace TravelersAround.Repository
 {
@@ -30,7 +31,7 @@ namespace TravelersAround.Repository
             }
             else
             {
-                throw new ApplicationException("Predicate value must be passed.");
+                throw new InvalidPredicateException();
             }
         }
 
@@ -42,8 +43,16 @@ namespace TravelersAround.Repository
             }
             else
             {
-                throw new ApplicationException("Predicate value must be passed.");
+                throw new InvalidPredicateException();
             }
+        }
+
+        public IQueryable<TEntity> FindAllBy<TEntity, TKey>(Expression<Func<TEntity, bool>> predicate, 
+                                                            Expression<Func<TEntity, TKey>> orderBy, 
+                                                            int index, 
+                                                            int count) where TEntity : class
+        {
+            return FindAllBy<TEntity>(predicate).OrderBy(orderBy).Skip(index).Take(count);
         }
 
         public IQueryable<TEntity> FindAll<TEntity>() where TEntity : class
@@ -52,9 +61,11 @@ namespace TravelersAround.Repository
             return _dataContext.CreateObjectSet<TEntity>();
         }
 
-        public IQueryable<TEntity> FindAll<TEntity>(int index, int count) where TEntity : class
+        public IQueryable<TEntity> FindAll<TEntity, TKey>(Expression<Func<TEntity, TKey>> orderBy, 
+                                                        int index, 
+                                                        int count) where TEntity : class
         {
-            return _dataContext.CreateObjectSet<TEntity>().Skip(index).Take(count);
+            return FindAll<TEntity>().OrderBy(orderBy).Skip(index).Take(count);
         }
 
         public void Save<TEntity>(TEntity entity) where TEntity : class
@@ -70,7 +81,7 @@ namespace TravelersAround.Repository
             }
             else
             {
-                throw new ApplicationException("TEntity must be of type IAggregateRoot");
+                throw new InvalidEntityTypeException();
             }
         }
 
@@ -82,7 +93,7 @@ namespace TravelersAround.Repository
             }
             else
             {
-                throw new ApplicationException("TEntity must be of type IAggregateRoot");
+                throw new InvalidEntityTypeException();
             }
         }
 
