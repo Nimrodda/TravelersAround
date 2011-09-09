@@ -21,12 +21,7 @@ namespace TravelersAround.Model.Services
             _repository = repository;
             _geoCoder = geoCoder;
         }
-
-        private double DegreeToRadian(double angle)
-        {
-            return Math.PI * angle / 180.0;
-        }
-
+        
         public void SetCurrentLocationWithIPAddress(Guid travelerID, string ipAddress)
         {
             Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);

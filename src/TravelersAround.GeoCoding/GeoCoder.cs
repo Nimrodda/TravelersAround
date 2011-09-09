@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TravelersAround.Model;
+using System.IO;
+using MaxMindGeocoder;
+using System.Reflection;
 
 namespace TravelersAround.GeoCoding
 {
@@ -10,7 +13,13 @@ namespace TravelersAround.GeoCoding
     {
         public GeoCoordinates ConvertIPAddressToGeoCoordinates(string ipAddress)
         {
-            throw new NotImplementedException();
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(LookupService)).Location), @"\GeoLiteCity.dat");
+            LookupService ls = new LookupService(path, LookupService.GEOIP_STANDARD);
+            Location loc = ls.getLocation(ipAddress);
+            GeoCoordinates geoCoords;
+            geoCoords.Latitude = loc.latitude;
+            geoCoords.Longtitude = loc.longitude;
+            return geoCoords;
         }
 
         public GeoCoordinates ConvertStreetAddressToGeoCoordinates(string streetAddress)
