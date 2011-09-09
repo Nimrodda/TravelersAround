@@ -92,6 +92,14 @@ namespace TravelersAround.Repository
         private IObjectSet<TravelerMessage> _TravelerMessages;
 
         #endregion
+
+        public ObjectResult<Traveler> FindNearByTravelers(int distance, double travelerLatitude, double travelerLongtitude)
+        {
+            return ExecuteFunction<Traveler>("FindNearByTravelers", 
+                new ObjectParameter("distance", distance), 
+                new ObjectParameter("travelerLatitude", travelerLatitude), 
+                new ObjectParameter("travelerLongtitude", travelerLongtitude));
+        }
     } 
 
     

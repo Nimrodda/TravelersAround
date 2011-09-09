@@ -157,6 +157,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FindNearByTravelers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="distance" Type="int" Mode="In" />
+          <Parameter Name="travelerLatitude" Type="float" Mode="In" />
+          <Parameter Name="travelerLongtitude" Type="float" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -186,6 +191,11 @@
             <End Role="Traveler" EntitySet="Travelers" />
             <End Role="tra_TravelersMessages" EntitySet="TravelerMessages" />
           </AssociationSet>
+          <FunctionImport Name="FindNearByTravelers" EntitySet="Travelers" ReturnType="Collection(TravelersAround.Model.Entities.Traveler)">
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="travelerLatitude" Mode="In" Type="Double" />
+            <Parameter Name="travelerLongtitude" Mode="In" Type="Double" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Message">
           <Key>
@@ -334,6 +344,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FindNearByTravelers" FunctionName="TravelersAroundModel.Store.FindNearByTravelers" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

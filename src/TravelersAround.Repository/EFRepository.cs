@@ -101,6 +101,5 @@ namespace TravelersAround.Repository
         {
             return _dataContext.SaveChanges();
         }
-        
     }
 }

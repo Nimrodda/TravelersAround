@@ -14,7 +14,6 @@ namespace TravelersAround.Model
 
         IQueryable<TEntity> FindAll<TEntity>() where TEntity : class;
         IQueryable<TEntity> FindAll<TEntity, TKey>(Expression<Func<TEntity, TKey>> orderBy, int index, int count) where TEntity : class;
-        
 
         void Save<TEntity>(TEntity entity) where TEntity : class;
         void Add<TEntity>(TEntity entity) where TEntity : class;
