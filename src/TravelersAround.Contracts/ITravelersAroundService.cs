@@ -15,12 +15,12 @@ namespace TravelersAround.Contracts
     {
         //Relationship service
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "Friends/Add?travelerId={TravelerID}", BodyStyle = WebMessageBodyStyle.Bare)] 
-        AddFriendResponse AddFriend(string TravelerID);
+        [WebInvoke(Method = "POST", UriTemplate = "Friends/Add?friendId={friendID}", BodyStyle = WebMessageBodyStyle.Bare)]
+        AddFriendResponse AddFriend(string friendID);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "Friends/Remove?travelerId={TravelerID}", BodyStyle = WebMessageBodyStyle.Bare)]
-        RemoveFriendResponse RemoveFriend(string TravelerID);
+        [WebInvoke(Method = "POST", UriTemplate = "Friends/Remove?friendId={friendID}", BodyStyle = WebMessageBodyStyle.Bare)]
+        RemoveFriendResponse RemoveFriend(string friendID);
 
         [OperationContract]
         [WebGet(UriTemplate = "Friends/List", BodyStyle = WebMessageBodyStyle.Bare)]
@@ -33,15 +33,15 @@ namespace TravelersAround.Contracts
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Messages/Send?subject={subject}&body={body}&recipientId={recipientID}", BodyStyle = WebMessageBodyStyle.Bare)]
-        SendMessageResponse SendMessage();
+        SendMessageResponse SendMessage(string subject, string body, string recipientID);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Messages/Delete?messageId={messageID}", BodyStyle = WebMessageBodyStyle.Bare)]
-        DeleteMessageResponse DeleteMessage();
+        DeleteMessageResponse DeleteMessage(string messageID);
 
         [OperationContract]
         [WebGet(UriTemplate = "Messages/Read?messageId={messageID}", BodyStyle = WebMessageBodyStyle.Bare)]
-        ReadMessageResponse ReadMessage();
+        ReadMessageResponse ReadMessage(string messageID);
 
         //Profile services
         [OperationContract]
