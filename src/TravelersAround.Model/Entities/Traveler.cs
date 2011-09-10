@@ -119,5 +119,10 @@ namespace TravelersAround.Model.Entities
         {
             travelerMessage.IsRead = false;
         }
+
+        public void DeleteMessage(TravelerMessage travelerMessage)
+        {
+            Messages.Remove(travelerMessage);
+        }
     }
 }

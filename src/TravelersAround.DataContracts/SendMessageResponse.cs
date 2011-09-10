@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TravelersAround.DataContracts.Responses
+namespace TravelersAround.DataContracts
 {
-    public class UpdateProfileResponse : Response
+    public class SendMessageResponse : ResponseBase
     {
     }
 }

@@ -7,12 +7,9 @@ using System.Runtime.Serialization;
 namespace TravelersAround.DataContracts
 {
     [DataContract]
-    public abstract class Response
+    public class AddFriendRequest
     {
         [DataMember]
-        public bool Success { get; set; }
-
-        [DataMember]
-        public string Message { get; set; }
+        public Guid FriendID { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace TravelersAround.GeoCoding
             GeoCoordinates geoCoords;
             geoCoords.Latitude = loc.latitude;
             geoCoords.Longtitude = loc.longitude;
+            geoCoords.City = loc.city;
+            geoCoords.Country = loc.countryName;
             return geoCoords;
         }
 

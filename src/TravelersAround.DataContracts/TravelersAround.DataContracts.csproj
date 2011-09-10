@@ -42,18 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Responses\AddFriendResponse.cs" />
-    <Compile Include="Responses\ListMessagesResponse.cs" />
-    <Compile Include="Responses\ReadMessageResponse.cs" />
-    <Compile Include="Responses\RemoveFriendResponse.cs" />
-    <Compile Include="Responses\Response.cs" />
+    <Compile Include="AddFriendRequest.cs" />
+    <Compile Include="AddFriendResponse.cs" />
+    <Compile Include="DeleteMessageResponse.cs" />
+    <Compile Include="ListFriendsResponse.cs" />
+    <Compile Include="ListMessagesResponse.cs" />
+    <Compile Include="ReadMessageResponse.cs" />
+    <Compile Include="RemoveFriendResponse.cs" />
+    <Compile Include="ResponseBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\SearchResponse.cs" />
-    <Compile Include="Responses\SendMessageResponse.cs" />
-    <Compile Include="Responses\UpdateProfileResponse.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Requests\" />
+    <Compile Include="SearchResponse.cs" />
+    <Compile Include="SendMessageResponse.cs" />
+    <Compile Include="DisplayProfileResponse.cs" />
+    <Compile Include="UpdateProfileResponse.cs" />
+    <Compile Include="Views\MessageView.cs" />
+    <Compile Include="Views\TravelerView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
