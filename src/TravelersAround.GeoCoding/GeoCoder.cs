@@ -16,7 +16,7 @@ namespace TravelersAround.GeoCoding
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(LookupService)).Location), @"\GeoLiteCity.dat");
             LookupService ls = new LookupService(path, LookupService.GEOIP_STANDARD);
             Location loc = ls.getLocation(ipAddress);
-            GeoCoordinates geoCoords;
+            GeoCoordinates geoCoords = new GeoCoordinates();
             geoCoords.Latitude = loc.latitude;
             geoCoords.Longtitude = loc.longitude;
             geoCoords.City = loc.city;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TravelersAround.Model
 {
-    public struct GeoCoordinates
+    public class GeoCoordinates
     {
         public double Longtitude { get; set; }
         public double Latitude { get; set; }

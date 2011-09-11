@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TravelersAround.Contracts;
+using System.ServiceModel.Activation;
+using System.ServiceModel;
 
 namespace TravelersAround.Service
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class TravelersAroundService : ITravelersAroundService
     {
         public TravelersAroundService()
