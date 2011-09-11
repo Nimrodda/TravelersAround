@@ -57,6 +57,7 @@
     <Compile Include="Exceptions\FriendDoesNotExistException.cs" />
     <Compile Include="Exceptions\FriendListEmptyException.cs" />
     <Compile Include="IGeoCoder.cs" />
+    <Compile Include="IMembership.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="IUnitOfWorkRepository.cs" />
     <Compile Include="Entities\Message.cs" />

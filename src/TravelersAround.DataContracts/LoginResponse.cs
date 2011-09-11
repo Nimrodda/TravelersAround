@@ -7,12 +7,7 @@ using System.Runtime.Serialization;
 namespace TravelersAround.DataContracts
 {
     [DataContract]
-    public abstract class ResponseBase
+    public class LoginResponse : ResponseBase
     {
-        [DataMember]
-        public bool Success { get; set; }
-
-        [DataMember]
-        public string ErrorMessage { get; set; }
     }
 }

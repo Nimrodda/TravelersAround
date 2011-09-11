@@ -47,7 +47,9 @@
     <Compile Include="DeleteMessageResponse.cs" />
     <Compile Include="ListFriendsResponse.cs" />
     <Compile Include="ListMessagesResponse.cs" />
+    <Compile Include="LoginResponse.cs" />
     <Compile Include="ReadMessageResponse.cs" />
+    <Compile Include="RegisterResponse.cs" />
     <Compile Include="RemoveFriendResponse.cs" />
     <Compile Include="ResponseBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

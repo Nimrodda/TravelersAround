@@ -57,7 +57,7 @@
           <Key>
             <PropertyRef Name="TravelerID" />
           </Key>
-          <Property Name="TravelerID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TravelerID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="None" />
           <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Lastname" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Birthdate" Type="date" Nullable="false" />
@@ -212,7 +212,7 @@
           <Key>
             <PropertyRef Name="TravelerID" />
           </Key>
-          <Property Name="TravelerID" Type="Guid" Nullable="false" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TravelerID" Type="Guid" Nullable="false" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" annotation:StoreGeneratedPattern="None" />
           <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Birthdate" Type="DateTime" Nullable="false" />
