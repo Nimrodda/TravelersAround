@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessDeniedResponse.cs" />
     <Compile Include="APIKeyRepository.cs" />
     <Compile Include="MembershipAccount.cs" />
     <Compile Include="MembershipService.cs" />

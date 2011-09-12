@@ -5,6 +5,7 @@ using System.Text;
 using TravelersAround.Contracts;
 using System.ServiceModel.Activation;
 using System.ServiceModel;
+using TravelersAround.DataContracts;
 
 namespace TravelersAround.Service
 {
@@ -16,62 +17,62 @@ namespace TravelersAround.Service
         {
         }
 
-        public DataContracts.RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
+        public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.LoginResponse Login(string email, string password)
+        public LoginResponse Login(string email, string password)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.AddFriendResponse AddFriend(string friendID)
+        public AddFriendResponse AddFriend(string friendID)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.RemoveFriendResponse RemoveFriend(string friendID)
+        public RemoveFriendResponse RemoveFriend(string friendID)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.ListFriendsResponse ListFriends()
+        public ListFriendsResponse ListFriends()
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.ListMessagesResponse ListMessages()
+        public ListMessagesResponse ListMessages()
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.SendMessageResponse SendMessage(string subject, string body, string recipientID)
+        public SendMessageResponse SendMessage(string subject, string body, string recipientID)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.DeleteMessageResponse DeleteMessage(string messageID)
+        public DeleteMessageResponse DeleteMessage(string messageID)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.ReadMessageResponse ReadMessage(string messageID)
+        public ReadMessageResponse ReadMessage(string messageID)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.UpdateProfileResponse UpdateProfile(string firstname, string lastname, string birthdate, string statusMessage, string gender, bool isAvailable)
+        public UpdateProfileResponse UpdateProfile(string firstname, string lastname, string birthdate, string statusMessage, string gender, bool isAvailable)
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.DisplayProfileResponse DisplayProfile()
+        public DisplayProfileResponse DisplayProfile()
         {
             throw new NotImplementedException();
         }
 
-        public DataContracts.SearchResponse Search(bool availabilityMark)
+        public SearchResponse Search(bool availabilityMark)
         {
             throw new NotImplementedException();
         }

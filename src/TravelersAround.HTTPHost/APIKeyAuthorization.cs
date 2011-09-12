@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using TravelersAround.Service;
+using System.Runtime.Serialization.Json;
 
 namespace TravelersAround.HTTPHost
 {
     public class APIKeyAuthorization : ServiceAuthorizationManager
     {
+        private const string APIKEY = "APIKey";
+
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
             string key = GetAPIKey(operationContext);
@@ -25,13 +27,13 @@ namespace TravelersAround.HTTPHost
             }
             else
             {
-                // Send back an HTML reply
                 CreateErrorReply(operationContext, key);
+                
                 return false;
             }
         }
 
-        public string GetAPIKey(OperationContext operationContext)
+        private string GetAPIKey(OperationContext operationContext)
         {
             // Get the request message
             var request = operationContext.RequestContext.RequestMessage;
@@ -48,44 +50,31 @@ namespace TravelersAround.HTTPHost
 
         private static void CreateErrorReply(OperationContext operationContext, string key)
         {
-            // The error message is padded so that IE shows the response by default
-            using (var sr = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + APIErrorHTML))
+            using (Message reply = Message.CreateMessage(MessageVersion.None, 
+                null, new APIKeyResponse { Message = "Access Denied", Success = false }, 
+                new DataContractJsonSerializer(typeof(APIKeyResponse))))
             {
-                XElement response = XElement.Load(sr);
-                using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))
+                //Formating response in JSON
+                reply.Properties[WebBodyFormatMessageProperty.Name] = new WebBodyFormatMessageProperty(WebContentFormat.Json);
+
+                //Response headers
+                HttpResponseMessageProperty responseProp = new HttpResponseMessageProperty
                 {
-                    HttpResponseMessageProperty responseProp = new HttpResponseMessageProperty() { StatusCode = HttpStatusCode.Unauthorized, StatusDescription = String.Format("'{0}' is an invalid API key", key) };
-                    responseProp.Headers[HttpResponseHeader.ContentType] = "text/html";
-                    reply.Properties[HttpResponseMessageProperty.Name] = responseProp;
-                    operationContext.RequestContext.Reply(reply);
-                    // set the request context to null to terminate processing of this request
-                    operationContext.RequestContext = null;
-                }
+                    StatusCode = HttpStatusCode.Unauthorized,
+                    StatusDescription = String.Format("Access denied", key)
+                };
+                responseProp.Headers[HttpResponseHeader.ContentType] = "application/json";
+
+                reply.Properties[HttpResponseMessageProperty.Name] = responseProp;
+                
+                operationContext.RequestContext.Reply(reply);
+                operationContext.RequestContext = null;
             }
+                
+                    
         }
 
-        const string APIKEY = "APIKey";
-        const string APIErrorHTML = @"
-<html>
-<head>
-    <title>Request Error - No API Key</title>
-    <style type=""text/css"">
-        body
-        {
-            font-family: Verdana;
-            font-size: large;
-        }
-    </style>
-</head>
-<body>
-    <h1>
-        Request Error
-    </h1>
-    <p>
-        A valid API key needs to be included using the apikey query string parameter
-    </p>
-</body>
-</html>
-";
+        
+        
     }
 }
