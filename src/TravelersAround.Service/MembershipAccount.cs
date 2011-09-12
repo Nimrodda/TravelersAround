@@ -72,5 +72,12 @@ namespace TravelersAround.Service
                 return false;
             }
         }
+
+        public Guid GetUserTravelerID(string userName)
+        {
+            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+            User = _provider.GetUser(userName, true);
+            return (Guid)User.ProviderUserKey;
+        }
     }
 }

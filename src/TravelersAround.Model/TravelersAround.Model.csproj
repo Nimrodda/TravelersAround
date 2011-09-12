@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\InvalidTravelerLocationException.cs" />
+    <Compile Include="Factories\TravelerFactory.cs" />
     <Compile Include="GeoCoordinates.cs" />
     <Compile Include="Entities\Folder.cs" />
     <Compile Include="Exceptions\InvalidEntityTypeException.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Services\RelationshipService.cs" />
-    <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\LocationService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

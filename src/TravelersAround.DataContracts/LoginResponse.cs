@@ -9,5 +9,7 @@ namespace TravelersAround.DataContracts
     [DataContract]
     public class LoginResponse : ResponseBase
     {
+        [DataMember]
+        public string APIKey { get; set; }
     }
 }

@@ -34,6 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\..\lib\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -66,13 +69,13 @@
   <ItemGroup>
     <Compile Include="APIKeyAuthorization.cs" />
     <Compile Include="APIKeyResponse.cs" />
-    <Compile Include="ErrorHandlerExtension.cs" />
-    <Compile Include="ExtentedWebServiceHostFactory.cs" />
+    <Compile Include="HostExtensions\ErrorHandlerExtension.cs" />
+    <Compile Include="HostExtensions\ExtentedWebServiceHostFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebHttpBehaviorExtension.cs" />
+    <Compile Include="HostExtensions\WebHttpBehaviorExtension.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

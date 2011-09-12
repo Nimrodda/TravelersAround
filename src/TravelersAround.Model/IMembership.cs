@@ -12,5 +12,6 @@ namespace TravelersAround.Model
         bool ValidateUser(string userName, string password);
         Guid CreateUser(string userName, string password, string email);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
+        Guid GetUserTravelerID(string userName);
     }
 }

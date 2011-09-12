@@ -8,6 +8,8 @@ using System.ServiceModel.Activation;
 using System.ServiceModel;
 using TravelersAround.Model;
 using TravelersAround.Model.Entities;
+using TravelersAround.Model.Factories;
+using TravelersAround.Model.Services;
 
 namespace TravelersAround.Service
 {
@@ -17,6 +19,20 @@ namespace TravelersAround.Service
     {
         private IRepository _repository;
         private IMembership _membership;
+        private IGeoCoder _geoCoder;
+        private ILocationDeterminator _locationDeterminator;
+
+        public MembershipService()
+        {
+            _repository = new TravelersAround.Repository.EFRepository();
+            _membership = new MembershipAccount();
+        }
+
+        public MembershipService(IRepository repository, IMembership membership)
+        {
+            _repository = repository;
+            _membership = membership;
+        }
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
         {
@@ -25,22 +41,18 @@ namespace TravelersAround.Service
             try
             {
                 Guid newTravelerID = _membership.CreateUser(email, password, email);
-                Traveler newTraveler = new Traveler
-                {
-                    TravelerID = newTravelerID,
-                    Firstname = firstname,
-                    Lastname = lastname,
-                    Gender = gender,
-                    Birthdate = DateTime.Parse(birthdate)
-                };
-
+                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
+                Traveler newTraveler = TravelerFactory.CreateTraveler(newTravelerID, firstname, lastname, birthdate, gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
+                
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
+                response.APIKey = newTravelerID.ToString("N");
             }
             catch (Exception ex)
             {
                 response.Success = false;
-
+                response.ErrorMessage = ex.Message;
             }
 
             return response;
@@ -50,7 +62,22 @@ namespace TravelersAround.Service
         public LoginResponse Login(string email, string password)
         {
             LoginResponse response = new LoginResponse { Success = true, ErrorMessage = "" };
-            
+            try
+            {
+                bool isMember = _membership.ValidateUser(email, password);
+                if (isMember)
+                {
+                    Guid travelerID = _membership.GetUserTravelerID(email);
+                    Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
+                    //TODO: Update geolocation
+                    response.APIKey = travelerID.ToString("N");
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.ErrorMessage = ex.Message;
+            }
             return response;
         }
     }
