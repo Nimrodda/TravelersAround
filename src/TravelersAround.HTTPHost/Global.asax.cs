@@ -14,8 +14,8 @@ namespace TravelersAround.HTTPHost
     {
         private void RegisterRoutes()
         {
-            RouteTable.Routes.Add(new ServiceRoute("MembershipService", new WebServiceHostFactory(), typeof(MembershipService)));
-            RouteTable.Routes.Add(new ServiceRoute("TravelersAroundService", new WebServiceHostFactory(), typeof(TravelersAroundService)));
+            RouteTable.Routes.Add(new ServiceRoute("MembershipService", new ExtentedWebServiceHostFactory(), typeof(MembershipService)));
+            RouteTable.Routes.Add(new ServiceRoute("TravelersAroundService", new ExtentedWebServiceHostFactory(), typeof(TravelersAroundService)));
         }
 
         protected void Application_Start(object sender, EventArgs e)

@@ -19,6 +19,7 @@ namespace TravelersAround.Service
             Bind<IRepository>().To<EFRepository>();
             Bind<ILocationDeterminator>().To<EFLocationDeterminator>();
             Bind<IGeoCoder>().To<GeoCoder>();
+            Bind<IMembership>().To<MembershipAccount>();
         }
     }
 }

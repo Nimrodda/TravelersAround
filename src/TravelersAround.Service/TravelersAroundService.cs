@@ -20,11 +20,10 @@ namespace TravelersAround.Service
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
 
-        [Inject]
         public TravelersAroundService(IRepository repository, 
-                                IMembership membership,
-                                IGeoCoder geoCoder,
-                                ILocationDeterminator locationDeterminator)
+                                    IMembership membership,
+                                    IGeoCoder geoCoder,
+                                    ILocationDeterminator locationDeterminator)
         {
             _repository = repository;
             _membership = membership;

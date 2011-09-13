@@ -8,9 +8,21 @@ namespace TravelersAround.Service
 {
     public static class DepenedencyRegistration
     {
+        public static IKernel Kernel { get; private set; }
+        
         public static void Register()
         {
-            IKernel kernel = new StandardKernel(new CustomModule());
+            Kernel = new StandardKernel(new CustomModule());
+        }
+
+        public static T Get<T>()
+        {
+            return Kernel.Get<T>();
+        }
+
+        public static object Get(Type type)
+        {
+            return Kernel.Get(type);
         }
     }
 }

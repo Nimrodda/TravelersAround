@@ -22,8 +22,7 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
-        
-        [Inject]
+    
         public MembershipService(IRepository repository, 
                                 IMembership membership,
                                 IGeoCoder geoCoder,
@@ -37,7 +36,7 @@ namespace TravelersAround.Service
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
         {
-            RegisterResponse response = new RegisterResponse { Success = true, ErrorMessage = "" };
+            RegisterResponse response = new RegisterResponse { Success = false, ErrorMessage = "An error has occured processing your request" };
 
             try
             {
@@ -49,6 +48,8 @@ namespace TravelersAround.Service
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
                 response.APIKey = newTravelerID.ToString("N");
+                response.ErrorMessage = String.Empty;
+                response.Success = true;
             }
             catch (Exception ex)
             {
@@ -62,7 +63,7 @@ namespace TravelersAround.Service
 
         public LoginResponse Login(string email, string password)
         {
-            LoginResponse response = new LoginResponse { Success = true, ErrorMessage = "" };
+            LoginResponse response = new LoginResponse { Success = false, ErrorMessage = "An error has occured processing your request" };
             try
             {
                 bool isMember = _membership.ValidateUser(email, password);
@@ -72,11 +73,16 @@ namespace TravelersAround.Service
                     Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
                     //TODO: Update geolocation
                     response.APIKey = travelerID.ToString("N");
+                    response.ErrorMessage = String.Empty;
+                    response.Success = true;
+                }
+                else
+                {
+                    response.ErrorMessage = "Incorrect username or password";
                 }
             }
             catch (Exception ex)
             {
-                response.Success = false;
                 response.ErrorMessage = ex.Message;
             }
             return response;
