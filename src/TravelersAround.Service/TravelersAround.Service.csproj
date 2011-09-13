@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\..\lib\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -46,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AccessDeniedResponse.cs" />
     <Compile Include="APIKeyRepository.cs" />
+    <Compile Include="CustomModule.cs" />
+    <Compile Include="DepenedencyRegistration.cs" />
     <Compile Include="MembershipAccount.cs" />
     <Compile Include="MembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +64,10 @@
     <ProjectReference Include="..\TravelersAround.DataContracts\TravelersAround.DataContracts.csproj">
       <Project>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</Project>
       <Name>TravelersAround.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.GeoCoding\TravelersAround.GeoCoding.csproj">
+      <Project>{76E11CD2-E6AC-47EE-B8F6-23673D4DBBB3}</Project>
+      <Name>TravelersAround.GeoCoding</Name>
     </ProjectReference>
     <ProjectReference Include="..\TravelersAround.Model\TravelersAround.Model.csproj">
       <Project>{72284192-C787-4F25-A88B-EBDF769EE695}</Project>

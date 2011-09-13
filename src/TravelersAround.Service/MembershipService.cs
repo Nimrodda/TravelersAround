@@ -10,6 +10,7 @@ using TravelersAround.Model;
 using TravelersAround.Model.Entities;
 using TravelersAround.Model.Factories;
 using TravelersAround.Model.Services;
+using Ninject;
 
 namespace TravelersAround.Service
 {
@@ -21,17 +22,17 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
-
-        public MembershipService()
-        {
-            _repository = new TravelersAround.Repository.EFRepository();
-            _membership = new MembershipAccount();
-        }
-
-        public MembershipService(IRepository repository, IMembership membership)
+        
+        [Inject]
+        public MembershipService(IRepository repository, 
+                                IMembership membership,
+                                IGeoCoder geoCoder,
+                                ILocationDeterminator locationDeterminator)
         {
             _repository = repository;
             _membership = membership;
+            _locationDeterminator = locationDeterminator;
+            _geoCoder = geoCoder;
         }
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)

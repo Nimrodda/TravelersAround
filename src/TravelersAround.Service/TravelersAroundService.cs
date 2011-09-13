@@ -6,6 +6,8 @@ using TravelersAround.Contracts;
 using System.ServiceModel.Activation;
 using System.ServiceModel;
 using TravelersAround.DataContracts;
+using TravelersAround.Model;
+using Ninject;
 
 namespace TravelersAround.Service
 {
@@ -13,8 +15,21 @@ namespace TravelersAround.Service
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class TravelersAroundService : ITravelersAroundService
     {
-        public TravelersAroundService()
+        private IRepository _repository;
+        private IMembership _membership;
+        private IGeoCoder _geoCoder;
+        private ILocationDeterminator _locationDeterminator;
+
+        [Inject]
+        public TravelersAroundService(IRepository repository, 
+                                IMembership membership,
+                                IGeoCoder geoCoder,
+                                ILocationDeterminator locationDeterminator)
         {
+            _repository = repository;
+            _membership = membership;
+            _locationDeterminator = locationDeterminator;
+            _geoCoder = geoCoder;
         }
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)

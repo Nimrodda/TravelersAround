@@ -14,7 +14,6 @@ namespace TravelersAround.HTTPHost
     {
         private void RegisterRoutes()
         {
-            // Edit the base address of Service1 by replacing the "Service1" string below
             RouteTable.Routes.Add(new ServiceRoute("MembershipService", new WebServiceHostFactory(), typeof(MembershipService)));
             RouteTable.Routes.Add(new ServiceRoute("TravelersAroundService", new WebServiceHostFactory(), typeof(TravelersAroundService)));
         }
@@ -22,6 +21,7 @@ namespace TravelersAround.HTTPHost
         protected void Application_Start(object sender, EventArgs e)
         {
             RegisterRoutes();
+            DepenedencyRegistration.Register();
         }
 
         protected void Session_Start(object sender, EventArgs e)
