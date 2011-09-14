@@ -22,13 +22,13 @@ namespace TravelersAround.Contracts
         RemoveFriendResponse RemoveFriend(string friendID);
 
         [OperationContract]
-        [WebGet(UriTemplate = "Friends/List", BodyStyle = WebMessageBodyStyle.Bare)]
-        ListFriendsResponse ListFriends();
+        [WebGet(UriTemplate = "Friends/List?index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare)]
+        ListFriendsResponse ListFriends(int index, int count);
 
         //Messaging service
         [OperationContract]
-        [WebGet(UriTemplate = "Messages/List", BodyStyle = WebMessageBodyStyle.Bare)]
-        ListMessagesResponse ListMessages();
+        [WebGet(UriTemplate = "Messages/List?folderName={folderName}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare)]
+        ListMessagesResponse ListMessages(string folderName, int index, int count);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Messages/Send?subject={subject}&body={body}&recipientId={recipientID}", BodyStyle = WebMessageBodyStyle.Bare)]
@@ -60,7 +60,7 @@ namespace TravelersAround.Contracts
 
         //Search service
         [OperationContract]
-        [WebGet(UriTemplate = "Search/?mark={availabilityMark}", BodyStyle = WebMessageBodyStyle.Bare)]
-        SearchResponse Search(bool availabilityMark);
+        [WebGet(UriTemplate = "Search/?mark={availabilityMark}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare)]
+        SearchResponse Search(bool availabilityMark,int index, int count);
     }
 }

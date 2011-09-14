@@ -10,7 +10,7 @@ namespace TravelersAround.DataContracts.Views
     public class TravelerView
     {
         [DataMember]
-        public Guid TravelerID { get; internal set; }
+        public Guid TravelerID { get; set; }
         [DataMember]
         public string Firstname { get; set; }
         [DataMember]

@@ -36,11 +36,12 @@ namespace TravelersAround.Service
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
         {
-            RegisterResponse response = new RegisterResponse { Success = false, ErrorMessage = "An error has occured processing your request" };
+            RegisterResponse response = new RegisterResponse();
 
             try
             {
                 Guid newTravelerID = _membership.CreateUser(email, password, email);
+                //TODO: set location for newly registered traveler.
                 LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
                 GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
                 Traveler newTraveler = TravelerFactory.CreateTraveler(newTravelerID, firstname, lastname, birthdate, gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
@@ -48,12 +49,10 @@ namespace TravelersAround.Service
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
                 response.APIKey = newTravelerID.ToString("N");
-                response.ErrorMessage = String.Empty;
-                response.Success = true;
+                response.MarkSuccess();
             }
             catch (Exception ex)
             {
-                response.Success = false;
                 response.ErrorMessage = ex.Message;
             }
 
@@ -63,7 +62,7 @@ namespace TravelersAround.Service
 
         public LoginResponse Login(string email, string password)
         {
-            LoginResponse response = new LoginResponse { Success = false, ErrorMessage = "An error has occured processing your request" };
+            LoginResponse response = new LoginResponse();
             try
             {
                 bool isMember = _membership.ValidateUser(email, password);
@@ -71,14 +70,13 @@ namespace TravelersAround.Service
                 {
                     Guid travelerID = _membership.GetUserTravelerID(email);
                     Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-                    //TODO: Update geolocation
+                    //TODO: Update geolocation based on whether the IP address had changed since last login
                     response.APIKey = travelerID.ToString("N");
-                    response.ErrorMessage = String.Empty;
-                    response.Success = true;
+                    response.MarkSuccess();
                 }
                 else
                 {
-                    response.ErrorMessage = "Incorrect username or password";
+                    response.ErrorMessage = R.ErrorMessages.InvalidCredentials;
                 }
             }
             catch (Exception ex)

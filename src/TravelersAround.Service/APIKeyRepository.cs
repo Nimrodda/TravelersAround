@@ -12,6 +12,8 @@ namespace TravelersAround.Service
     {
         private const string APIKEYLIST = "APIKeyList";
 
+        public static Guid APIKey { get; set; }
+
         public static bool IsValidAPIKey(string key)
         {
             // TODO: Implement IsValidAPI Key using your repository

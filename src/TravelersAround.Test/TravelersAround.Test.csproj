@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MessageServiceIntegrationTest.cs" />
     <Compile Include="SearchServiceTest.cs" />
+    <Compile Include="SendMessageResponseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">

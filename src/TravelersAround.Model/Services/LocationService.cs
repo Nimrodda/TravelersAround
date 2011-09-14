@@ -32,11 +32,11 @@ namespace TravelersAround.Model.Services
             return _geoCoder.ConvertStreetAddressToGeoCoordinates(streetAddress);
         }
 
-        public IEnumerable<Traveler> GetListOfTravelersWithin(int kmDistance, Guid travelerID)
+        public IEnumerable<Traveler> GetListOfTravelersWithin(int kmDistance, int index, int count, Guid travelerID)
         {
             Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
             if (traveler.Latitude > 0 && traveler.Longtitude > 0) 
-                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude);
+                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Skip(index).Take(count);
             else
                 throw new InvalidTravelerLocationException();
 

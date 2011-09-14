@@ -88,7 +88,7 @@ namespace TravelersAround.Model.Entities
             return Relationships != null;
         }
 
-        public virtual Message ReadMessage(Guid messageID)
+        public virtual TravelerMessage ReadMessage(Guid messageID)
         {
             if (HasMessages())
             {
@@ -96,7 +96,7 @@ namespace TravelersAround.Model.Entities
                 if (travelerMessage != null)
                 {
                     MarkMessageRead(travelerMessage);
-                    return travelerMessage.Message;
+                    return travelerMessage;
                 }
                 else
                 {

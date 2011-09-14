@@ -38,12 +38,12 @@ namespace TravelersAround.Model.Services
             _repository.Commit();
         }
 
-        public Message ReadMessage(Guid messageID, Guid travelerID)
+        public TravelerMessage ReadMessage(Guid messageID, Guid travelerID)
         {
             Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
             if (traveler == null) throw new TravelerNotFoundException();
-            Message message = traveler.ReadMessage(messageID);
-            _repository.Save<Message>(message);
+            TravelerMessage message = traveler.ReadMessage(messageID);
+            _repository.Save<TravelerMessage>(message);
             _repository.Commit();
             return message;
         }

@@ -45,6 +45,7 @@
     <Compile Include="AddFriendRequest.cs" />
     <Compile Include="AddFriendResponse.cs" />
     <Compile Include="DeleteMessageResponse.cs" />
+    <Compile Include="IRequest.cs" />
     <Compile Include="ListFriendsResponse.cs" />
     <Compile Include="ListMessagesResponse.cs" />
     <Compile Include="LoginResponse.cs" />
