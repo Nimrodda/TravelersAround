@@ -23,8 +23,8 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
-        
-        private readonly Guid _currentTravelerId = APIKeyRepository.APIKey;
+
+        private readonly Guid _currentTravelerId = APIKeyService.GetAssociatedID();
 
         public TravelersAroundService(IRepository repository, 
                                     IMembership membership,

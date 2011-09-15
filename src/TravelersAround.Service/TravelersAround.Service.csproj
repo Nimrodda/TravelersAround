@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessDeniedResponse.cs" />
-    <Compile Include="APIKeyRepository.cs" />
+    <Compile Include="APIKeyService.cs" />
     <Compile Include="CustomModule.cs" />
     <Compile Include="DepenedencyRegistration.cs" />
     <Compile Include="ErrorMessages.Designer.cs">

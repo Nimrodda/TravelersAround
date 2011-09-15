@@ -21,10 +21,9 @@ namespace TravelersAround.HTTPHost
         {
             string key = GetAPIKey(operationContext);
 
-            APIKeyRepository.APIKey = new Guid(key);
-
-            if (APIKeyRepository.IsValidAPIKey(key))
+            if (APIKeyService.IsValidAPIKey(key))
             {
+                APIKeyService.CurrentTravelerAPIKey = key;
                 return true;
             }
             else

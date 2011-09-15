@@ -20,6 +20,8 @@ namespace TravelersAround.Service
             Bind<ILocationDeterminator>().To<EFLocationDeterminator>();
             Bind<IGeoCoder>().To<GeoCoder>();
             Bind<IMembership>().To<MembershipAccount>();
+            Bind<IAPIKeyGenerator>().To<HMACSHA512APIKeyGenerator>();
+            Bind<ICache>().To<SQLiteCache>();
         }
     }
 }

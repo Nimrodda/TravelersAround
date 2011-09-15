@@ -36,6 +36,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HMACSHA512APIKeyGenerator.cs" />
     <Compile Include="Exceptions\InvalidTravelerLocationException.cs" />
     <Compile Include="Factories\TravelerFactory.cs" />
     <Compile Include="GeoCoordinates.cs" />
@@ -57,6 +59,8 @@
     <Compile Include="Exceptions\FriendAlreadyExistsException.cs" />
     <Compile Include="Exceptions\FriendDoesNotExistException.cs" />
     <Compile Include="Exceptions\FriendListEmptyException.cs" />
+    <Compile Include="IAPIKeyGenerator.cs" />
+    <Compile Include="ICache.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="IMembership.cs" />
     <Compile Include="IUnitOfWork.cs" />

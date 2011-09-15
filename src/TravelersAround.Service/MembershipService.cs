@@ -22,16 +22,19 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
+        private IAPIKeyGenerator _apiKeyGen;
     
         public MembershipService(IRepository repository, 
                                 IMembership membership,
                                 IGeoCoder geoCoder,
-                                ILocationDeterminator locationDeterminator)
+                                ILocationDeterminator locationDeterminator,
+                                IAPIKeyGenerator apiKeyGen)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
+            _apiKeyGen = apiKeyGen;
         }
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
@@ -41,11 +44,12 @@ namespace TravelersAround.Service
             try
             {
                 Guid newTravelerID = _membership.CreateUser(email, password, email);
-                //TODO: set location for newly registered traveler.
+                //TODO: determine IP
                 LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
                 GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
                 Traveler newTraveler = TravelerFactory.CreateTraveler(newTravelerID, firstname, lastname, birthdate, gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
-                
+                string travelerApiKey = _apiKeyGen.Generate(password);
+                APIKeyService.Store(travelerApiKey, newTravelerID);
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
                 response.APIKey = newTravelerID.ToString("N");
@@ -69,8 +73,19 @@ namespace TravelersAround.Service
                 if (isMember)
                 {
                     Guid travelerID = _membership.GetUserTravelerID(email);
-                    Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-                    //TODO: Update geolocation based on whether the IP address had changed since last login
+                    Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
+                    string travelerApiKey = _apiKeyGen.Generate(password);
+                    APIKeyService.Store(travelerApiKey, traveler.TravelerID);
+                    //TODO: determine IP
+                    LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                    GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
+                    if (traveler.IsLocationChanged(travelerGeoCoords))
+                    {
+                        traveler.Latitude = travelerGeoCoords.Latitude;
+                        traveler.Longtitude = travelerGeoCoords.Longtitude;
+                        _repository.Save<Traveler>(traveler);
+                        _repository.Commit();
+                    }
                     response.APIKey = travelerID.ToString("N");
                     response.MarkSuccess();
                 }

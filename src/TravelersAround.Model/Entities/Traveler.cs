@@ -124,5 +124,10 @@ namespace TravelersAround.Model.Entities
         {
             Messages.Remove(travelerMessage);
         }
+
+        public bool IsLocationChanged(GeoCoordinates geoCoords)
+        {
+            return (geoCoords.Latitude == Latitude && geoCoords.Longtitude == Longtitude);
+        }
     }
 }
