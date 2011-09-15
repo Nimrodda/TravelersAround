@@ -7,6 +7,7 @@ using TravelersAround.Contracts;
 using TravelersAround.Model;
 using TravelersAround.Repository;
 using TravelersAround.GeoCoding;
+using log4net;
 
 namespace TravelersAround.Service
 {
@@ -22,6 +23,7 @@ namespace TravelersAround.Service
             Bind<IMembership>().To<MembershipAccount>();
             Bind<IAPIKeyGenerator>().To<HMACSHA512APIKeyGenerator>();
             Bind<ICache>().To<SQLiteCache>();
+            Bind<ILog>().ToMethod(x => LogManager.GetLogger("TEST"));
         }
     }
 }

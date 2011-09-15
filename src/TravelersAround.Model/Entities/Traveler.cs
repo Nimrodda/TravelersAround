@@ -127,7 +127,7 @@ namespace TravelersAround.Model.Entities
 
         public bool IsLocationChanged(GeoCoordinates geoCoords)
         {
-            return (geoCoords.Latitude == Latitude && geoCoords.Longtitude == Longtitude);
+            return (geoCoords.Latitude != Latitude && geoCoords.Longtitude != Longtitude);
         }
     }
 }

@@ -5,12 +5,13 @@ using System.Text;
 using System.Data.SQLite;
 using System.Data;
 using System.IO;
+using System.Reflection;
 
 namespace TravelersAround.Model
 {
     public class SQLiteCache : ICache
     {
-        private const string DATABASE_FILE = "cache.db";
+        private readonly string DATABASE_FILE = Path.Combine(Path.GetDirectoryName(new System.Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath), "cache.db");
 
         private SQLiteConnection GetConnection()
         {

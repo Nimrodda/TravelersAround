@@ -13,7 +13,8 @@ namespace TravelersAround.GeoCoding
     {
         public GeoCoordinates ConvertIPAddressToGeoCoordinates(string ipAddress)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(LookupService)).Location), @"GeoLiteCity.dat");
+            string path = Path.Combine(Path.GetDirectoryName(new System.Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath), "GeoLiteCity.dat");
+            if (!File.Exists(path)) throw new FileNotFoundException(path);
             LookupService ls = new LookupService(path, LookupService.GEOIP_STANDARD);
             Location loc = ls.getLocation(ipAddress);
             GeoCoordinates geoCoords = new GeoCoordinates();

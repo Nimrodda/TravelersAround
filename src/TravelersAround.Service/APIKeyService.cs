@@ -17,7 +17,7 @@ namespace TravelersAround.Service
 
         public static bool IsValidAPIKey(string key)
         {
-            return String.IsNullOrEmpty((string)_apiKeys.GetValue(key));
+            return !String.IsNullOrEmpty((string)_apiKeys.GetValue(key));
         }
 
         /// <summary>

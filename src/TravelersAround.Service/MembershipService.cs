@@ -11,6 +11,7 @@ using TravelersAround.Model.Entities;
 using TravelersAround.Model.Factories;
 using TravelersAround.Model.Services;
 using Ninject;
+using log4net;
 
 namespace TravelersAround.Service
 {
@@ -23,18 +24,21 @@ namespace TravelersAround.Service
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
         private IAPIKeyGenerator _apiKeyGen;
+        private ILog _log;
     
         public MembershipService(IRepository repository, 
                                 IMembership membership,
                                 IGeoCoder geoCoder,
                                 ILocationDeterminator locationDeterminator,
-                                IAPIKeyGenerator apiKeyGen)
+                                IAPIKeyGenerator apiKeyGen,
+                                ILog log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
             _apiKeyGen = apiKeyGen;
+            _log = log;
         }
 
         public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
@@ -52,7 +56,7 @@ namespace TravelersAround.Service
                 APIKeyService.Store(travelerApiKey, newTravelerID);
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
-                response.APIKey = newTravelerID.ToString("N");
+                response.APIKey = travelerApiKey;
                 response.MarkSuccess();
             }
             catch (Exception ex)
@@ -78,7 +82,7 @@ namespace TravelersAround.Service
                     APIKeyService.Store(travelerApiKey, traveler.TravelerID);
                     //TODO: determine IP
                     LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                    GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
+                    GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("80.221.20.181");
                     if (traveler.IsLocationChanged(travelerGeoCoords))
                     {
                         traveler.Latitude = travelerGeoCoords.Latitude;
@@ -86,7 +90,7 @@ namespace TravelersAround.Service
                         _repository.Save<Traveler>(traveler);
                         _repository.Commit();
                     }
-                    response.APIKey = travelerID.ToString("N");
+                    response.APIKey = travelerApiKey;
                     response.MarkSuccess();
                 }
                 else

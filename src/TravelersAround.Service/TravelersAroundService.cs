@@ -10,6 +10,7 @@ using TravelersAround.Model;
 using TravelersAround.Model.Services;
 using TravelersAround.Model.Entities;
 using TravelersAround.Service.Mappers;
+using log4net;
 
 namespace TravelersAround.Service
 {
@@ -23,18 +24,21 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
+        private ILog _log;
 
         private readonly Guid _currentTravelerId = APIKeyService.GetAssociatedID();
 
         public TravelersAroundService(IRepository repository, 
                                     IMembership membership,
                                     IGeoCoder geoCoder,
-                                    ILocationDeterminator locationDeterminator)
+                                    ILocationDeterminator locationDeterminator,
+                                    ILog log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
+            _log = log;
         }
 
         public AddFriendResponse AddFriend(string friendID)
