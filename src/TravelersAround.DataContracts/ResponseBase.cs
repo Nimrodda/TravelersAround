@@ -24,7 +24,7 @@ namespace TravelersAround.DataContracts
         public void MarkSuccess()
         {
             Success = true;
-            ErrorMessage = String.Empty;
+            ErrorMessage = null;
         }
     }
 
