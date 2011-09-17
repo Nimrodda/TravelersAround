@@ -121,13 +121,13 @@ namespace TravelersAround.Service
             return response;
         }
 
-        public SendMessageResponse SendMessage(string subject, string body, string recipientID)
+        public SendMessageResponse SendMessage(SendMessageRequest sendMsgReq)
         {
             SendMessageResponse response = new SendMessageResponse();
             MessageService msgSvc = new MessageService(_repository);
             try
             {
-                msgSvc.SendMessage(subject, body, _currentTravelerId, new Guid[] { new Guid(recipientID) });
+                msgSvc.SendMessage(sendMsgReq.Subject, sendMsgReq.Body, _currentTravelerId, new Guid[] { sendMsgReq.RecipientID });
                 response.MarkSuccess();
             }
             catch (Exception ex)
@@ -177,17 +177,17 @@ namespace TravelersAround.Service
             return response;
         }
 
-        public UpdateProfileResponse UpdateProfile(string firstname, string lastname, string birthdate, string statusMessage, string gender, bool isAvailable)
+        public UpdateProfileResponse UpdateProfile(UpdateProfileRequest updateProfileReq)
         {
             UpdateProfileResponse response = new UpdateProfileResponse();
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
-                traveler.Firstname = firstname;
-                traveler.Lastname = lastname;
-                traveler.StatusMessage = statusMessage;
-                traveler.Gender = gender;
-                traveler.IsAvailable = isAvailable;
+                traveler.Firstname = updateProfileReq.Firstname;
+                traveler.Lastname = updateProfileReq.Lastname;
+                traveler.StatusMessage = updateProfileReq.StatusMessage;
+                traveler.Gender = updateProfileReq.Gender;
+                traveler.IsAvailable = updateProfileReq.IsAvailable;
                 _repository.Save<Traveler>(traveler);
                 _repository.Commit();
                 response.Profile = traveler.ConvertToTravelerView();

@@ -31,8 +31,8 @@ namespace TravelersAround.Contracts
         ListMessagesResponse ListMessages(string folderName, int index, int count);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "Messages/Send?subject={subject}&body={body}&recipientId={recipientID}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        SendMessageResponse SendMessage(string subject, string body, string recipientID);
+        [WebInvoke(Method = "POST", UriTemplate = "Messages/Send", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        SendMessageResponse SendMessage(SendMessageRequest sendMsgReq);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Messages/Delete?messageId={messageID}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
@@ -44,15 +44,8 @@ namespace TravelersAround.Contracts
 
         //Profile services
         [OperationContract]
-        [WebInvoke(Method = "POST",
-                UriTemplate = @"Profile/Update?firstname={firstname}&
-                                lastname={lastname}&
-                                birthdate={birthdate}&
-                                statusMessage={statusMessage}&
-                                gender={gender}&
-                                isAvailable={isAvailable}",
-                BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        UpdateProfileResponse UpdateProfile(string firstname, string lastname, string birthdate, string statusMessage, string gender, bool isAvailable);
+        [WebInvoke(Method = "POST", UriTemplate = @"Profile/Update", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        UpdateProfileResponse UpdateProfile(UpdateProfileRequest updateProfileReq);
 
         [OperationContract]
         [WebGet(UriTemplate = "Profile/Display", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]

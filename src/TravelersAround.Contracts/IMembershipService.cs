@@ -13,12 +13,12 @@ namespace TravelersAround.Contracts
     {
         [OperationContract]
         [WebInvoke(Method = "POST",
-                UriTemplate = @"Register?email={email}&password={password}&confirmPassword={confirmPassword}&firstname={firstname}&lastname={lastname}&birthdate={birthdate}&gender={gender}",
+                UriTemplate = "Register/",
                 BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender);
+        RegisterResponse Register(RegisterRequest registerReq);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = @"Login?email={email}&password={password}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        LoginResponse Login(string email, string password);
+        [WebInvoke(Method = "POST", UriTemplate = "Login/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        LoginResponse Login(LoginRequest loginReq);
     }
 }

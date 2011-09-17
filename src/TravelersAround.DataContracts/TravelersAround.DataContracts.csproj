@@ -44,12 +44,16 @@
   <ItemGroup>
     <Compile Include="AddFriendRequest.cs" />
     <Compile Include="AddFriendResponse.cs" />
+    <Compile Include="SendMessageRequest.cs" />
+    <Compile Include="UpdateProfileRequest.cs" />
+    <Compile Include="LoginRequest.cs" />
     <Compile Include="DeleteMessageResponse.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="ListFriendsResponse.cs" />
     <Compile Include="ListMessagesResponse.cs" />
     <Compile Include="LoginResponse.cs" />
     <Compile Include="ReadMessageResponse.cs" />
+    <Compile Include="RegisterRequest.cs" />
     <Compile Include="RegisterResponse.cs" />
     <Compile Include="RemoveFriendResponse.cs" />
     <Compile Include="ResponseBase.cs" />

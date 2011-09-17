@@ -41,18 +41,25 @@ namespace TravelersAround.Service
             _log = log;
         }
 
-        public RegisterResponse Register(string email, string password, string confirmPassword, string firstname, string lastname, string birthdate, string gender)
+        public RegisterResponse Register(RegisterRequest registerReq)
         {
             RegisterResponse response = new RegisterResponse();
 
             try
             {
-                Guid newTravelerID = _membership.CreateUser(email, password, email);
+                Guid newTravelerID = _membership.CreateUser(registerReq.Email, registerReq.Password, registerReq.Email);
                 //TODO: determine IP
                 LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
                 GeoCoordinates travelerGeoCoords = locationSvc.GetCurrentLocationWithIPAddress("IPADD");
-                Traveler newTraveler = TravelerFactory.CreateTraveler(newTravelerID, firstname, lastname, birthdate, gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
-                string travelerApiKey = _apiKeyGen.Generate(password);
+                Traveler newTraveler = TravelerFactory.CreateTraveler(
+                                                                    newTravelerID, 
+                                                                    registerReq.Firstname, 
+                                                                    registerReq.Lastname, 
+                                                                    registerReq.Birthdate, 
+                                                                    registerReq.Gender, 
+                                                                    travelerGeoCoords.Latitude, 
+                                                                    travelerGeoCoords.Longtitude);
+                string travelerApiKey = _apiKeyGen.Generate(registerReq.Password);
                 APIKeyService.Store(travelerApiKey, newTravelerID);
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
@@ -68,17 +75,17 @@ namespace TravelersAround.Service
 
         }
 
-        public LoginResponse Login(string email, string password)
+        public LoginResponse Login(LoginRequest loginReq)
         {
             LoginResponse response = new LoginResponse();
             try
             {
-                bool isMember = _membership.ValidateUser(email, password);
+                bool isMember = _membership.ValidateUser(loginReq.Email, loginReq.Password);
                 if (isMember)
                 {
-                    Guid travelerID = _membership.GetUserTravelerID(email);
+                    Guid travelerID = _membership.GetUserTravelerID(loginReq.Email);
                     Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-                    string travelerApiKey = _apiKeyGen.Generate(password);
+                    string travelerApiKey = _apiKeyGen.Generate(loginReq.Password);
                     APIKeyService.Store(travelerApiKey, traveler.TravelerID);
                     //TODO: determine IP
                     LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
