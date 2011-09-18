@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HMACSHA512KeyGeneratorTest.cs" />
+    <Compile Include="HttpRequestAdapterTest.cs" />
     <Compile Include="MembershipServiceTest.cs" />
     <Compile Include="MessageServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,10 @@
     <ProjectReference Include="..\TravelersAround.Repository\TravelersAround.Repository.csproj">
       <Project>{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}</Project>
       <Name>TravelersAround.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.ServiceProxy\TravelersAround.ServiceProxy.csproj">
+      <Project>{25DCDBF0-A995-4155-93FF-463758044040}</Project>
+      <Name>TravelersAround.ServiceProxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\TravelersAround.Service\TravelersAround.Service.csproj">
       <Project>{89EB0B88-2A30-4153-98B6-E63BB52D8ACF}</Project>

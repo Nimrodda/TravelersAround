@@ -29,10 +29,8 @@ namespace TravelersAround.ServiceProxy
         /// <param name="query">NameValueCollection of query string parameters and values</param>
         /// <param name="method">The method to use in the request</param>
         /// <returns>The response type defined in the method</returns>
-        public static ResponseType WebHttpRequest<ResponseType>(string baseUrl, string uri, NameValueCollection query, Method method = Method.GET)
+        public static ResponseType WebHttpRequest<ResponseType>(string baseUrl, string uri, string queryString, Method method = Method.GET)
         {
-            string queryString = String.Empty;
-            if (query != null) queryString = NameValueCollectionToQueryString(query);
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(baseUrl, "/", uri, queryString)) as HttpWebRequest;
             invokeRequest.Method = Enum.GetName(typeof(Method), method);
             invokeRequest.ContentType = "application/json";
@@ -55,11 +53,8 @@ namespace TravelersAround.ServiceProxy
         /// <param name="query">NameValueCollection of query string parameters and values</param>
         /// <param name="method">The method to use in the request</param>
         /// <returns>MemoryStream containing the binary data</returns>
-        public static MemoryStream WebHttpRequest(string baseUrl, string uri, NameValueCollection query, Method method = Method.GET)
+        public static MemoryStream WebHttpRequest(string baseUrl, string uri, string queryString, Method method = Method.GET)
         {
-            string queryString = String.Empty;
-            if (query != null) queryString = NameValueCollectionToQueryString(query);
-            
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(baseUrl, "/", uri, queryString)) as HttpWebRequest;
             invokeRequest.Method = Enum.GetName(typeof(Method), method);
             invokeRequest.ContentType = "application/json";
@@ -95,7 +90,7 @@ namespace TravelersAround.ServiceProxy
         /// <param name="url">The base url</param>
         /// <param name="uri">The operation name</param>
         /// <returns>The response type defined in the method</returns>
-        public static ResponseType WebHttpPost<ResponseType>(object requestObject, string url, string uri)
+        public static ResponseType WebHttpPost<ResponseType>(string url, string uri, object requestObject)
         {
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(url, uri)) as HttpWebRequest;
             
@@ -124,14 +119,13 @@ namespace TravelersAround.ServiceProxy
         /// <param name="uri">The operation name</param>
         /// <param name="query">NameValueCollection of query string parameters and values</param>
         /// <returns></returns>
-        public static ResponseType WebHttpPost<ResponseType>(Stream stream, int streamContentLength, string baseUrl, string uri, NameValueCollection query)
+        public static ResponseType WebHttpPost<ResponseType>(string baseUrl, string uri, Stream stream, string queryString)
         {
+            int streamContentLength = (int)stream.Length;
             byte[] requestBodyBytes = new byte[streamContentLength];
             using (stream)
                 stream.Read(requestBodyBytes, 0, streamContentLength);
 
-            string queryString = String.Empty;
-            if (query != null) queryString = NameValueCollectionToQueryString(query);
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(baseUrl, "/", uri, queryString)) as HttpWebRequest;
             
             invokeRequest.Method = "POST";
@@ -205,6 +199,12 @@ namespace TravelersAround.ServiceProxy
             return String.Concat("?", String.Join("&", Array.ConvertAll(nvc.AllKeys, key => String.Format("{0}={1}", key, nvc[key]))));
         }
 
+        /// <summary>
+        /// Constructs a http request query string out of parent method's parameter names and input parameters
+        /// </summary>
+        /// <param name="parameterNames">The calling method ParameterInfos which will represent the key of the query</param>
+        /// <param name="queryParameters">Must be the same parameters from the calling method and in the same order!</param>
+        /// <returns>Query string representation</returns>
         public static string ConstructQueryString(ParameterInfo[] parameterNames, params object[] queryParameters)
         {
             string queryString = "?";

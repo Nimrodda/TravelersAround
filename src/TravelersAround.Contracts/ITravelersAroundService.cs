@@ -5,6 +5,7 @@ using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using TravelersAround.DataContracts;
+using System.IO;
 
 
 namespace TravelersAround.Contracts
@@ -53,7 +54,16 @@ namespace TravelersAround.Contracts
 
         //Search service
         [OperationContract]
-        [WebGet(UriTemplate = "Search/?mark={availabilityMark}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "Search?availabilityMark={availabilityMark}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         SearchResponse Search(bool availabilityMark,int index, int count);
+
+        //Profile picture management
+        [OperationContract]
+        [WebInvoke(UriTemplate = "Profile/Picture", Method = "POST", ResponseFormat = WebMessageFormat.Json)]
+        ProfilePictureUploadResponse UploadProfilePicture(Stream pictureStream);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Profile/Picture?travelerID={travelerID}")]
+        Stream GetProfilePicture(string travelerID);
     }
 }

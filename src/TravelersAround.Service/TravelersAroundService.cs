@@ -11,6 +11,7 @@ using TravelersAround.Model.Services;
 using TravelersAround.Model.Entities;
 using TravelersAround.Service.Mappers;
 using log4net;
+using System.IO;
 
 namespace TravelersAround.Service
 {
@@ -230,6 +231,47 @@ namespace TravelersAround.Service
                 response.ErrorMessage = ex.Message;
             }
             return response;
+        }
+
+
+        public ProfilePictureUploadResponse UploadProfilePicture(Stream pictureStream)
+        {
+            ProfilePictureUploadResponse response = new ProfilePictureUploadResponse();
+            try
+            {
+                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+
+                using (MemoryStream bufferStream = new MemoryStream())
+                {
+                    pictureStream.CopyTo(bufferStream);
+                    traveler.ProfilePicture = bufferStream.ToArray();
+                }
+                _repository.Save<Traveler>(traveler);
+                _repository.Commit();
+                response.UploadedBytes = traveler.ProfilePicture.Length;
+                response.MarkSuccess();
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMessage = ex.Message;
+            }
+            return response;
+        }
+
+        public Stream GetProfilePicture(string travelerID)
+        {
+            try
+            {
+                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+                MemoryStream bufferStream = new MemoryStream(traveler.ProfilePicture);
+                return bufferStream;
+            }
+            catch (Exception ex)
+            {
+                //log
+            }
+            return null;
+
         }
     }
 }

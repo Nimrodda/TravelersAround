@@ -17,6 +17,7 @@ namespace TravelersAround.Model.Entities
         public double Longtitude { get; set; }
         public double Latitude { get; set; }
         public bool IsAvailable { get; set; }
+        public byte[] ProfilePicture { get; set; }
         public virtual IList<Traveler> Relationships { get; set; }
         public virtual IList<TravelerMessage> Messages { get; set; }
 
