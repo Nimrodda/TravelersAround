@@ -53,7 +53,7 @@ namespace TravelersAround.ServiceProxy
         /// <param name="query">NameValueCollection of query string parameters and values</param>
         /// <param name="method">The method to use in the request</param>
         /// <returns>MemoryStream containing the binary data</returns>
-        public static MemoryStream WebHttpRequest(string baseUrl, string uri, string queryString, Method method = Method.GET)
+        public static Stream WebHttpRequest(string baseUrl, string uri, string queryString, Method method = Method.GET)
         {
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(baseUrl, "/", uri, queryString)) as HttpWebRequest;
             invokeRequest.Method = Enum.GetName(typeof(Method), method);
@@ -62,22 +62,20 @@ namespace TravelersAround.ServiceProxy
 
             using (WebResponse response = invokeRequest.GetResponse())
             {
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    byte[] buffer = new byte[64 * 1024];
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        //copying the bytes array from one stream to another
-                        //int read;
-                        //while ((read = responseStream.Read(buffer, 0, buffer.Length)) > 0)
-                        //{
-                        //    ms.Write(buffer, 0, read);
-                        //}
-                        //It seems that CopyTo does the same thing as the loop above
-                        responseStream.CopyTo(ms);
-                        return ms;
-                    }
-                }
+                Stream responseStream = response.GetResponseStream();
+                MemoryStream buffer = new MemoryStream();
+                #region Traditional stream copying
+                //copying the bytes array from one stream to another
+                //int read;
+                //while ((read = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                //{
+                //    ms.Write(buffer, 0, read);
+                //}
+                //It seems that CopyTo does the same thing as the loop above
+                #endregion
+                responseStream.CopyTo(buffer);
+                responseStream.Close();
+                return buffer;
             }
 
         }
