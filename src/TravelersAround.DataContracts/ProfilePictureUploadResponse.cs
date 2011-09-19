@@ -9,6 +9,5 @@ namespace TravelersAround.DataContracts
     [DataContract]
     public class ProfilePictureUploadResponse : ResponseBase
     {
-        public int UploadedBytes { get; set; }
     }
 }

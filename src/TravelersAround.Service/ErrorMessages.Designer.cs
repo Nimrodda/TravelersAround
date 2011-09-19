@@ -133,6 +133,15 @@ namespace R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The supplied image is not in a valid format, supported formats are JPG and PNG.
+        /// </summary>
+        internal static string InvalidImageFormatException {
+            get {
+                return ResourceManager.GetString("InvalidImageFormatException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid password.
         /// </summary>
         internal static string InvalidPassword {

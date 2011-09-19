@@ -19,7 +19,7 @@ namespace TravelersAround.Service.Mappers
                 SenderName = travelerMessage.Message.Author.Fullname,
                 SentDate = travelerMessage.Message.SentDate,
                 Subject = travelerMessage.Message.Subject,
-                RecipientsNames = new string[] { travelerMessage.Traveler.Firstname }
+                RecipientsNames = travelerMessage.Message.Recipients.Where(x => x.TravelerID != travelerMessage.TravelerID).Select(t => t.Traveler.Fullname).ToList()
             };
         }
 

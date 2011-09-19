@@ -81,7 +81,7 @@ namespace TravelersAround.Service
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
                 if (traveler.HasFriends())
                 {
-                    response.FriendsList = traveler.Relationships.ConvertToTravelerViewList();
+                    response.FriendsList = traveler.Relationships.Skip(index).Take(count).ConvertToTravelerViewList();
                     response.MarkSuccess();
                 }
                 else
@@ -235,19 +235,17 @@ namespace TravelersAround.Service
 
         public ProfilePictureUploadResponse UploadProfilePicture(Stream pictureStream)
         {
-            ProfilePictureUploadResponse response = new ProfilePictureUploadResponse();
+            ProfilePictureUploadResponse response = new ProfilePictureUploadResponse { ErrorMessage = R.ErrorMessages.InvalidImageFormatException };
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
 
-                using (MemoryStream bufferStream = new MemoryStream())
-                {
-                    pictureStream.CopyTo(bufferStream);
-                    traveler.ProfilePicture = bufferStream.ToArray();
-                }
+                ProfileService profileSvc = new ProfileService(_repository);
+                MemoryStream resizedPicture = profileSvc.ResizeProfilePicture(pictureStream);
+                traveler.ProfilePicture = resizedPicture.ToArray();
+                
                 _repository.Save<Traveler>(traveler);
                 _repository.Commit();
-                response.UploadedBytes = traveler.ProfilePicture.Length;
                 response.MarkSuccess();
             }
             catch (Exception ex)

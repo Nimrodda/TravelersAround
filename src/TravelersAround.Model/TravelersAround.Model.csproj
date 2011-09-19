@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -44,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidImageFormatException.cs" />
     <Compile Include="Exceptions\MembershipCreationFailedException.cs" />
     <Compile Include="HMACSHA512APIKeyGenerator.cs" />
     <Compile Include="Exceptions\InvalidTravelerLocationException.cs" />

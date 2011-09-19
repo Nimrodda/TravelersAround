@@ -86,15 +86,11 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void DeleteMessageTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            string messageID = string.Empty; // TODO: Initialize to an appropriate value
-            DeleteMessageResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            string messageID = "d3fc5f98-cfe2-e011-8ebf-206a8a339500";
             DeleteMessageResponse actual;
             actual = target.DeleteMessage(messageID);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.IsTrue(actual.Success);
         }
 
         /// <summary>
@@ -103,14 +99,10 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void DisplayProfileTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            DisplayProfileResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
             DisplayProfileResponse actual;
             actual = target.DisplayProfile();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.IsNotNull(actual.Profile);
         }
 
         /// <summary>
@@ -136,16 +128,11 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void ListFriendsTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            int index = 0; // TODO: Initialize to an appropriate value
-            int count = 0; // TODO: Initialize to an appropriate value
-            ListFriendsResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            int index = 5; // TODO: Initialize to an appropriate value
+            int count = 10; // TODO: Initialize to an appropriate value
             ListFriendsResponse actual;
             actual = target.ListFriends(index, count);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -154,17 +141,12 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void ListMessagesTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            string folderName = string.Empty; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            string folderName = "Sent";
             int index = 0; // TODO: Initialize to an appropriate value
-            int count = 0; // TODO: Initialize to an appropriate value
-            ListMessagesResponse expected = null; // TODO: Initialize to an appropriate value
+            int count = 10; // TODO: Initialize to an appropriate value
             ListMessagesResponse actual;
             actual = target.ListMessages(folderName, index, count);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -173,15 +155,10 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void ReadMessageTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            string messageID = string.Empty; // TODO: Initialize to an appropriate value
-            ReadMessageResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            string messageID = "d3fc5f98-cfe2-e011-8ebf-206a8a339500";
             ReadMessageResponse actual;
             actual = target.ReadMessage(messageID);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -190,15 +167,11 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void RemoveFriendTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            string friendID = string.Empty; // TODO: Initialize to an appropriate value
-            RemoveFriendResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            string friendID = "26b7d8fb-efc3-409d-b001-41b52eef544d";
             RemoveFriendResponse actual;
             actual = target.RemoveFriend(friendID);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            
         }
 
         /// <summary>
@@ -226,15 +199,10 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void SendMessageTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            SendMessageRequest sendMsgReq = null; // TODO: Initialize to an appropriate value
-            SendMessageResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            SendMessageRequest sendMsgReq = new SendMessageRequest { Body = "is num", Subject = "head", RecipientID = new Guid("26b7d8fb-efc3-409d-b001-41b52eef544d") };
             SendMessageResponse actual;
             actual = target.SendMessage(sendMsgReq);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -243,15 +211,11 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void UpdateProfileTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            UpdateProfileRequest updateProfileReq = null; // TODO: Initialize to an appropriate value
-            UpdateProfileResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            UpdateProfileRequest updateProfileReq = new UpdateProfileRequest { Birthdate = DateTime.Now, Firstname = "Acer", Gender = "F", IsAvailable = true, Lastname = "Laptop", StatusMessage = "Sup guys?" }; 
             UpdateProfileResponse actual;
             actual = target.UpdateProfile(updateProfileReq);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.IsTrue(actual.Success);
         }
 
         /// <summary>
@@ -260,15 +224,11 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void UploadProfilePictureTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            Stream pictureStream = null; // TODO: Initialize to an appropriate value
-            ProfilePictureUploadResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            Stream pictureStream = new FileStream("d:\\me.gif", FileMode.Open, FileAccess.Read);
             ProfilePictureUploadResponse actual;
             actual = target.UploadProfilePicture(pictureStream);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.IsTrue(actual.Success);
         }
     }
 }
