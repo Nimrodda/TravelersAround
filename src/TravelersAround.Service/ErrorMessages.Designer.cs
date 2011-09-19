@@ -88,6 +88,15 @@ namespace R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot add friend, traveler already exists in friends list.
+        /// </summary>
+        internal static string FriendAlreadyExistsException {
+            get {
+                return ResourceManager.GetString("FriendAlreadyExistsException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No friends found for traveler {0}.
         /// </summary>
         internal static string FriendListEmpty {

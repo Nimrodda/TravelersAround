@@ -17,7 +17,7 @@ namespace TravelersAround.Service
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public class TravelersAroundService : ITravelersAroundService
+    public class TravelersAroundService : ServiceBase, ITravelersAroundService
     {
         private const int RADIUS = 20;
 
@@ -25,7 +25,6 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
-        private ILog _log;
 
         private readonly Guid _currentTravelerId = APIKeyService.GetAssociatedID();
 
@@ -34,12 +33,12 @@ namespace TravelersAround.Service
                                     IGeoCoder geoCoder,
                                     ILocationDeterminator locationDeterminator,
                                     ILog log)
+            : base(log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
-            _log = log;
         }
 
         public AddFriendResponse AddFriend(string friendID)
@@ -53,7 +52,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }

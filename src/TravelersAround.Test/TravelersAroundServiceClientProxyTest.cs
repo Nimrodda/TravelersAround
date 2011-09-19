@@ -15,7 +15,9 @@ namespace TravelersAround.Test
     [TestClass()]
     public class TravelersAroundServiceClientProxyTest
     {
-
+        private const string _serviceBaseUrl = "http://localhost.:2848/TravelersAroundService";
+        
+        //api key of user: test1@ta.com
         private const string _apiKey = "OMhsROUKSLMGsTQDz0RV6JeJB2ULRnCCaxh4J583MNz2ihYluiMi6n8Dw_PL4pSJkV-4UjveVDjQ9wBCaKvbyg2";
         private TestContext testContextInstance;
 
@@ -72,15 +74,10 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void AddFriendTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            string friendID = string.Empty; // TODO: Initialize to an appropriate value
-            AddFriendResponse expected = null; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            string friendID = "26b7d8fb-efc3-409d-b001-41b52eef544d";
             AddFriendResponse actual;
             actual = target.AddFriend(friendID);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>

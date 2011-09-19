@@ -126,6 +126,9 @@
   <data name="DuplicateUserName" xml:space="preserve">
     <value>A traveler with the supplied email address already exists</value>
   </data>
+  <data name="FriendAlreadyExistsException" xml:space="preserve">
+    <value>Cannot add friend, traveler already exists in friends list</value>
+  </data>
   <data name="FriendListEmpty" xml:space="preserve">
     <value>No friends found for traveler {0}</value>
   </data>
