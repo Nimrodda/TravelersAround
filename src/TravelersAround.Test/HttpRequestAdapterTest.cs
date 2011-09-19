@@ -15,8 +15,7 @@ namespace TravelersAround.Test
         public void ConstructQueryStringTest()
         {
 
-            TravelersAroundServiceClientProxy a = new TravelersAroundServiceClientProxy("asdfsadf");
-            a.ListMessages("inbox", 0, 10);
+            
         }
     }
 }

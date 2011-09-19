@@ -117,16 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>A traveler with the supplied email address already exists</value>
+  </data>
+  <data name="DuplicateProviderUserKey" xml:space="preserve">
+    <value>An error has occured while processing your request, try again later</value>
+  </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>A traveler with the supplied email address already exists</value>
+  </data>
   <data name="FriendListEmpty" xml:space="preserve">
     <value>No friends found for traveler {0}</value>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Incorrect username or password</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
   <data name="InvalidFolderName" xml:space="preserve">
     <value>{0} is an invalid folder name! Valid folder names are (Inbox, Sent, Trash)</value>
   </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Invalid password</value>
+  </data>
+  <data name="InvalidProviderUserKey" xml:space="preserve">
+    <value>An error has occured while processing your request, try again later</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
+  <data name="ProviderError" xml:space="preserve">
+    <value>An error has occured while processing your request, try again later</value>
+  </data>
   <data name="UnknownErrorHasOccured" xml:space="preserve">
-    <value>An error has occured while processing your request</value>
+    <value>An error has occured while processing your request, try again later</value>
+  </data>
+  <data name="UserRejected" xml:space="preserve">
+    <value>An error has occured while processing your request, try again later</value>
   </data>
 </root>

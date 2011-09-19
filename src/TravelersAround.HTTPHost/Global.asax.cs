@@ -31,7 +31,7 @@ namespace TravelersAround.HTTPHost
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            APIKeyService.CurrentTravelerIPAddress = GetIPAddressAsString();
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -53,5 +53,18 @@ namespace TravelersAround.HTTPHost
         {
 
         }
+
+        private string GetIPAddressAsString()
+        {
+            if (HttpContext.Current != null && !HttpContext.Current.Request.IsLocal)
+            {
+                return HttpContext.Current.Request.UserHostAddress;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

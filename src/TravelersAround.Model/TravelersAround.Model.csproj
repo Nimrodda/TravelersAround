@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\MembershipCreationFailedException.cs" />
     <Compile Include="HMACSHA512APIKeyGenerator.cs" />
     <Compile Include="Exceptions\InvalidTravelerLocationException.cs" />
     <Compile Include="Factories\TravelerFactory.cs" />

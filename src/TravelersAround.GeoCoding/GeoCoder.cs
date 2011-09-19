@@ -6,6 +6,7 @@ using TravelersAround.Model;
 using System.IO;
 using MaxMindGeocoder;
 using System.Reflection;
+using TravelersAround.Model.Exceptions;
 
 namespace TravelersAround.GeoCoding
 {
@@ -17,6 +18,7 @@ namespace TravelersAround.GeoCoding
             if (!File.Exists(path)) throw new FileNotFoundException(path);
             LookupService ls = new LookupService(path, LookupService.GEOIP_STANDARD);
             Location loc = ls.getLocation(ipAddress);
+            if (loc == null) throw new InvalidTravelerLocationException();
             GeoCoordinates geoCoords = new GeoCoordinates();
             geoCoords.Latitude = loc.latitude;
             geoCoords.Longtitude = loc.longitude;

@@ -8,7 +8,7 @@ namespace TravelersAround.Model.Factories
 {
     public static class TravelerFactory
     {
-        public static Traveler CreateTraveler(Guid id, string firstname, string lastname, string birthdate, string gender, double latitude, double longtitude)
+        public static Traveler CreateTraveler(Guid id, string firstname, string lastname, DateTime birthdate, string gender, double latitude, double longtitude)
         {
             return new Traveler
             {
@@ -16,7 +16,7 @@ namespace TravelersAround.Model.Factories
                 Firstname = firstname,
                 Lastname = lastname,
                 Gender = gender,
-                Birthdate = DateTime.Parse(birthdate),
+                Birthdate = birthdate,
                 Latitude = latitude,
                 Longtitude = longtitude
             };

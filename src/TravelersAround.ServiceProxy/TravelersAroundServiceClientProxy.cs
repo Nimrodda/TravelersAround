@@ -53,7 +53,7 @@ namespace TravelersAround.ServiceProxy
 
         public SendMessageResponse SendMessage(SendMessageRequest sendMsgReq)
         {
-            return HttpRequestAdapter.WebHttpPost<SendMessageResponse>(_serviceBaseUrl, "Messages/Send", sendMsgReq, String.Concat("?apikey=", _apiKey));
+            return HttpRequestAdapter.WebHttpPostRequest<SendMessageResponse>(_serviceBaseUrl, "Messages/Send", sendMsgReq, String.Concat("?apikey=", _apiKey));
         }
 
         public DeleteMessageResponse DeleteMessage(string messageID)
@@ -70,7 +70,7 @@ namespace TravelersAround.ServiceProxy
 
         public UpdateProfileResponse UpdateProfile(UpdateProfileRequest updateProfileReq)
         {
-            return HttpRequestAdapter.WebHttpPost<UpdateProfileResponse>(_serviceBaseUrl, "Profile/Update", updateProfileReq, String.Concat("?apikey=", _apiKey));
+            return HttpRequestAdapter.WebHttpPostRequest<UpdateProfileResponse>(_serviceBaseUrl, "Profile/Update", updateProfileReq, String.Concat("?apikey=", _apiKey));
         }
 
         public DisplayProfileResponse DisplayProfile()
@@ -86,7 +86,7 @@ namespace TravelersAround.ServiceProxy
 
         public ProfilePictureUploadResponse UploadProfilePicture(Stream pictureStream)
         {
-            return HttpRequestAdapter.WebHttpPost<ProfilePictureUploadResponse>(_serviceBaseUrl, "Profile/Picture", pictureStream, String.Concat("?apikey=", _apiKey));
+            return HttpRequestAdapter.WebHttpPostRequest<ProfilePictureUploadResponse>(_serviceBaseUrl, "Profile/Picture", pictureStream, String.Concat("?apikey=", _apiKey));
         }
 
         public Stream GetProfilePicture(string travelerID)

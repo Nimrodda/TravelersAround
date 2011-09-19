@@ -12,6 +12,7 @@ namespace TravelersAround.Service
     public static class APIKeyService
     {
         public static string CurrentTravelerAPIKey { get; set; }
+        public static string CurrentTravelerIPAddress { get; set; }
 
         private static ICache _apiKeys = DepenedencyRegistration.Get<ICache>();
 

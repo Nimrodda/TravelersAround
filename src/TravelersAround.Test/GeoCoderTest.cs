@@ -17,7 +17,7 @@ namespace TravelersAround.Test
         public void ConvertIPAddressToGeoCoordinatesTest()
         {
             GeoCoder geo = new GeoCoder();
-            var coords = geo.ConvertIPAddressToGeoCoordinates("80.221.20.181");
+            var coords = geo.ConvertIPAddressToGeoCoordinates("11.11.11.11");
         }
     }
 }

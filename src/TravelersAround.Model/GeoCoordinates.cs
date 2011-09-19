@@ -11,5 +11,10 @@ namespace TravelersAround.Model
         public double Latitude { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+
+        public bool IsValid()
+        {
+            return Latitude != 0 && Longtitude != 0;
+        }
     }
 }

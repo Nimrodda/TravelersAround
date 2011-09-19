@@ -19,6 +19,8 @@ namespace TravelersAround.HTTPHost
 
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
+            
+
             string key = GetAPIKey(operationContext);
 
             if (APIKeyService.IsValidAPIKey(key))

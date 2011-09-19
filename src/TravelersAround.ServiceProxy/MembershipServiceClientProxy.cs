@@ -14,12 +14,12 @@ namespace TravelersAround.ServiceProxy
 
         public RegisterResponse Register(RegisterRequest registerReq)
         {
-            return HttpRequestAdapter.WebHttpPost<RegisterResponse>(_serviceBaseUrl, MethodBase.GetCurrentMethod().Name, registerReq);
+            return HttpRequestAdapter.WebHttpPostRequest<RegisterResponse>(_serviceBaseUrl, MethodBase.GetCurrentMethod().Name, registerReq);
         }
 
         public LoginResponse Login(LoginRequest loginReq)
         {
-            return HttpRequestAdapter.WebHttpPost<LoginResponse>(_serviceBaseUrl, MethodBase.GetCurrentMethod().Name, loginReq);
+            return HttpRequestAdapter.WebHttpPostRequest<LoginResponse>(_serviceBaseUrl, MethodBase.GetCurrentMethod().Name, loginReq);
         }
     }
 }

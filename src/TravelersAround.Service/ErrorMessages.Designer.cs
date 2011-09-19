@@ -61,6 +61,33 @@ namespace R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A traveler with the supplied email address already exists.
+        /// </summary>
+        internal static string DuplicateEmail {
+            get {
+                return ResourceManager.GetString("DuplicateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
+        /// </summary>
+        internal static string DuplicateProviderUserKey {
+            get {
+                return ResourceManager.GetString("DuplicateProviderUserKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A traveler with the supplied email address already exists.
+        /// </summary>
+        internal static string DuplicateUserName {
+            get {
+                return ResourceManager.GetString("DuplicateUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No friends found for traveler {0}.
         /// </summary>
         internal static string FriendListEmpty {
@@ -79,6 +106,15 @@ namespace R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid email format.
+        /// </summary>
+        internal static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is an invalid folder name! Valid folder names are (Inbox, Sent, Trash).
         /// </summary>
         internal static string InvalidFolderName {
@@ -88,11 +124,56 @@ namespace R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured while processing your request.
+        ///   Looks up a localized string similar to Invalid password.
+        /// </summary>
+        internal static string InvalidPassword {
+            get {
+                return ResourceManager.GetString("InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
+        /// </summary>
+        internal static string InvalidProviderUserKey {
+            get {
+                return ResourceManager.GetString("InvalidProviderUserKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email format.
+        /// </summary>
+        internal static string InvalidUserName {
+            get {
+                return ResourceManager.GetString("InvalidUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
+        /// </summary>
+        internal static string ProviderError {
+            get {
+                return ResourceManager.GetString("ProviderError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
         internal static string UnknownErrorHasOccured {
             get {
                 return ResourceManager.GetString("UnknownErrorHasOccured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
+        /// </summary>
+        internal static string UserRejected {
+            get {
+                return ResourceManager.GetString("UserRejected", resourceCulture);
             }
         }
     }

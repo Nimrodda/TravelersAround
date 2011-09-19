@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="HMACSHA512KeyGeneratorTest.cs" />
     <Compile Include="HttpRequestAdapterTest.cs" />
+    <Compile Include="MembershipServiceClientProxyTest.cs" />
     <Compile Include="MembershipServiceTest.cs" />
     <Compile Include="MessageServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="GeoCoderTest.cs" />
     <Compile Include="SendMessageResponseTest.cs" />
     <Compile Include="SQLiteCacheTest.cs" />
+    <Compile Include="TravelersAroundServiceClientProxyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">

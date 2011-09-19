@@ -90,7 +90,7 @@ namespace TravelersAround.ServiceProxy
         /// <param name="url">The base url</param>
         /// <param name="uri">The operation name</param>
         /// <returns>The response type defined in the method</returns>
-        public static ResponseType WebHttpPost<ResponseType>(string baseUrl, string uri, object requestObject, string queryString = "")
+        public static ResponseType WebHttpPostRequest<ResponseType>(string baseUrl, string uri, object requestObject, string queryString = "")
         {
             HttpWebRequest invokeRequest = WebRequest.Create(String.Concat(baseUrl, "/", uri, queryString)) as HttpWebRequest;
             
@@ -119,7 +119,7 @@ namespace TravelersAround.ServiceProxy
         /// <param name="uri">The operation name</param>
         /// <param name="query">NameValueCollection of query string parameters and values</param>
         /// <returns></returns>
-        public static ResponseType WebHttpPost<ResponseType>(string baseUrl, string uri, Stream stream, string queryString = "")
+        public static ResponseType WebHttpPostRequest<ResponseType>(string baseUrl, string uri, Stream stream, string queryString = "")
         {
             int streamContentLength = (int)stream.Length;
             byte[] requestBodyBytes = new byte[streamContentLength];

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using TravelersAround.Model;
+using TravelersAround.Model.Exceptions;
 
 namespace TravelersAround.Service
 {
@@ -47,6 +48,12 @@ namespace TravelersAround.Service
 
             MembershipCreateStatus status;
             User = _provider.CreateUser(userName, password, email, null, null, true, null, out status);
+            if (User == null)
+            {
+                MembershipCreationFailedException exception = new MembershipCreationFailedException();
+                exception.Message = Enum.GetName(status.GetType(), status);
+                throw exception;
+            }
             return (Guid)User.ProviderUserKey;
         }
 
