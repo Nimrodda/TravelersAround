@@ -68,7 +68,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -91,7 +91,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -115,7 +115,7 @@ namespace TravelersAround.Service
                 }
                 catch (Exception ex)
                 {
-                    response.ErrorMessage = ex.Message;
+                    ReportError(ex, response);
                 }
             }
             return response;
@@ -132,7 +132,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
 
@@ -155,7 +155,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -172,7 +172,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -195,7 +195,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -211,7 +211,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -227,7 +227,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
@@ -252,7 +252,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }

@@ -18,7 +18,7 @@ namespace TravelersAround.Service
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public class MembershipService : IMembershipService
+    public class MembershipService : ServiceBase, IMembershipService
     {
         private IRepository _repository;
         private IMembership _membership;
@@ -32,14 +32,14 @@ namespace TravelersAround.Service
                                 IGeoCoder geoCoder,
                                 ILocationDeterminator locationDeterminator,
                                 IAPIKeyGenerator apiKeyGen,
-                                ILog log)
+                                ILog log) 
+            : base(log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
             _apiKeyGen = apiKeyGen;
-            _log = log;
         }
 
         public RegisterResponse Register(RegisterRequest registerReq)
@@ -75,7 +75,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                //log
+                ReportError(ex, response);
             }
 
             return response;
@@ -121,7 +121,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                response.ErrorMessage = ex.Message;
+                ReportError(ex, response);
             }
             return response;
         }
