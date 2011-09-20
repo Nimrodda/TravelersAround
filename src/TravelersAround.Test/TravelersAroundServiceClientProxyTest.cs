@@ -195,7 +195,7 @@ namespace TravelersAround.Test
         public void SendMessageTest()
         {
             TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
-            SendMessageRequest sendMsgReq = new SendMessageRequest { Body = "is num", Subject = "head", RecipientID = new Guid("26b7d8fb-efc3-409d-b001-41b52eef544d") };
+            SendMessageRequest sendMsgReq = new SendMessageRequest { Body = "is num", Subject = "head", RecipientID = "26b7d8fb-efc3-409d-b001-41b52eef544d" };
             SendMessageResponse actual;
             actual = target.SendMessage(sendMsgReq);
             Assert.IsTrue(actual.Success);
@@ -208,7 +208,7 @@ namespace TravelersAround.Test
         public void UpdateProfileTest()
         {
             TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
-            UpdateProfileRequest updateProfileReq = new UpdateProfileRequest { Birthdate = DateTime.Now, Firstname = "Acer", Gender = "F", IsAvailable = true, Lastname = "Laptop", StatusMessage = "Sup guys?" }; 
+            UpdateProfileRequest updateProfileReq = new UpdateProfileRequest { Birthdate = DateTime.Now.ToString(), Firstname = "Acer", Gender = "F", IsAvailable = true, Lastname = "Laptop", StatusMessage = "Sup guys?" }; 
             UpdateProfileResponse actual;
             actual = target.UpdateProfile(updateProfileReq);
             Assert.IsTrue(actual.Success);

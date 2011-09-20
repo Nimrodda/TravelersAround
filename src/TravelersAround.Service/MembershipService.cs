@@ -25,7 +25,6 @@ namespace TravelersAround.Service
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
         private IAPIKeyGenerator _apiKeyGen;
-        private ILog _log;
     
         public MembershipService(IRepository repository, 
                                 IMembership membership,
@@ -56,7 +55,7 @@ namespace TravelersAround.Service
                 
                 //Creating new traveler profile
                 Traveler newTraveler = TravelerFactory.CreateTraveler(
-                    newTravelerID, registerReq.Firstname, registerReq.Lastname, registerReq.Birthdate, registerReq.Gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
+                    newTravelerID, registerReq.Firstname, registerReq.Lastname, DateTime.Parse(registerReq.Birthdate), registerReq.Gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
                 
                 //Issuing an API key and storing in cache
                 string travelerApiKey = GetUniqueApiKey(registerReq.Password);

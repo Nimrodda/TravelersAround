@@ -87,7 +87,7 @@ namespace TravelersAround.Test
         {
             string serviceBaseUrl = _serviceBaseUrl; 
             MembershipServiceClientProxy target = new MembershipServiceClientProxy(serviceBaseUrl);
-            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now, ConfirmPassword = "123456", Password = "123456", Email = "test2@ta.com", Firstname = "Test2", Gender = "F", Lastname = "Test2" };
+            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now.ToString(), ConfirmPassword = "123456", Password = "123456", Email = "test2@ta.com", Firstname = "Test2", Gender = "F", Lastname = "Test2" };
             RegisterResponse actual = target.Register(registerReq);
         }
 
@@ -96,7 +96,7 @@ namespace TravelersAround.Test
         {
             string serviceBaseUrl = _serviceBaseUrl;
             MembershipServiceClientProxy target = new MembershipServiceClientProxy(serviceBaseUrl);
-            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now, ConfirmPassword = "123456", Password = "123456", Email = "test4@ta.com", Firstname = "Test4", Gender = "F", Lastname = "Test4" };
+            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now.ToString(), ConfirmPassword = "123456", Password = "123456", Email = "test4@ta.com", Firstname = "Test4", Gender = "F", Lastname = "Test4" };
             RegisterResponse actual = target.Register(registerReq);
         }
     }

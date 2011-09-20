@@ -127,7 +127,7 @@ namespace TravelersAround.Service
             MessageService msgSvc = new MessageService(_repository);
             try
             {
-                msgSvc.SendMessage(sendMsgReq.Subject, sendMsgReq.Body, _currentTravelerId, new Guid[] { sendMsgReq.RecipientID });
+                msgSvc.SendMessage(sendMsgReq.Subject, sendMsgReq.Body, _currentTravelerId, new Guid[] { new Guid(sendMsgReq.RecipientID) });
                 response.MarkSuccess();
             }
             catch (Exception ex)
@@ -270,7 +270,7 @@ namespace TravelersAround.Service
             }
             catch (Exception ex)
             {
-                //log
+                _log.Error(ex);
             }
             return null;
 

@@ -10,13 +10,13 @@ namespace TravelersAround.DataContracts.Views
     public class MessageView
     {
         [DataMember]
-        public Guid MessageID { get; set; }
+        public string MessageID { get; set; }
         [DataMember]
         public string Subject { get; set; }
         [DataMember]
         public string Body { get; set; }
         [DataMember]
-        public DateTime SentDate { get; set; }
+        public string SentDate { get; set; }
         [DataMember]
         public string SenderName { get; set; }
         [DataMember]

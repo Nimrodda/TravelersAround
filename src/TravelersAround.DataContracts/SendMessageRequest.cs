@@ -14,7 +14,7 @@ namespace TravelersAround.DataContracts
         [DataMember]
         public string Body { get; set; }
         [DataMember]
-        public Guid RecipientID { get; set; }
+        public string RecipientID { get; set; }
         
     }
 }

@@ -15,9 +15,9 @@ namespace TravelersAround.Service.Mappers
             {
                 Body = travelerMessage.Message.Body,
                 IsRead = travelerMessage.IsRead,
-                MessageID = travelerMessage.MessageID,
+                MessageID = travelerMessage.MessageID.ToString(),
                 SenderName = travelerMessage.Message.Author.Fullname,
-                SentDate = travelerMessage.Message.SentDate,
+                SentDate = travelerMessage.Message.SentDate.ToString(),
                 Subject = travelerMessage.Message.Subject,
                 RecipientsNames = travelerMessage.Message.Recipients.Where(x => x.TravelerID != travelerMessage.TravelerID).Select(t => t.Traveler.Fullname).ToList()
             };

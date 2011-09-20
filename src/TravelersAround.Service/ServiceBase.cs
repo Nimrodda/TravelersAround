@@ -9,7 +9,7 @@ namespace TravelersAround.Service
 {
     public abstract class ServiceBase
     {
-        private ILog _log;
+        protected ILog _log;
 
         public ServiceBase(ILog log)
         {

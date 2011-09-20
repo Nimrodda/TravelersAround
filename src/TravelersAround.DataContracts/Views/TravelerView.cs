@@ -10,13 +10,13 @@ namespace TravelersAround.DataContracts.Views
     public class TravelerView
     {
         [DataMember]
-        public Guid TravelerID { get; set; }
+        public string TravelerID { get; set; }
         [DataMember]
         public string Firstname { get; set; }
         [DataMember]
         public string Lastname { get; set; }
         [DataMember]
-        public DateTime Birthdate { get; set; }
+        public string Birthdate { get; set; }
         [DataMember]
         public string StatusMessage { get; set; }
         [DataMember]

@@ -13,8 +13,8 @@ namespace TravelersAround.Service.Mappers
         {
             return new TravelerView
             {
-                TravelerID = traveler.TravelerID,
-                Birthdate = traveler.Birthdate,
+                TravelerID = traveler.TravelerID.ToString(),
+                Birthdate = traveler.Birthdate.ToString(),
                 StatusMessage = traveler.StatusMessage,
                 Firstname = traveler.Firstname,
                 Lastname = traveler.Lastname,

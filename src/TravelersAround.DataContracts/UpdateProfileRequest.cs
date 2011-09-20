@@ -15,7 +15,7 @@ namespace TravelersAround.DataContracts
         [DataMember]
         public string Lastname { get; set; }
         [DataMember]
-        public DateTime Birthdate { get; set; }
+        public string Birthdate { get; set; }
         [DataMember]
         public string StatusMessage { get; set; }
         [DataMember]

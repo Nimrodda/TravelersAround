@@ -10,6 +10,6 @@ namespace TravelersAround.DataContracts
     public class AddFriendRequest
     {
         [DataMember]
-        public Guid FriendID { get; set; }
+        public string FriendID { get; set; }
     }
 }
