@@ -12,6 +12,7 @@ namespace TravelersAround.Service
         
         public static void Register()
         {
+            log4net.Config.XmlConfigurator.Configure();
             Kernel = new StandardKernel(new CustomModule());
         }
 

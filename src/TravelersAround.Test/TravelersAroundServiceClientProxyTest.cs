@@ -15,10 +15,10 @@ namespace TravelersAround.Test
     [TestClass()]
     public class TravelersAroundServiceClientProxyTest
     {
-        private const string _serviceBaseUrl = "http://localhost.:2848/TravelersAroundService";
+        private const string _serviceBaseUrl = "http://localhost.:6149/TravelersAroundService";
         
         //api key of user: test1@ta.com
-        private const string _apiKey = "OMhsROUKSLMGsTQDz0RV6JeJB2ULRnCCaxh4J583MNz2ihYluiMi6n8Dw_PL4pSJkV-4UjveVDjQ9wBCaKvbyg2";
+        private const string _apiKey = "aqTXIbLdMKbPmVFkBuPz6YiwYGQZSYrSKqOceaBquDckYFr-BYF9NY2ZCdiZRvZEaK2iFe6yP6_r_vptTSiOZg2";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -78,6 +78,7 @@ namespace TravelersAround.Test
             string friendID = "26b7d8fb-efc3-409d-b001-41b52eef544d";
             AddFriendResponse actual;
             actual = target.AddFriend(friendID);
+            Assert.IsTrue(actual.Success);
         }
 
         /// <summary>
@@ -111,15 +112,13 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void GetProfilePictureTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
             string travelerID = string.Empty; // TODO: Initialize to an appropriate value
-            Stream expected = null; // TODO: Initialize to an appropriate value
-            Stream actual;
-            actual = target.GetProfilePicture(travelerID);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+
+            Stream actual = target.GetProfilePicture(travelerID);
+            MemoryStream ms = new MemoryStream();
+            actual.CopyTo(ms);
+            
         }
 
         /// <summary>
@@ -180,17 +179,13 @@ namespace TravelersAround.Test
         [TestMethod()]
         public void SearchTest()
         {
-            string serviceBaseUrl = string.Empty; // TODO: Initialize to an appropriate value
-            string apiKey = string.Empty; // TODO: Initialize to an appropriate value
-            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(serviceBaseUrl, apiKey); // TODO: Initialize to an appropriate value
-            bool availabilityMark = false; // TODO: Initialize to an appropriate value
+            TravelersAroundServiceClientProxy target = new TravelersAroundServiceClientProxy(_serviceBaseUrl, _apiKey); // TODO: Initialize to an appropriate value
+            bool availabilityMark = true; // TODO: Initialize to an appropriate value
             int index = 0; // TODO: Initialize to an appropriate value
-            int count = 0; // TODO: Initialize to an appropriate value
-            SearchResponse expected = null; // TODO: Initialize to an appropriate value
+            int count = 10; // TODO: Initialize to an appropriate value
             SearchResponse actual;
             actual = target.Search(availabilityMark, index, count);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.IsTrue(actual.Success);
         }
 
         /// <summary>
@@ -203,6 +198,7 @@ namespace TravelersAround.Test
             SendMessageRequest sendMsgReq = new SendMessageRequest { Body = "is num", Subject = "head", RecipientID = new Guid("26b7d8fb-efc3-409d-b001-41b52eef544d") };
             SendMessageResponse actual;
             actual = target.SendMessage(sendMsgReq);
+            Assert.IsTrue(actual.Success);
         }
 
         /// <summary>

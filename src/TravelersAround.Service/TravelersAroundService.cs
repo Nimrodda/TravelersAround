@@ -223,6 +223,11 @@ namespace TravelersAround.Service
             try
             {
                 response.Travelers = locSvc.GetListOfTravelersWithin(RADIUS, index, count, _currentTravelerId).ConvertToTravelerViewList();
+                //Filter only travelers who are marked available, otherwise return both available and unavaialble ones
+                if (availabilityMark)
+                {
+                    response.Travelers = response.Travelers.Where(t => t.IsAvailable).ToList();
+                }
                 response.MarkSuccess();
             }
             catch (Exception ex)

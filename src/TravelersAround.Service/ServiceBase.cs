@@ -27,7 +27,7 @@ namespace TravelersAround.Service
             string errorMessage = R.ErrorMessages.ResourceManager.GetString(exception.GetType().Name);
             if (String.IsNullOrEmpty(errorMessage))
             {
-                //log
+                _log.Error(response, exception);
             }
             else response.ErrorMessage = errorMessage;
         }

@@ -75,6 +75,7 @@ namespace TravelersAround.Test
             MembershipServiceClientProxy target = new MembershipServiceClientProxy(_serviceBaseUrl);
             LoginRequest loginReq = new LoginRequest { Email = "test1@ta.com", Password = "123456" };
             LoginResponse actual = target.Login(loginReq);
+            Assert.IsTrue(actual.Success);
             
         }
 
