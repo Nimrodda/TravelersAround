@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace R {
+namespace R.String {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace R {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessages {
+    public class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace R {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TravelersAround.Service.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("R.String.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace R {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to A traveler with the supplied email address already exists.
         /// </summary>
-        internal static string DuplicateEmail {
+        public static string DuplicateEmail {
             get {
                 return ResourceManager.GetString("DuplicateEmail", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
-        internal static string DuplicateProviderUserKey {
+        public static string DuplicateProviderUserKey {
             get {
                 return ResourceManager.GetString("DuplicateProviderUserKey", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to A traveler with the supplied email address already exists.
         /// </summary>
-        internal static string DuplicateUserName {
+        public static string DuplicateUserName {
             get {
                 return ResourceManager.GetString("DuplicateUserName", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to Cannot add friend, traveler already exists in friends list.
         /// </summary>
-        internal static string FriendAlreadyExistsException {
+        public static string FriendAlreadyExistsException {
             get {
                 return ResourceManager.GetString("FriendAlreadyExistsException", resourceCulture);
             }
@@ -99,16 +99,34 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to No friends found for traveler {0}.
         /// </summary>
-        internal static string FriendListEmpty {
+        public static string FriendListEmpty {
             get {
                 return ResourceManager.GetString("FriendListEmpty", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid birthdate. Correct format is: dd/mm/yyyy.
+        /// </summary>
+        public static string InvalidBirthdate {
+            get {
+                return ResourceManager.GetString("InvalidBirthdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid confirm password.
+        /// </summary>
+        public static string InvalidConfirmPassword {
+            get {
+                return ResourceManager.GetString("InvalidConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect username or password.
         /// </summary>
-        internal static string InvalidCredentials {
+        public static string InvalidCredentials {
             get {
                 return ResourceManager.GetString("InvalidCredentials", resourceCulture);
             }
@@ -117,43 +135,79 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to Invalid email format.
         /// </summary>
-        internal static string InvalidEmail {
+        public static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid firstname.
+        /// </summary>
+        public static string InvalidFirstname {
+            get {
+                return ResourceManager.GetString("InvalidFirstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is an invalid folder name! Valid folder names are (Inbox, Sent, Trash).
         /// </summary>
-        internal static string InvalidFolderName {
+        public static string InvalidFolderName {
             get {
                 return ResourceManager.GetString("InvalidFolderName", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid gender. Possible input: M or F.
+        /// </summary>
+        public static string InvalidGender {
+            get {
+                return ResourceManager.GetString("InvalidGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The supplied image is not in a valid format, supported formats are JPG and PNG.
         /// </summary>
-        internal static string InvalidImageFormatException {
+        public static string InvalidImageFormatException {
             get {
                 return ResourceManager.GetString("InvalidImageFormatException", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid lastname.
+        /// </summary>
+        public static string InvalidLastname {
+            get {
+                return ResourceManager.GetString("InvalidLastname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid password.
         /// </summary>
-        internal static string InvalidPassword {
+        public static string InvalidPassword {
             get {
                 return ResourceManager.GetString("InvalidPassword", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password don&apos;t match.
+        /// </summary>
+        public static string InvalidPasswordMatch {
+            get {
+                return ResourceManager.GetString("InvalidPasswordMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
-        internal static string InvalidProviderUserKey {
+        public static string InvalidProviderUserKey {
             get {
                 return ResourceManager.GetString("InvalidProviderUserKey", resourceCulture);
             }
@@ -162,7 +216,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to Invalid email format.
         /// </summary>
-        internal static string InvalidUserName {
+        public static string InvalidUserName {
             get {
                 return ResourceManager.GetString("InvalidUserName", resourceCulture);
             }
@@ -171,7 +225,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
-        internal static string ProviderError {
+        public static string ProviderError {
             get {
                 return ResourceManager.GetString("ProviderError", resourceCulture);
             }
@@ -180,7 +234,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
-        internal static string UnknownErrorHasOccured {
+        public static string UnknownErrorHasOccured {
             get {
                 return ResourceManager.GetString("UnknownErrorHasOccured", resourceCulture);
             }
@@ -189,7 +243,7 @@ namespace R {
         /// <summary>
         ///   Looks up a localized string similar to An error has occured while processing your request, try again later.
         /// </summary>
-        internal static string UserRejected {
+        public static string UserRejected {
             get {
                 return ResourceManager.GetString("UserRejected", resourceCulture);
             }

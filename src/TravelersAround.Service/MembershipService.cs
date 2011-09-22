@@ -70,7 +70,7 @@ namespace TravelersAround.Service
             }
             catch (MembershipCreationFailedException ex)
             {
-                response.ErrorMessage = R.ErrorMessages.ResourceManager.GetString(ex.Message);
+                response.ErrorMessage = R.String.ErrorMessages.ResourceManager.GetString(ex.Message);
             }
             catch (Exception ex)
             {
@@ -115,7 +115,7 @@ namespace TravelersAround.Service
                 }
                 else
                 {
-                    response.ErrorMessage = R.ErrorMessages.InvalidCredentials;
+                    response.ErrorMessage = R.String.ErrorMessages.InvalidCredentials;
                 }
             }
             catch (Exception ex)

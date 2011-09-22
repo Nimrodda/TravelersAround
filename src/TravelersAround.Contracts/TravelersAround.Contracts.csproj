@@ -31,7 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\..\lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Validation">
+      <HintPath>..\..\lib\Microsoft.Practices.EnterpriseLibrary.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF">
+      <HintPath>..\..\lib\Microsoft.Practices.EnterpriseLibrary.Validation.Integration.WCF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -51,6 +61,10 @@
     <ProjectReference Include="..\TravelersAround.DataContracts\TravelersAround.DataContracts.csproj">
       <Project>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</Project>
       <Name>TravelersAround.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.Resources\TravelersAround.Resources.csproj">
+      <Project>{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}</Project>
+      <Name>TravelersAround.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,6 +7,7 @@ using TravelersAround.Service;
 using TravelersAround.Model;
 using TravelersAround.Repository;
 using TravelersAround.GeoCoding;
+using TravelersAround.DataContracts;
 
 namespace TravelersAround.Test
 {
@@ -18,10 +19,10 @@ namespace TravelersAround.Test
         {
             DepenedencyRegistration.Register();
             MembershipService memberSvc = DepenedencyRegistration.Get<MembershipService>();
+            RegisterRequest req = new RegisterRequest();
+            var actual = memberSvc.Register(req);
 
-            //var actual = memberSvc.Register("test1@ta.com", "123456", "123456", "Nimrod", "Dayan", "05/05/1982", "M");
-
-            //Assert.IsTrue(actual.Success);
+            Assert.IsTrue(actual.Success);
         }
 
         [TestMethod]

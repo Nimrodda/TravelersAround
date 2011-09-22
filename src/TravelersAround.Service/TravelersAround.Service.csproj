@@ -54,11 +54,6 @@
     <Compile Include="APIKeyService.cs" />
     <Compile Include="CustomModule.cs" />
     <Compile Include="DepenedencyRegistration.cs" />
-    <Compile Include="ErrorMessages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ErrorMessages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Mappers\MessageExtensions.cs" />
     <Compile Include="Mappers\TravelerExtensions.cs" />
     <Compile Include="MembershipAccount.cs" />
@@ -88,16 +83,13 @@
       <Project>{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}</Project>
       <Name>TravelersAround.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.Resources\TravelersAround.Resources.csproj">
+      <Project>{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}</Project>
+      <Name>TravelersAround.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ErrorMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>R</CustomToolNamespace>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

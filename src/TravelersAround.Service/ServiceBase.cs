@@ -24,7 +24,7 @@ namespace TravelersAround.Service
         /// <param name="response"></param>
         protected void ReportError(Exception exception, ResponseBase response)
         {
-            string errorMessage = R.ErrorMessages.ResourceManager.GetString(exception.GetType().Name);
+            string errorMessage = R.String.ErrorMessages.ResourceManager.GetString(exception.GetType().Name);
             if (String.IsNullOrEmpty(errorMessage))
             {
                 _log.Error(response, exception);

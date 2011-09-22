@@ -132,20 +132,38 @@
   <data name="FriendListEmpty" xml:space="preserve">
     <value>No friends found for traveler {0}</value>
   </data>
+  <data name="InvalidBirthdate" xml:space="preserve">
+    <value>Invalid birthdate. Correct format is: dd/mm/yyyy</value>
+  </data>
+  <data name="InvalidConfirmPassword" xml:space="preserve">
+    <value>Invalid confirm password</value>
+  </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Incorrect username or password</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email format</value>
   </data>
+  <data name="InvalidFirstname" xml:space="preserve">
+    <value>Invalid firstname</value>
+  </data>
   <data name="InvalidFolderName" xml:space="preserve">
     <value>{0} is an invalid folder name! Valid folder names are (Inbox, Sent, Trash)</value>
+  </data>
+  <data name="InvalidGender" xml:space="preserve">
+    <value>Invalid gender. Possible input: M or F</value>
   </data>
   <data name="InvalidImageFormatException" xml:space="preserve">
     <value>The supplied image is not in a valid format, supported formats are JPG and PNG</value>
   </data>
+  <data name="InvalidLastname" xml:space="preserve">
+    <value>Invalid lastname</value>
+  </data>
   <data name="InvalidPassword" xml:space="preserve">
     <value>Invalid password</value>
+  </data>
+  <data name="InvalidPasswordMatch" xml:space="preserve">
+    <value>Password don't match</value>
   </data>
   <data name="InvalidProviderUserKey" xml:space="preserve">
     <value>An error has occured while processing your request, try again later</value>
