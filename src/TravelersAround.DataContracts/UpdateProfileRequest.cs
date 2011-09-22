@@ -19,7 +19,7 @@ namespace TravelersAround.DataContracts
         [DataMember]
         public string StatusMessage { get; set; }
         [DataMember]
-        public bool IsAvailable { get; set; }
+        public bool? IsAvailable { get; set; }
         [DataMember]
         public string Gender { get; set; }
     }

@@ -1,0 +1,53 @@
+﻿@model TravelersAround.ServiceProxy.ViewModels.FriendsListView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            index
+        </th>
+        <th>
+            count
+        </th>
+        <th>
+            ErrorMessage
+        </th>
+        <th>
+            Success
+        </th>
+    </tr>
+
+@foreach (var item in Model.Friends) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+        <td>
+            @item.Firstname
+        </td>
+        <td>
+            @item.Lastname
+        </td>
+        <td>
+            @item.StatusMessage
+        </td>
+        <td>
+            @item.IsAvailable
+        </td>
+    </tr>
+}
+
+</table>
+

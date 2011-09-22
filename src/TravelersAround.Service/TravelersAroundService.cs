@@ -184,11 +184,11 @@ namespace TravelersAround.Service
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
-                traveler.Firstname = updateProfileReq.Firstname;
-                traveler.Lastname = updateProfileReq.Lastname;
-                traveler.StatusMessage = updateProfileReq.StatusMessage;
-                traveler.Gender = updateProfileReq.Gender;
-                traveler.IsAvailable = updateProfileReq.IsAvailable;
+                traveler.Firstname = updateProfileReq.Firstname ?? traveler.Firstname;
+                traveler.Lastname = updateProfileReq.Lastname ?? traveler.Lastname;
+                traveler.StatusMessage = updateProfileReq.StatusMessage ?? traveler.StatusMessage;
+                traveler.Gender = updateProfileReq.Gender ?? traveler.Gender;
+                traveler.IsAvailable = updateProfileReq.IsAvailable ?? traveler.IsAvailable;
                 _repository.Save<Traveler>(traveler);
                 _repository.Commit();
                 response.Profile = traveler.ConvertToTravelerView();

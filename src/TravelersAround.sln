@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.ServiceProx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.Resources", "TravelersAround.Resources\TravelersAround.Resources.csproj", "{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelersAround.WebMvc", "TravelersAround.WebMvc\TravelersAround.WebMvc.csproj", "{6672D7B3-FE30-40A8-BFD7-BAA811907411}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TravelersAround1.vsmdi
@@ -85,6 +87,10 @@ Global
 		{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6672D7B3-FE30-40A8-BFD7-BAA811907411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6672D7B3-FE30-40A8-BFD7-BAA811907411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6672D7B3-FE30-40A8-BFD7-BAA811907411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6672D7B3-FE30-40A8-BFD7-BAA811907411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +106,6 @@ Global
 		{77D25D95-C514-4AD6-B763-E52F1ABA4C05} = {7C977746-8C38-4555-B564-C74988F201FE}
 		{36DA9243-33A7-4959-9B42-B3B05BC386F9} = {7C977746-8C38-4555-B564-C74988F201FE}
 		{25DCDBF0-A995-4155-93FF-463758044040} = {592D09CD-EA61-400A-8898-8FD792A7A08E}
+		{6672D7B3-FE30-40A8-BFD7-BAA811907411} = {592D09CD-EA61-400A-8898-8FD792A7A08E}
 	EndGlobalSection
 EndGlobal
