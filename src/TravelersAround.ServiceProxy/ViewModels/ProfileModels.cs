@@ -6,12 +6,19 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using TravelersAround.DataContracts.Views;
 using System.IO;
+using AutoMapper;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
     public class ProfileDisplayView : BaseView
     {
         public TravelerView Profile { get; set; }
+
+        public ProfileUpdateView ConvertToProfileUpdateView()
+        {
+            Mapper.CreateMap<ProfileDisplayView, ProfileUpdateView>();
+            return Mapper.Map<ProfileDisplayView, ProfileUpdateView>(this);
+        }
     }
 
     public class ProfileUpdateView : BaseView
@@ -30,11 +37,5 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
         public bool IsAvailable { get; set; }
     }
-
-    public class ProfilePictureView : BaseView
-    {
-        public string TravelerID { get; internal set; }
-        public string Filename { get; set; }
-        public Stream Data { get; set; }
-    }
+   
 }

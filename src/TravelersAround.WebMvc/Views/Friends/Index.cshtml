@@ -5,46 +5,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Friends List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    
 </p>
 <table>
     <tr>
         <th></th>
         <th>
-            index
+            Firstname
         </th>
         <th>
-            count
+            Lastname
         </th>
         <th>
-            ErrorMessage
+            Birthdate
         </th>
         <th>
-            Success
+            StatusMessage
+        </th>
+        <th>
+            Gender
         </th>
     </tr>
 
-@foreach (var item in Model.Friends) {
+@foreach (var friend in Model.Friends) {
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = friend.TravelerID }) |
+            @Html.ActionLink("Remove", "Remove", new { id = friend.TravelerID })
         </td>
         <td>
-            @item.Firstname
+            @friend.Firstname
         </td>
         <td>
-            @item.Lastname
+            @friend.Lastname
         </td>
         <td>
-            @item.StatusMessage
+            @friend.Birthdate
         </td>
         <td>
-            @item.IsAvailable
+            @friend.StatusMessage
+        </td>
+        <td>
+            @friend.Gender
+        </td>
+        <td>
+            @friend.IsAvailable
         </td>
     </tr>
 }

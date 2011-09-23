@@ -1,0 +1,35 @@
+﻿@model TravelersAround.DataContracts.Views.MessageView
+
+@{
+    ViewBag.Title = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Read</h2>
+
+<fieldset>
+    <legend>MessageView</legend>
+
+    <div class="display-label">MessageID</div>
+    <div class="display-field">@Model.MessageID</div>
+
+    <div class="display-label">Subject</div>
+    <div class="display-field">@Model.Subject</div>
+
+    <div class="display-label">Body</div>
+    <div class="display-field">@Model.Body</div>
+
+    <div class="display-label">SentDate</div>
+    <div class="display-field">@Model.SentDate</div>
+
+    <div class="display-label">SenderName</div>
+    <div class="display-field">@Model.SenderName</div>
+
+    <div class="display-label">IsRead</div>
+    <div class="display-field">@Model.IsRead</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

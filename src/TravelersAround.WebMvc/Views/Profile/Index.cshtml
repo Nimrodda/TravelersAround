@@ -1,0 +1,34 @@
+﻿@model TravelersAround.ServiceProxy.ViewModels.ProfileDisplayView
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+
+<fieldset>
+    <legend>Personal details</legend>
+
+    <div class="display-label">Firstname</div>
+    <div class="display-field">@Model.Profile.Firstname</div>
+
+    <div class="display-label">Lastname</div>
+    <div class="display-field">@Model.Profile.Lastname</div>
+
+    <div class="display-label">Birthdate</div>
+    <div class="display-field">@Model.Profile.Birthdate</div>
+
+    <div class="display-label">StatusMessage</div>
+    <div class="display-field">@Model.Profile.StatusMessage</div>
+
+    <div class="display-label">Gender</div>
+    <div class="display-field">@Model.Profile.Gender</div>
+
+    <div class="display-label">IsAvailable</div>
+    <div class="display-field">@Model.Profile.IsAvailable</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit")
+</p>
+

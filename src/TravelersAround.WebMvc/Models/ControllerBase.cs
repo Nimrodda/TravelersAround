@@ -9,6 +9,8 @@ namespace TravelersAround.WebMvc.Controllers
 {
     public abstract class ControllerBase : Controller
     {
+        protected const int PAGE_SIZE = 10;
+
         protected ITravelersAroundServiceFacade _taService;
 
         public ControllerBase(ITravelersAroundServiceFacade taService)

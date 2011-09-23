@@ -13,17 +13,12 @@ namespace TravelersAround.ServiceProxy
     {
         private ITravelersAroundService _travelersAroundService;
 
-        public TravelersAroundServiceFacade(ITravelersAroundService travelersAroundService)
-        {
-            _travelersAroundService = travelersAroundService;
-        }
-
-        public bool AddFriend(string friendID)
+        public FriendsListView AddFriend(string friendID)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveFriend(string friendID)
+        public FriendsListView RemoveFriend(string friendID)
         {
             throw new NotImplementedException();
         }
@@ -43,7 +38,7 @@ namespace TravelersAround.ServiceProxy
             throw new NotImplementedException();
         }
 
-        public bool DeleteMessage(string messageID)
+        public MessagesListView DeleteMessage(string messageID)
         {
             throw new NotImplementedException();
         }
@@ -63,12 +58,12 @@ namespace TravelersAround.ServiceProxy
             throw new NotImplementedException();
         }
 
-        public SearchtView Search(bool availabilityMark, int index, int count)
+        public SearchView Search(bool availabilityMark, int index, int count)
         {
             throw new NotImplementedException();
         }
 
-        public bool UploadProfilePicture(Stream pictureStream)
+        public ProfileUpdateView UploadProfilePicture(Stream pictureStream)
         {
             throw new NotImplementedException();
         }

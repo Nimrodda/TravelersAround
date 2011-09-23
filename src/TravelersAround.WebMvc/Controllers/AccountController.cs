@@ -26,6 +26,7 @@ namespace TravelersAround.WebMvc.Controllers
             _formsService = formsService;
         }
 
+        [HttpGet]
         public ActionResult LogOn()
         {
             return View();
@@ -55,13 +56,8 @@ namespace TravelersAround.WebMvc.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
 
         public ActionResult LogOff()
         {
@@ -70,10 +66,7 @@ namespace TravelersAround.WebMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
@@ -98,10 +91,6 @@ namespace TravelersAround.WebMvc.Controllers
 
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
 
         [Authorize]
         public ActionResult ChangePassword()

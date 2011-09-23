@@ -8,30 +8,45 @@ using TravelersAround.ServiceProxy;
 
 namespace TravelersAround.WebMvc.Controllers
 {
-    public class FriendsController : Controller
+    public class FriendsController : ControllerBase
     {
-        private ITravelersAroundServiceFacade _taService;
-
-        public FriendsController(ITravelersAroundServiceFacade taService)
+        public FriendsController(ITravelersAroundServiceFacade taService) : base(taService)
         {
-            _taService = taService;
         }
 
         //FriendsList
-        public ActionResult Index(int i = 0)
+        public ActionResult Index(int p = 0)
         {
-            FriendsListView model = _taService.ListFriends(i, 10);
+            FriendsListView model = _taService.ListFriends(p * PAGE_SIZE, PAGE_SIZE);
             return View(model);
         }
 
         public ActionResult Add(string id)
         {
-            return View("Index");
+            FriendsListView model = _taService.AddFriend(id);
+            if (model.Success)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", model.ErrorMessage);
+            }
+            return View("Index", model);
         }
 
         public ActionResult Remove(string id)
         {
-            return View("Index");
+            FriendsListView model = _taService.RemoveFriend(id);
+            if (model.Success)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", model.ErrorMessage);
+            }
+            return View("Index", model);
         }
 
     }

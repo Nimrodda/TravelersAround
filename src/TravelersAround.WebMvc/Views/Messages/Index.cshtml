@@ -1,0 +1,49 @@
+﻿@model TravelersAround.ServiceProxy.ViewModels.MessagesListView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Send")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>
+            Subject
+        </th>
+        <th>
+            From
+        </th>
+        <th>
+            Sent Date
+        </th>
+    </tr>
+
+@foreach (var message in Model.Messages) {
+    <tr>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = message.MessageID })
+        </td>
+        <td>
+            @message.IsRead
+        </td>
+        <td>
+            @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
+        </td>
+        <td>
+            @message.SenderName
+        </td>
+        <td>
+            @message.SentDate
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -8,7 +8,7 @@ using TravelersAround.DataContracts.Views;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
-    public class SearchtView : BaseView
+    public class SearchView : BaseView
     {
         public IList<TravelerView> Travelers { get; set; }
         public bool AvailabilityMark { get; set; }

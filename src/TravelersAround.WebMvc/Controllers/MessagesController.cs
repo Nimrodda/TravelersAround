@@ -8,19 +8,17 @@ using TravelersAround.ServiceProxy.ViewModels;
 
 namespace TravelersAround.WebMvc.Controllers
 {
-    public class MessagesController : Controller
+    public class MessagesController : ControllerBase
     {
-        private ITravelersAroundServiceFacade _taService;
-
-        public MessagesController(ITravelersAroundServiceFacade taService)
+        public MessagesController(ITravelersAroundServiceFacade taService) : base(taService)
         {
-            _taService = taService;
         }
 
         //MessagesList
-        public ActionResult Index()
+        public ActionResult Index(string folder, int p = 0)
         {
-            return View();
+            MessagesListView model = _taService.ListMessages(folder, p * PAGE_SIZE, PAGE_SIZE);
+            return View(model);
         }
 
         [HttpGet]
@@ -32,17 +30,43 @@ namespace TravelersAround.WebMvc.Controllers
         [HttpPost]
         public ActionResult Send(MessageSendView model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                model = _taService.SendMessage(model);
+                if (model.Success)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", model.ErrorMessage);
+                }
+            }
+            return View(model);
         }
 
         public ActionResult Read(string id)
         {
-            return View();
+            MessageReadView model = _taService.ReadMessage(id);
+            if (!model.Success)
+            {
+                ModelState.AddModelError("", model.ErrorMessage);
+            }
+            return View(model);
         }
 
         public ActionResult Delete(string id)
         {
-            return View("Index");
+            MessagesListView model = _taService.DeleteMessage(id);
+            if (model.Success)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", model.ErrorMessage);
+            }
+            return View("Index", model);
         }
     }
 }

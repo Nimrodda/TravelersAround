@@ -9,9 +9,9 @@ namespace TravelersAround.ServiceProxy
 {
     public interface ITravelersAroundServiceFacade
     {
-        bool AddFriend(string friendID);
+        FriendsListView AddFriend(string friendID);
 
-        bool RemoveFriend(string friendID);
+        FriendsListView RemoveFriend(string friendID);
 
         FriendsListView ListFriends(int index, int count);
 
@@ -19,7 +19,7 @@ namespace TravelersAround.ServiceProxy
 
         MessageSendView SendMessage(MessageSendView view);
 
-        bool DeleteMessage(string messageID);
+        MessagesListView DeleteMessage(string messageID);
 
         MessageReadView ReadMessage(string messageID);
 
@@ -27,9 +27,9 @@ namespace TravelersAround.ServiceProxy
 
         ProfileDisplayView DisplayProfile();
 
-        SearchtView Search(bool availabilityMark, int index, int count);
+        SearchView Search(bool availabilityMark, int index, int count);
 
-        bool UploadProfilePicture(Stream pictureStream);
+        ProfileUpdateView UploadProfilePicture(Stream pictureStream);
 
         Stream GetProfilePicture(string travelerID);
     }
