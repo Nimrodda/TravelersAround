@@ -14,7 +14,7 @@ namespace TravelersAround.WebMvc.Models
         {
             List<DropDownListItem> selectList = new List<DropDownListItem>();
 
-            foreach (var friend in model.Friends)
+            foreach (var friend in model.FriendsList)
             {
                 selectList.Add(new DropDownListItem 
                 { 

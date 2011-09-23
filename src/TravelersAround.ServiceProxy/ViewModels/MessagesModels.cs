@@ -11,7 +11,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
 {
     public class MessagesListView : BaseView
     {
-        public IList<MessageView> Messages { get; set; }
+        public IList<MessageView> MessagesList { get; set; }
     }
 
     public class MessageSendView : BaseView

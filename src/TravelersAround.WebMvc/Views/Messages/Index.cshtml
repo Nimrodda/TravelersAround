@@ -12,8 +12,6 @@
 </p>
 <table>
     <tr>
-        <th></th>
-        <th></th>
         <th>
             Subject
         </th>
@@ -23,24 +21,29 @@
         <th>
             Sent Date
         </th>
+        <th></th>
     </tr>
 
-@foreach (var message in Model.Messages) {
+@foreach (var message in Model.MessagesList) {
     <tr>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id = message.MessageID })
-        </td>
-        <td>
-            @message.IsRead
-        </td>
-        <td>
-            @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
+            @if (!message.IsRead)
+            {
+                <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })</strong>
+            }
+            else
+            {
+                @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
+            }
         </td>
         <td>
             @message.SenderName
         </td>
         <td>
             @message.SentDate
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = message.MessageID })
         </td>
     </tr>
 }

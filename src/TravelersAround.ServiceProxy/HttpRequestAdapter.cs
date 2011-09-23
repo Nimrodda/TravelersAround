@@ -100,11 +100,8 @@ namespace TravelersAround.ServiceProxy
             using (Stream postStream = invokeRequest.GetRequestStream())
                 postStream.Write(requestBodyBytes, 0, requestBodyBytes.Length);
 
-            WebResponse response = invokeRequest.GetResponse();
-
+            HttpWebResponse response = invokeRequest.GetResponse() as HttpWebResponse;
             return DeserializeFromJSON<ResponseType>(response.GetResponseStream());
-
-
         }
 
         /// <summary>

@@ -62,7 +62,7 @@ namespace TravelersAround.ServiceProxy
 
         public ProfileDisplayView DisplayProfile()
         {
-            return (ProfileDisplayView)GetMappedObject(_travelersAroundService.DisplayProfile(), typeof(ProfileUpdateView));
+            return (ProfileDisplayView)GetMappedObject(_travelersAroundService.DisplayProfile(), typeof(ProfileDisplayView));
         }
 
         public SearchView Search(bool availabilityMark, int index, int count)

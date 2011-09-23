@@ -10,52 +10,59 @@
 <p>
     
 </p>
-<table>
-    <tr>
-        <th></th>
-        <th>
-            Firstname
-        </th>
-        <th>
-            Lastname
-        </th>
-        <th>
-            Birthdate
-        </th>
-        <th>
-            StatusMessage
-        </th>
-        <th>
-            Gender
-        </th>
-    </tr>
+@if (Model.FriendsList != null)
+{
+    <table>
+        <tr>
+            <th>
+                Firstname
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                Birthdate
+            </th>
+            <th>
+                StatusMessage
+            </th>
+            <th>
+                Gender
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var friend in Model.Friends) {
-    <tr>
-        <td>
-            @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = friend.TravelerID }) |
-            @Html.ActionLink("Remove", "Remove", new { id = friend.TravelerID })
-        </td>
-        <td>
-            @friend.Firstname
-        </td>
-        <td>
-            @friend.Lastname
-        </td>
-        <td>
-            @friend.Birthdate
-        </td>
-        <td>
-            @friend.StatusMessage
-        </td>
-        <td>
-            @friend.Gender
-        </td>
-        <td>
-            @friend.IsAvailable
-        </td>
-    </tr>
+    @foreach (var friend in Model.FriendsList)
+    {
+        <tr>
+            <td>
+                @friend.Firstname
+            </td>
+            <td>
+                @friend.Lastname
+            </td>
+            <td>
+                @friend.Birthdate
+            </td>
+            <td>
+                @friend.StatusMessage
+            </td>
+            <td>
+                @friend.Gender
+            </td>
+            <td>
+                @friend.IsAvailable
+            </td>
+            <td>
+                @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = friend.TravelerID }) |
+                @Html.ActionLink("Remove", "Remove", new { id = friend.TravelerID })
+            </td>
+        </tr>
+    }
+
+    </table>
 }
-
-</table>
-
+else
+{
+    <p>No friend in friends list</p>
+}

@@ -14,28 +14,9 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>MessageSendView</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Subject)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Subject)
-            @Html.ValidationMessageFor(model => model.Subject)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Body)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Body)
-            @Html.ValidationMessageFor(model => model.Body)
-        </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.RecipientID)
-        </div>
-        <div class="editor-field">
-            @if (Model.FriendsDropDownList.Count > 0)
+            @if (Model.FriendsDropDownList != null)
             {
                 <select class="editor-field" name="RecipientID">
                 @foreach (var item in Model.FriendsDropDownList)
@@ -55,9 +36,26 @@
             }
             @Html.ValidationMessageFor(model => model.RecipientID)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Subject)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Subject)
+            @Html.ValidationMessageFor(model => model.Subject)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Body)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Body)
+            @Html.ValidationMessageFor(model => model.Body)
+        </div>
+
+        
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Send" />
         </p>
     </fieldset>
 }

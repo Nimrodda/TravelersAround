@@ -28,7 +28,7 @@ namespace TravelersAround.WebMvc.Controllers
             MessageSendView model = new MessageSendView { RecipientID = id };
             model.FriendsDropDownList = _taService.ListFriends(p * PAGE_SIZE, PAGE_SIZE).ConvertToSelectListItemList();
             
-            return View();
+            return View(model);
         }
 
         [HttpPost]

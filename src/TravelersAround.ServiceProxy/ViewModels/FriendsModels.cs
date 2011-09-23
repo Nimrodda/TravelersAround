@@ -8,7 +8,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
 {
     public class FriendsListView : BaseView
     {
-        public IList<TravelerView> Friends { get; internal set; }
+        public IList<TravelerView> FriendsList { get; set; }
 
         public int index { get; set; }
 

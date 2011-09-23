@@ -11,7 +11,7 @@
 
         <div id="header">
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>TravelersAround</h1>
             </div>
 
             <div id="logindisplay">
@@ -23,6 +23,10 @@
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Find travelers around you", "Index", "Search")</li>
+                    <li>@Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" })</li>
+                    <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
+                    <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
                 </ul>
 
             </div>

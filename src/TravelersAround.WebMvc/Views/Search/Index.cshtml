@@ -16,11 +16,12 @@
 
             <div class="editor-field">
                 @Html.EditorFor(model => model.AvailabilityMark)
+                @Html.LabelFor(model => model.AvailabilityMark)
                 @Html.ValidationMessageFor(model => model.AvailabilityMark)
             </div>
 
             <p>
-                <input type="submit" value="Save" />
+                <input type="submit" value="Search" />
             </p>
         </fieldset>
     }
@@ -28,7 +29,6 @@
 
 <table>
     <tr>
-        <th></th>
         <th>
             Firstname
         </th>
@@ -47,15 +47,12 @@
         <th>
             IsAvailable
         </th>
+        <th></th>
     </tr>
 
 @foreach (var traveler in Model.Travelers)
 {
     <tr>
-        <td>
-            @Html.ActionLink("Add to friends list", "Add", new { controller = "Friends", id = traveler.TravelerID }) |
-            @Html.ActionLink("Send message", "Send", new { controller = "Messages", id = traveler.TravelerID })
-        </td>
         <td>
             @traveler.Firstname
         </td>
@@ -63,7 +60,7 @@
             @traveler.Lastname
         </td>
         <td>
-            @traveler.Birthdate
+            @DateTime.Parse(traveler.Birthdate).ToShortDateString()
         </td>
         <td>
             @traveler.StatusMessage
@@ -73,6 +70,10 @@
         </td>
         <td>
             @traveler.IsAvailable
+        </td>
+        <td>
+            @Html.ActionLink("Add to friends list", "Add", new { controller = "Friends", id = traveler.TravelerID }) |
+            @Html.ActionLink("Send message", "Send", new { controller = "Messages", id = traveler.TravelerID })
         </td>
     </tr>
 }
