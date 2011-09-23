@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TravelersAround.ServiceProxy;
 using TravelersAround.ServiceProxy.ViewModels;
+using TravelersAround.WebMvc.Models;
 
 namespace TravelersAround.WebMvc.Controllers
 {
@@ -22,8 +23,11 @@ namespace TravelersAround.WebMvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Send()
+        public ActionResult Send(string id, int p = 0)
         {
+            MessageSendView model = new MessageSendView { RecipientID = id };
+            model.FriendsDropDownList = _taService.ListFriends(p * PAGE_SIZE, PAGE_SIZE).ConvertToSelectListItemList();
+            
             return View();
         }
 

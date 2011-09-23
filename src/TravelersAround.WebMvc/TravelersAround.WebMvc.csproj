@@ -71,6 +71,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageSendViewExtensions.cs" />
     <Compile Include="Models\WebMvcModule.cs" />
     <Compile Include="Models\FormsAuthentication.cs" />
     <Compile Include="Models\IoCControllerFactory.cs" />
@@ -137,6 +138,10 @@
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">
       <Project>{74642909-E6FD-4984-BC1A-748EEA39F064}</Project>
       <Name>TravelersAround.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.DataContracts\TravelersAround.DataContracts.csproj">
+      <Project>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</Project>
+      <Name>TravelersAround.DataContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\TravelersAround.ServiceProxy\TravelersAround.ServiceProxy.csproj">
       <Project>{25DCDBF0-A995-4155-93FF-463758044040}</Project>

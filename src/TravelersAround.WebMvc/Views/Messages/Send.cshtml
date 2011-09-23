@@ -32,11 +32,28 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.RecipientName)
+            @Html.LabelFor(model => model.RecipientID)
         </div>
         <div class="editor-field">
-            @*@Html.DropDownListFor(model => model.RecipientName)*@
-            @Html.ValidationMessageFor(model => model.RecipientName)
+            @if (Model.FriendsDropDownList.Count > 0)
+            {
+                <select class="editor-field" name="RecipientID">
+                @foreach (var item in Model.FriendsDropDownList)
+                {
+                    <option value="@item.Value" @if (item.Value == Model.RecipientID) { <text>selected="selected"</text> }>@item.Name</option>
+                }
+                </select>
+            }
+            else if (!String.IsNullOrEmpty(Model.RecipientID))
+            {
+                @Html.HiddenFor(model => model.RecipientID)
+                @Model.RecipientName
+            }
+            else
+            {
+                @: Friend list is empty or invalid traveler ID
+            }
+            @Html.ValidationMessageFor(model => model.RecipientID)
         </div>
 
         <p>

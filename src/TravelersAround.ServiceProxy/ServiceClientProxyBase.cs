@@ -15,5 +15,6 @@ namespace TravelersAround.ServiceProxy
         {
             _serviceBaseUrl = serviceBaseUrl;
         }
+
     }
 }

@@ -8,7 +8,7 @@ using TravelersAround.DataContracts;
 
 namespace TravelersAround.ServiceProxy
 {
-    public class MembershipServiceFacade : IMembershipServiceFacade
+    public class MembershipServiceFacade : ServiceFacadeBase, IMembershipServiceFacade
     {
         private IMembershipService _membershipService;
 
@@ -19,12 +19,14 @@ namespace TravelersAround.ServiceProxy
 
         public LoginView Login(LoginView view)
         {
-            throw new NotImplementedException();
+            LoginRequest request = (LoginRequest)GetMappedObject(view, typeof(LoginRequest));
+            return (LoginView)GetMappedObject(_membershipService.Login(request), typeof(LoginView));
         }
 
         public RegisterView Register(RegisterView view)
         {
-            throw new NotImplementedException();
+            RegisterRequest request = (RegisterRequest)GetMappedObject(view, typeof(RegisterRequest));
+            return (RegisterView)GetMappedObject(_membershipService.Register(request), typeof(RegisterView));
         }
     }
 }

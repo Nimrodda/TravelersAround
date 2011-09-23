@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using TravelersAround.DataContracts.Views;
+using System.Collections.Specialized;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
@@ -15,6 +16,10 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
     public class MessageSendView : BaseView
     {
+        public List<DropDownListItem> FriendsDropDownList { get; set; }
+
+        public string RecipientName { get; set; }
+
         [Required]
         public string Subject { get; set; }
 
@@ -22,7 +27,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public string Body { get; set; }
 
         [Required]
-        public string RecipientName { get; set; }
+        public string RecipientID { get; set; }
     }
 
     public class MessageReadView : BaseView
