@@ -21,7 +21,11 @@ namespace TravelersAround.Service.Mappers
                 Gender = traveler.Gender,
                 IsAvailable = traveler.IsAvailable,
                 Latitude = traveler.Latitude,
-                Longtitude = traveler.Longtitude
+                Longtitude = traveler.Longtitude,
+                IsOnline = traveler.IsOnline,
+                City = traveler.City,
+                Country = traveler.Country
+                
             };
         }
 

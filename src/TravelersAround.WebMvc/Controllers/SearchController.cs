@@ -15,16 +15,9 @@ namespace TravelersAround.WebMvc.Controllers
         {
         }
 
-        //[HttpGet]
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
         public ActionResult Index(SearchView model, int p = 0)
         {
-            model = _taService.Search(model.AvailabilityMark, p * PAGE_SIZE, PAGE_SIZE);
+            model = _taService.Search(model.IncludeOfflineTravelers, p * PAGE_SIZE, PAGE_SIZE);
             
             if (!model.Success)
             {

@@ -27,5 +27,13 @@ namespace TravelersAround.DataContracts.Views
         public double Latitude { get; set; }
         [DataMember]
         public bool IsAvailable { get; set; }
+        [DataMember]
+        public bool IsOnline { get; set; }
+        [DataMember]
+        public string Country { get; set; }
+        [DataMember]
+        public string City { get; set; }
+
+
     }
 }

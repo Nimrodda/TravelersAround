@@ -217,19 +217,31 @@ namespace TravelersAround.Service
             return response;
         }
 
-        public SearchResponse Search(bool availabilityMark, int index, int count)
+        public SearchResponse Search(bool includeOfflineTravelers, int index, int count)
         {
-            //TODO: modify results to return only online travelers by intersecting cached travelers ID with DB travelers ID
             SearchResponse response = new SearchResponse();
             LocationService locSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+            APIKeyService apiKeySvc = new APIKeyService();
+
             try
             {
-                response.Travelers = locSvc.GetListOfTravelersWithin(RADIUS, index, count, _currentTravelerId).ConvertToTravelerViewList();
-                //Filter only travelers who are marked available, otherwise return both available and unavaialble ones
-                if (availabilityMark)
+                IEnumerable<Traveler> travelersAround = locSvc.GetListOfTravelersWithin(RADIUS, index, count, _currentTravelerId);
+                //Loading currently online travelers from the cache
+                IEnumerable<Guid> currentlyActiveTravelers = apiKeySvc.GetCurrentlyActiveTravelers();
+
+                if (!includeOfflineTravelers)
                 {
-                    response.Travelers = response.Travelers.Where(t => t.IsAvailable).ToList();
+                    //Gets only travelers around who are online at this moment
+                    travelersAround = travelersAround.Where(t => currentlyActiveTravelers.Contains(t.TravelerID));
                 }
+
+                //Marks which travelers are online
+                travelersAround
+                    .ToList()
+                    .ForEach(traveler => traveler.IsOnline = currentlyActiveTravelers.Contains(traveler.TravelerID));
+                
+                //Converts to the suitable data contract for serialization                
+                response.Travelers = travelersAround.ConvertToTravelerViewList();
                 response.MarkSuccess();
             }
             catch (Exception ex)

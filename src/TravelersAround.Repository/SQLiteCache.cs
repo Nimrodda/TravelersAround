@@ -146,33 +146,26 @@ namespace TravelersAround.Model
         }
 
         /// <summary>
-        /// Gets all the records that haven't expired yet
+        /// Gets all records that haven't expired and are online
         /// </summary>
         /// <returns>List of OnlineUser</returns>
-        public IEnumerable<OnlineUser> GetAll()
+        public IEnumerable<Guid> GetAll()
         {
             DataTable table = new DataTable();
             using (SQLiteConnection connection = GetConnection())
             {
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand(String.Format("select * from cache where expiration >= '{0}';", DateTime.Now.ToString(DATE_FORMAT)), connection);
+                SQLiteCommand command = new SQLiteCommand(String.Format("select value from cache where expiration >= '{0}' and online = 1;", DateTime.Now.ToString(DATE_FORMAT)), connection);
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     table.Load(reader);
-                    List<OnlineUser> result = new List<OnlineUser>();
+                    List<Guid> result = new List<Guid>();
                     if (table.Rows.Count > 0)
                     {
                         for (int i = 0; i < table.Rows.Count; i++)
-			            {
-                            result.Add(new OnlineUser
-                            {
-                                Key = (string)table.Rows[i].ItemArray[0],
-                                Value = (string)table.Rows[i].ItemArray[1],
-                                Expiration = DateTime.Parse((string)table.Rows[i].ItemArray[2]),
-                                IsOnline = (bool)table.Rows[i].ItemArray[3],
-                            });
-
-			            }
+                        {
+                            result.Add(Guid.Parse((string)table.Rows[i].ItemArray[0]));
+                        }
                     }
                     reader.Close();
                     connection.Close();

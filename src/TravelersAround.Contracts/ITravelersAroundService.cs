@@ -59,8 +59,8 @@ namespace TravelersAround.Contracts
 
         //Search service
         [OperationContract]
-        [WebGet(UriTemplate = "Search?availabilityMark={availabilityMark}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        SearchResponse Search(bool availabilityMark,int index, int count);
+        [WebGet(UriTemplate = "Search?includeOfflineTravelers={includeOfflineTravelers}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        SearchResponse Search(bool includeOfflineTravelers,int index, int count);
 
         //Profile picture management
         [OperationContract]

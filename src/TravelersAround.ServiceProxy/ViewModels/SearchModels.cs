@@ -11,6 +11,6 @@ namespace TravelersAround.ServiceProxy.ViewModels
     public class SearchView : BaseView
     {
         public IList<TravelerView> Travelers { get; set; }
-        public bool AvailabilityMark { get; set; }
+        public bool IncludeOfflineTravelers { get; set; }
     }
 }

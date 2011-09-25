@@ -22,7 +22,7 @@ namespace TravelersAround.Service
         public static int IdleUsersCleanUpTime { get { return _apiKeys.IdleUsersCleanUpTime; } }
 
 
-        
+
         /// <summary>
         /// Validating API key by first looking in the cache and if not found then fallback to the Database
         /// </summary>
@@ -101,6 +101,10 @@ namespace TravelersAround.Service
             _apiKeys.SetIdleUserOffline();
         }
 
+        public IEnumerable<Guid> GetCurrentlyActiveTravelers()
+        {
+            return _apiKeys.GetAll();
+        }
 
     }
 }

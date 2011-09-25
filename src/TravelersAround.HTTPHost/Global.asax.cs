@@ -14,9 +14,6 @@ namespace TravelersAround.HTTPHost
 {
     public class Global : HttpApplication
     {
-        private static Timer _setIdleUsersTimer;
-        private static Timer _cacheCleanUpTimer;
-
         private void RegisterRoutes()
         {
             RouteTable.Routes.Add(new ServiceRoute("MembershipService", new ExtentedWebServiceHostFactory(), typeof(MembershipService)));
@@ -27,12 +24,6 @@ namespace TravelersAround.HTTPHost
         {
             RegisterRoutes();
             DepenedencyRegistration.Register();
-
-            //Timer for setting all idle users as offline
-            //_setIdleUsersTimer = new Timer(s => { System.Diagnostics.Debug.WriteLine(DateTime.Now); APIKeyService.MarkIdleUsersOffline(); }, null, TimeSpan.Zero, TimeSpan.FromMinutes(APIKeyService.IdleTime));
-
-            //Timer for removing all users that have been idle more than X hours, as defined by the service
-            //_cacheCleanUpTimer = new Timer(s => APIKeyService.IdleUsersCleanUp(), null, TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime), TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime));
         }
 
         protected void Session_Start(object sender, EventArgs e)

@@ -21,6 +21,7 @@ namespace TravelersAround.Model.Entities
         public string ApiKey { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public bool IsOnline { get; set; }
         public virtual IList<Traveler> Relationships { get; set; }
         public virtual IList<TravelerMessage> Messages { get; set; }
 
