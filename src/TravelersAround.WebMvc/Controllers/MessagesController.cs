@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TravelersAround.ServiceProxy;
 using TravelersAround.ServiceProxy.ViewModels;
 using TravelersAround.WebMvc.Models;
+using System.Collections.Specialized;
 
 namespace TravelersAround.WebMvc.Controllers
 {
@@ -20,6 +21,7 @@ namespace TravelersAround.WebMvc.Controllers
         {
             MessagesListView model = _taService.ListMessages(folder, p * PAGE_SIZE, PAGE_SIZE);
             model.Folder = folder;
+            model.Page = p;
             return View(model);
         }
 
@@ -61,18 +63,27 @@ namespace TravelersAround.WebMvc.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(string id)
+        [HttpPost]
+        public ActionResult Delete(MessageDeleteView model)
         {
-            MessagesListView model = _taService.DeleteMessage(id);
-            if (model.Success)
+            MessagesListView messageListView;
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                messageListView = _taService.DeleteMessage(String.Join(",", model.MessageIDs));
+                if (messageListView.Success)
+                {
+                    return RedirectToAction("Index", new { folder = model.Folder, p = model.Page });
+                }
+                else
+                {
+                    ModelState.AddModelError("", messageListView.ErrorMessage);
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", model.ErrorMessage);
-            }
-            return View("Index", model);
+            messageListView = _taService.ListMessages(model.Folder, model.Page * PAGE_SIZE, PAGE_SIZE);
+            messageListView.Folder = model.Folder;
+            messageListView.Page = model.Page;
+            return View("Index", messageListView);
         }
     }
 }

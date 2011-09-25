@@ -11,59 +11,69 @@
     @Html.ActionLink("Create New", "Send")
     @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
     @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
+    @Html.ActionLink("Trash", "Index", new { folder = "Trash" })
 </p>
-<table>
-    <tr>
-        <th>
-            Subject
-        </th>
-        <th>
-            @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
-            {
-                @: From
-            }
-            else
-            {
-                @: Recipient
-            }
-        </th>
-        <th>
-            Sent Date
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var message in Model.MessagesList)
+<p>
+    @Html.ValidationSummary(true)
+    @Html.ValidationMessage("MessageIDs")
+</p>
+@using (Html.BeginForm("Delete", "Messages"))
 {
-    <tr>
-        <td>
-            @if (!message.IsRead)
-            {
-                <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })</strong>
-            }
-            else
-            {
-                @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
-            }
-        </td>
-        <td>
-            @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
-            {
-                @message.SenderName
-            }
-            else
-            {
-                @message.RecipientsNames.First()
-            }
-        </td>
-        <td>
-            @message.SentDate
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = message.MessageID })
-        </td>
-    </tr>
+    <input type="hidden" value="@Model.Folder" name="Folder" />
+    <input type="hidden" value="@Model.Page" name="Page" />
+    <table>
+        <tr>
+            <th>
+                <input type="submit" value="Delete" />
+            </th>
+            <th>
+                Subject
+            </th>
+            <th>
+                @if (Model.Folder.Equals("Sent", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    @: Recipient
+                }
+                else
+                {
+                    @: From
+                }
+            </th>
+            <th>
+                Sent Date
+            </th>
+        </tr>
+
+        @foreach (var message in Model.MessagesList)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" value="@message.MessageID" name="MessageIDs" />
+                </td>
+                <td>
+                    @if (!message.IsRead)
+                    {
+                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })</strong>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
+                    }
+                </td>
+                <td>
+                    @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        @message.SenderName
+                    }
+                    else
+                    {
+                        @message.RecipientsNames.First()
+                    }
+                </td>
+                <td>
+                    @message.SentDate
+                </td>
+            </tr>
+        }
+    </table>
 }
-
-</table>
-

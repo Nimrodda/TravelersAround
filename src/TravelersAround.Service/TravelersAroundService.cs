@@ -145,24 +145,34 @@ namespace TravelersAround.Service
 
         }
 
-        public DeleteMessageResponse DeleteMessage(string messageID)
+        public DeleteMessageResponse DeleteMessage(string messagesIDs)
         {
+            string[] messagesToDelete = messagesIDs.Split(',');
             DeleteMessageResponse response = new DeleteMessageResponse();
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
-                TravelerMessage message = traveler.Messages.FirstOrDefault(m => m.MessageID == new Guid(messageID));
-                if (message != null)
+                IEnumerable<TravelerMessage> messages = traveler.Messages.Where(m => messagesToDelete.Contains(m.MessageID.ToString()));
+                List<TravelerMessage> buffer = new List<TravelerMessage>();
+                if (messages != null)
                 {
-                    if (message.FolderID != (int)FolderType.Trash)
+                    foreach (TravelerMessage message in messages)
                     {
-                        message.FolderID = (int)FolderType.Trash;
-                        _repository.Save<TravelerMessage>(message);
+                        if (message.FolderID != (int)FolderType.Trash)
+                        {
+                            message.FolderID = (int)FolderType.Trash;
+                            _repository.Save<TravelerMessage>(message);
+                        }
+                        else
+                        {
+                            buffer.Add(message);
+                        }
                     }
-                    else
+                    foreach (TravelerMessage messageToDelete in buffer)
                     {
-                        _repository.Remove<TravelerMessage>(message);
+                        _repository.Remove<TravelerMessage>(messageToDelete);
                     }
+                    buffer.Clear();
                     _repository.Commit();
                     response.MarkSuccess();
                 }
