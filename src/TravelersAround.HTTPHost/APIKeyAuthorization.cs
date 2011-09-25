@@ -22,10 +22,13 @@ namespace TravelersAround.HTTPHost
             
 
             string key = GetAPIKey(operationContext);
+            
+            APIKeyService apiKeyService = new APIKeyService();
 
-            if (APIKeyService.IsValidAPIKey(key))
+            if (apiKeyService.IsValidAPIKey(key))
             {
                 APIKeyService.CurrentTravelerAPIKey = key;
+                apiKeyService.SetOnline(key);
                 return true;
             }
             else

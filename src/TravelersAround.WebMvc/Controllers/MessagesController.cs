@@ -16,9 +16,10 @@ namespace TravelersAround.WebMvc.Controllers
         }
 
         //MessagesList
-        public ActionResult Index(string folder, int p = 0)
+        public ActionResult Index(string folder = "Inbox", int p = 0)
         {
             MessagesListView model = _taService.ListMessages(folder, p * PAGE_SIZE, PAGE_SIZE);
+            model.Folder = folder;
             return View(model);
         }
 
@@ -49,9 +50,10 @@ namespace TravelersAround.WebMvc.Controllers
             return View(model);
         }
 
-        public ActionResult Read(string id)
+        public ActionResult Read(string id, string returnToFolder)
         {
             MessageReadView model = _taService.ReadMessage(id);
+            model.ReturnToFolder = returnToFolder;
             if (!model.Success)
             {
                 ModelState.AddModelError("", model.ErrorMessage);

@@ -94,5 +94,10 @@ namespace TravelersAround.ServiceProxy
             string queryString = HttpRequestAdapter.ConstructQueryString(MethodBase.GetCurrentMethod().GetParameters(), travelerID) + apiKeyQueryString;
             return HttpRequestAdapter.WebHttpRequest(_serviceBaseUrl, "Profile/Picture", queryString);
         }
+
+        public TickerResponse Tick()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

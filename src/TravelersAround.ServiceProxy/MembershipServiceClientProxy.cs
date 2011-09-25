@@ -21,5 +21,11 @@ namespace TravelersAround.ServiceProxy
         {
             return HttpRequestAdapter.WebHttpPostRequest<LoginResponse>(_serviceBaseUrl, MethodBase.GetCurrentMethod().Name, loginReq);
         }
+
+
+        public LogoutResponse Logout(string apiKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

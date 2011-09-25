@@ -11,6 +11,8 @@ namespace TravelersAround.ServiceProxy.ViewModels
 {
     public class MessagesListView : BaseView
     {
+        public string Folder { get; set; }
+
         public IList<MessageView> MessagesList { get; set; }
     }
 
@@ -32,6 +34,8 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
     public class MessageReadView : BaseView
     {
+        public string ReturnToFolder { get; set; }
+
         public MessageView Message { get; set; }
     }
 

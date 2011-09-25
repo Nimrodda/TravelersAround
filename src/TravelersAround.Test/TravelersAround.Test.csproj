@@ -70,7 +70,9 @@
     <Compile Include="MessageServiceIntegrationTest.cs" />
     <Compile Include="GeoCoderTest.cs" />
     <Compile Include="SendMessageResponseTest.cs" />
-    <Compile Include="SQLiteCacheTest.cs" />
+    <Compile Include="SQLiteCacheTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TravelersAroundServiceClientProxyTest.cs" />
   </ItemGroup>
   <ItemGroup>

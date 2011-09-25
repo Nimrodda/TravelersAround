@@ -13,7 +13,7 @@ namespace TravelersAround.Test
         [TestMethod]
         public void GetValue_Returns_Null()
         {
-            SQLiteCache cache = new SQLiteCache();
+            SQLiteCache cache = new SQLiteCache(1,1);
             object actual = cache.GetValue("123123123");
             Assert.IsNull(actual);
         }
@@ -21,7 +21,7 @@ namespace TravelersAround.Test
         [TestMethod]
         public void GetKey_Returns_Null()
         {
-            SQLiteCache cache = new SQLiteCache();
+            SQLiteCache cache = new SQLiteCache(1,1);
             object actual = cache.GetKey("123123123");
             Assert.IsNull(actual);
         }
@@ -29,7 +29,7 @@ namespace TravelersAround.Test
         [TestMethod]
         public void Remove_Returns_Zero()
         {
-            SQLiteCache cache = new SQLiteCache();
+            SQLiteCache cache = new SQLiteCache(1,1);
             int actual = cache.Remove("asdasd");
             Assert.IsTrue(actual == 0);
         }

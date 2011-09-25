@@ -7,11 +7,16 @@ using System.Web.SessionState;
 using System.Web.Routing;
 using System.ServiceModel.Activation;
 using TravelersAround.Service;
+using System.Threading;
+using System.Configuration;
 
 namespace TravelersAround.HTTPHost
 {
     public class Global : HttpApplication
     {
+        private Timer _setIdleUsersTimer;
+        private Timer _cacheCleanUpTimer;
+
         private void RegisterRoutes()
         {
             RouteTable.Routes.Add(new ServiceRoute("MembershipService", new ExtentedWebServiceHostFactory(), typeof(MembershipService)));
@@ -22,11 +27,19 @@ namespace TravelersAround.HTTPHost
         {
             RegisterRoutes();
             DepenedencyRegistration.Register();
+
+            APIKeyService apiKeySvc = new APIKeyService();
+
+            //Timer for setting all idle users as offline
+            _setIdleUsersTimer = new Timer(s => { System.Diagnostics.Debug.WriteLine(DateTime.Now); apiKeySvc.MarkIdleUsersOffline(); }, null, TimeSpan.Zero, TimeSpan.FromMinutes(APIKeyService.IdleTime));
+
+            //Timer for removing all users that have been idle more than X hours, as defined by the service
+            _cacheCleanUpTimer = new Timer(s => apiKeySvc.IdleUsersCleanUp(), null, TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime), TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime));
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            string sessionId = Session.SessionID;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -51,7 +64,7 @@ namespace TravelersAround.HTTPHost
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            
         }
 
         private string GetIPAddressAsString()
@@ -65,6 +78,5 @@ namespace TravelersAround.HTTPHost
                 return null;
             }
         }
-
     }
 }

@@ -9,6 +9,8 @@
 
 <p>
     @Html.ActionLink("Create New", "Send")
+    @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
+    @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
 </p>
 <table>
     <tr>
@@ -16,7 +18,14 @@
             Subject
         </th>
         <th>
-            From
+            @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
+            {
+                @: From
+            }
+            else
+            {
+                @: Recipient
+            }
         </th>
         <th>
             Sent Date
@@ -24,7 +33,8 @@
         <th></th>
     </tr>
 
-@foreach (var message in Model.MessagesList) {
+@foreach (var message in Model.MessagesList)
+{
     <tr>
         <td>
             @if (!message.IsRead)
@@ -37,7 +47,14 @@
             }
         </td>
         <td>
-            @message.SenderName
+            @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
+            {
+                @message.SenderName
+            }
+            else
+            {
+                @message.RecipientsNames.First()
+            }
         </td>
         <td>
             @message.SentDate

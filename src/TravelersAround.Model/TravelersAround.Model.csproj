@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OnlineUser.cs" />
     <Compile Include="Exceptions\InvalidImageFormatException.cs" />
     <Compile Include="Exceptions\MembershipCreationFailedException.cs" />
     <Compile Include="HMACSHA512APIKeyGenerator.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="Exceptions\FriendDoesNotExistException.cs" />
     <Compile Include="Exceptions\FriendListEmptyException.cs" />
     <Compile Include="IAPIKeyGenerator.cs" />
-    <Compile Include="ICache.cs" />
+    <Compile Include="IOnlineUsersCache.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="IMembership.cs" />
     <Compile Include="IUnitOfWork.cs" />

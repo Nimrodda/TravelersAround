@@ -8,6 +8,7 @@ using TravelersAround.Model;
 using TravelersAround.Repository;
 using TravelersAround.GeoCoding;
 using log4net;
+using System.Configuration;
 
 namespace TravelersAround.Service
 {
@@ -22,7 +23,9 @@ namespace TravelersAround.Service
             Bind<IGeoCoder>().To<GeoCoder>();
             Bind<IMembership>().To<MembershipAccount>();
             Bind<IAPIKeyGenerator>().To<HMACSHA512APIKeyGenerator>();
-            Bind<ICache>().To<SQLiteCache>();
+            Bind<ICache>().To<SQLiteCache>()
+                .WithConstructorArgument("idleTime", Int32.Parse(ConfigurationManager.AppSettings["IdleTime"]))
+                .WithConstructorArgument("idleUsersCleanUpTime", Int32.Parse(ConfigurationManager.AppSettings["IdleUsersCleanUpTime"]));
             Bind<ILog>().ToMethod(x => LogManager.GetLogger("TEST"));
         }
     }

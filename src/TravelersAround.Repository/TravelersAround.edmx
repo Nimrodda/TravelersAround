@@ -67,6 +67,9 @@
           <Property Name="Longtitude" Type="float" />
           <Property Name="Latitude" Type="float" />
           <Property Name="ProfilePicture" Type="image" />
+          <Property Name="ApiKey" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tra_TravelersMessages">
           <Key>
@@ -225,6 +228,9 @@
           <NavigationProperty Name="Relationships" Relationship="TravelersAround.Model.Entities.tra_TravelersRelationships" FromRole="tra_Travelers" ToRole="tra_Travelers1" />
           <NavigationProperty Name="Messages" Relationship="TravelersAround.Model.Entities.FK_tra_TravelersMessages_tra_Travelers" FromRole="Traveler" ToRole="tra_TravelersMessages" />
           <Property Type="Binary" Name="ProfilePicture" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="ApiKey" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tra_Messages_tra_Travelers">
           <End Role="tra_Travelers" Type="TravelersAround.Model.Entities.Traveler" Multiplicity="1" />
@@ -302,7 +308,10 @@
             <ScalarProperty Name="SentDate" ColumnName="SentDate" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Travelers"><EntityTypeMapping TypeName="TravelersAround.Model.Entities.Traveler"><MappingFragment StoreEntitySet="tra_Travelers">
-            <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+            <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
                 <ScalarProperty Name="TravelerID" ColumnName="TravelerID" />
             <ScalarProperty Name="Firstname" ColumnName="Firstname" />
             <ScalarProperty Name="Lastname" ColumnName="Lastname" />

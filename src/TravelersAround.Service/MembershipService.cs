@@ -52,15 +52,17 @@ namespace TravelersAround.Service
 
                 //Getting traveler's location based on his IP address if possible
                 GeoCoordinates travelerGeoCoords = GetCoordinates();
-                
-                //Creating new traveler profile
-                Traveler newTraveler = TravelerFactory.CreateTraveler(
-                    newTravelerID, registerReq.Firstname, registerReq.Lastname, DateTime.Parse(registerReq.Birthdate), registerReq.Gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude);
-                
+
                 //Issuing an API key and storing in cache
                 string travelerApiKey = GetUniqueApiKey(registerReq.Password);
-                APIKeyService.Store(travelerApiKey, newTravelerID);
-                
+                APIKeyService apiKeySvc = new APIKeyService();
+                apiKeySvc.Store(travelerApiKey, newTravelerID);
+
+                //Creating new traveler profile
+                Traveler newTraveler = TravelerFactory.CreateTraveler(
+                    newTravelerID, registerReq.Firstname, registerReq.Lastname, DateTime.Parse(registerReq.Birthdate), 
+                    registerReq.Gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude, travelerApiKey, travelerGeoCoords.City, travelerGeoCoords.Country);
+
                 //Persisting the new traveler profile to the database
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
@@ -99,16 +101,22 @@ namespace TravelersAround.Service
 
                     //Issuing an API key and storing in cache
                     string travelerApiKey = GetUniqueApiKey(loginReq.Password);
-                    APIKeyService.Store(travelerApiKey, traveler.TravelerID);
+                    APIKeyService apiKeySvc = new APIKeyService();
+                    apiKeySvc.Store(travelerApiKey, traveler.TravelerID);
 
                     //Updating traveler's location only if the location was changed since last login
                     if (travelerGeoCoords.IsValid() && traveler.IsLocationChanged(travelerGeoCoords))
                     {
                         traveler.Latitude = travelerGeoCoords.Latitude;
                         traveler.Longtitude = travelerGeoCoords.Longtitude;
-                        _repository.Save<Traveler>(traveler);
-                        _repository.Commit();
+                        traveler.City = travelerGeoCoords.City;
+                        traveler.Country = travelerGeoCoords.Country;
                     }
+
+                    traveler.ApiKey = travelerApiKey;
+
+                    _repository.Save<Traveler>(traveler);
+                    _repository.Commit();
 
                     response.APIKey = travelerApiKey;
                     response.MarkSuccess();
@@ -147,16 +155,50 @@ namespace TravelersAround.Service
         private string GetUniqueApiKey(string password)
         {
             string newTravelerApiKey;
-            
+            APIKeyService apiKeySvc = new APIKeyService();
             //Verifying that the newly generated key is unique by checking if it exists in the cache
             do
             {
                 newTravelerApiKey = _apiKeyGen.Generate(password);
             }
-            while(APIKeyService.IsValidAPIKey(newTravelerApiKey));
+            while (apiKeySvc.IsValidAPIKey(newTravelerApiKey));
 
             return newTravelerApiKey;
         }
 
+        public LogoutResponse Logout(string apiKey)
+        {
+            LogoutResponse response = new LogoutResponse();
+            try
+            {
+                APIKeyService apiKeySvc = new APIKeyService();
+                if (apiKeySvc.IsValidAPIKey(apiKey))
+                {
+                    Guid travelerId = apiKeySvc.GetAssociatedIdTo(apiKey);
+
+                    //Removes the traveler's api key so the next time traveler will have to first login to get a new api key
+                    Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerId);
+                    traveler.ApiKey = null;
+
+                    //Removes the traveler's cache record
+                    apiKeySvc.Delete(apiKey);
+
+                    //Persist changes to DB
+                    _repository.Save<Traveler>(traveler);
+                    _repository.Commit();
+
+                    response.MarkSuccess();
+                }
+                else
+                {
+                    response.ErrorMessage = R.String.ErrorMessages.InvalidAPIKey;
+                }
+            }
+            catch (Exception ex)
+            {
+                ReportError(ex, response);
+            }
+            return response;
+        }
     }
 }

@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="AddFriendRequest.cs" />
     <Compile Include="AddFriendResponse.cs" />
+    <Compile Include="LogoutResponse.cs" />
     <Compile Include="ProfilePictureUploadResponse.cs" />
     <Compile Include="SendMessageRequest.cs" />
+    <Compile Include="TickerResponse.cs" />
     <Compile Include="UpdateProfileRequest.cs" />
     <Compile Include="LoginRequest.cs" />
     <Compile Include="DeleteMessageResponse.cs" />

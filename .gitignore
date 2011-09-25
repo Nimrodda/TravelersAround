@@ -30,3 +30,4 @@ _ReSharper*/
 GeoLiteCity.dat
 web_tracelog.svclog
 testimpactdata.sdf
+log*.txt

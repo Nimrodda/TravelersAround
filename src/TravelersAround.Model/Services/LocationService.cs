@@ -36,7 +36,7 @@ namespace TravelersAround.Model.Services
         {
             Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
             if (traveler.Latitude > 0 && traveler.Longtitude > 0) 
-                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Skip(index).Take(count);
+                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Where(t => t.TravelerID != travelerID).Skip(index).Take(count);
             else
                 throw new InvalidTravelerLocationException();
 

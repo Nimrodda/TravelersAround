@@ -106,6 +106,15 @@ namespace R.String {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to API key could not be found in the system.
+        /// </summary>
+        public static string InvalidAPIKey {
+            get {
+                return ResourceManager.GetString("InvalidAPIKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid birthdate. Correct format is: dd/mm/yyyy.
         /// </summary>
         public static string InvalidBirthdate {

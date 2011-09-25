@@ -219,6 +219,7 @@ namespace TravelersAround.Service
 
         public SearchResponse Search(bool availabilityMark, int index, int count)
         {
+            //TODO: modify results to return only online travelers by intersecting cached travelers ID with DB travelers ID
             SearchResponse response = new SearchResponse();
             LocationService locSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
             try
@@ -276,5 +277,21 @@ namespace TravelersAround.Service
             return null;
 
         }
+
+        public TickerResponse Tick()
+        {
+            TickerResponse response = new TickerResponse();
+            try
+            {
+                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+                response.NewMessagesCount = traveler.Messages.Count;
+                response.MarkSuccess();
+            }
+            catch (Exception ex)
+            {
+                ReportError(ex, response);
+            }
+            return response;
+         }
     }
 }

@@ -20,5 +20,9 @@ namespace TravelersAround.Contracts
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Login/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         LoginResponse Login(LoginRequest loginReq);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Logout/{apiKey}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        LogoutResponse Logout(string apiKey);
     }
 }

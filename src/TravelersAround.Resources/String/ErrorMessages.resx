@@ -132,6 +132,9 @@
   <data name="FriendListEmpty" xml:space="preserve">
     <value>No friends found for traveler {0}</value>
   </data>
+  <data name="InvalidAPIKey" xml:space="preserve">
+    <value>API key could not be found in the system</value>
+  </data>
   <data name="InvalidBirthdate" xml:space="preserve">
     <value>Invalid birthdate. Correct format is: dd/mm/yyyy</value>
   </data>

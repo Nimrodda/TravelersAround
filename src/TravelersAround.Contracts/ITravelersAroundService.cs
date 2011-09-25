@@ -13,6 +13,11 @@ namespace TravelersAround.Contracts
     [ServiceContract]
     public interface ITravelersAroundService
     {
+        //Keep connetion alive and get notified for new messages
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "Tick", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        TickerResponse Tick();
+ 
         //Relationship service
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Friends/Add?friendId={friendID}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
