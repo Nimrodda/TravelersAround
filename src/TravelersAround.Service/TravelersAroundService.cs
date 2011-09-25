@@ -154,8 +154,15 @@ namespace TravelersAround.Service
                 TravelerMessage message = traveler.Messages.FirstOrDefault(m => m.MessageID == new Guid(messageID));
                 if (message != null)
                 {
-                    message.FolderID = (int)FolderType.Trash;
-                    _repository.Save<TravelerMessage>(message);
+                    if (message.FolderID != (int)FolderType.Trash)
+                    {
+                        message.FolderID = (int)FolderType.Trash;
+                        _repository.Save<TravelerMessage>(message);
+                    }
+                    else
+                    {
+                        _repository.Remove<TravelerMessage>(message);
+                    }
                     _repository.Commit();
                     response.MarkSuccess();
                 }
