@@ -14,8 +14,8 @@ namespace TravelersAround.HTTPHost
 {
     public class Global : HttpApplication
     {
-        private Timer _setIdleUsersTimer;
-        private Timer _cacheCleanUpTimer;
+        private static Timer _setIdleUsersTimer;
+        private static Timer _cacheCleanUpTimer;
 
         private void RegisterRoutes()
         {
@@ -28,13 +28,11 @@ namespace TravelersAround.HTTPHost
             RegisterRoutes();
             DepenedencyRegistration.Register();
 
-            APIKeyService apiKeySvc = new APIKeyService();
-
             //Timer for setting all idle users as offline
-            _setIdleUsersTimer = new Timer(s => { System.Diagnostics.Debug.WriteLine(DateTime.Now); apiKeySvc.MarkIdleUsersOffline(); }, null, TimeSpan.Zero, TimeSpan.FromMinutes(APIKeyService.IdleTime));
+            //_setIdleUsersTimer = new Timer(s => { System.Diagnostics.Debug.WriteLine(DateTime.Now); APIKeyService.MarkIdleUsersOffline(); }, null, TimeSpan.Zero, TimeSpan.FromMinutes(APIKeyService.IdleTime));
 
             //Timer for removing all users that have been idle more than X hours, as defined by the service
-            _cacheCleanUpTimer = new Timer(s => apiKeySvc.IdleUsersCleanUp(), null, TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime), TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime));
+            //_cacheCleanUpTimer = new Timer(s => APIKeyService.IdleUsersCleanUp(), null, TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime), TimeSpan.FromHours(APIKeyService.IdleUsersCleanUpTime));
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -45,6 +43,12 @@ namespace TravelersAround.HTTPHost
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             APIKeyService.CurrentTravelerIPAddress = GetIPAddressAsString();
+
+            //Sets all idle users as offline
+            APIKeyService.MarkIdleUsersOffline();
+
+            //removes all users that have been idle more than X hours, as defined by the service
+            APIKeyService.OfflineUsersCleanUp();
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

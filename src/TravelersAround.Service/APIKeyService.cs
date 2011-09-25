@@ -91,12 +91,12 @@ namespace TravelersAround.Service
             _apiKeys.SetOnline(apiKey);
         }
 
-        public void IdleUsersCleanUp()
+        public static void OfflineUsersCleanUp()
         {
             _apiKeys.RemoveExpired();
         }
 
-        public void MarkIdleUsersOffline()
+        public static void MarkIdleUsersOffline()
         {
             _apiKeys.SetIdleUserOffline();
         }

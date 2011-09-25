@@ -203,7 +203,7 @@ namespace TravelersAround.Model
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(
-                    String.Format("update cache set online = 0 where expiration < '{0}';", DateTime.Now.ToString(DATE_FORMAT)),
+                    String.Format("update cache set online = 0 where expiration < '{0}' and online = 1;", DateTime.Now.ToString(DATE_FORMAT)),
                     connection);
                 int rowsAffected = command.ExecuteNonQuery();
                 connection.Close();
