@@ -26,6 +26,8 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
+        private ICache _cache;
+        private IAPIKeyGenerator _apiKeyGen;
 
         private readonly Guid _currentTravelerId = APIKeyService.GetAssociatedID();
 
@@ -33,13 +35,17 @@ namespace TravelersAround.Service
                                     IMembership membership,
                                     IGeoCoder geoCoder,
                                     ILocationDeterminator locationDeterminator,
-                                    ILog log)
+                                    ILog log,
+                                    ICache cache,
+                                    IAPIKeyGenerator apiKeyGen)
             : base(log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
+            _cache = cache;
+            _apiKeyGen = apiKeyGen;
         }
 
         public AddFriendResponse AddFriend(string friendID)
@@ -221,7 +227,7 @@ namespace TravelersAround.Service
         {
             SearchResponse response = new SearchResponse();
             LocationService locSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-            APIKeyService apiKeySvc = new APIKeyService();
+            APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
 
             try
             {

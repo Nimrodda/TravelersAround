@@ -35,11 +35,14 @@ namespace TravelersAround.HTTPHost
         {
             APIKeyService.CurrentTravelerIPAddress = GetIPAddressAsString();
 
-            //Sets all idle users as offline
-            APIKeyService.MarkIdleUsersOffline();
+            lock (this)
+            {
+                //Sets all idle users as offline
+                APIKeyService.MarkIdleUsersOffline();
 
-            //removes all users that have been idle more than X hours, as defined by the service
-            APIKeyService.OfflineUsersCleanUp();
+                //removes all users that have been idle more than X hours, as defined by the service
+                APIKeyService.OfflineUsersCleanUp();
+            }
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

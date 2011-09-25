@@ -24,19 +24,24 @@ namespace TravelersAround.Service
         private IMembership _membership;
         private IGeoCoder _geoCoder;
         private ILocationDeterminator _locationDeterminator;
+        private ICache _cache;
         private IAPIKeyGenerator _apiKeyGen;
-    
+
         public MembershipService(IRepository repository, 
                                 IMembership membership,
                                 IGeoCoder geoCoder,
                                 ILocationDeterminator locationDeterminator,
-                                ILog log) 
+                                ILog log,
+                                ICache cache,
+                                IAPIKeyGenerator apiKeyGen) 
             : base(log)
         {
             _repository = repository;
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
+            _cache = cache;
+            _apiKeyGen = apiKeyGen;
         }
 
         public RegisterResponse Register(RegisterRequest registerReq)
@@ -49,7 +54,7 @@ namespace TravelersAround.Service
                 Guid newTravelerID = _membership.CreateUser(registerReq.Email, registerReq.Password, registerReq.Email);
 
                 //Issuing an API key and storing in cache
-                APIKeyService apiKeySvc = new APIKeyService();
+                APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
                 string travelerApiKey = apiKeySvc.GetUniqueApiKey(registerReq.Password);
                 apiKeySvc.Store(travelerApiKey, newTravelerID);
 
@@ -100,7 +105,7 @@ namespace TravelersAround.Service
                     locationSvc.UpdateTravelerCoordinates(traveler, APIKeyService.CurrentTravelerIPAddress);
 
                     //Issuing an API key and storing in cache
-                    APIKeyService apiKeySvc = new APIKeyService();
+                    APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
                     string travelerApiKey = apiKeySvc.GetUniqueApiKey(loginReq.Password);
                     apiKeySvc.Store(travelerApiKey, traveler.TravelerID);
 
@@ -131,7 +136,7 @@ namespace TravelersAround.Service
             LogoutResponse response = new LogoutResponse();
             try
             {
-                APIKeyService apiKeySvc = new APIKeyService();
+                APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
                 if (apiKeySvc.IsValidAPIKey(apiKey))
                 {
                     Guid travelerId = apiKeySvc.GetAssociatedIdTo(apiKey);

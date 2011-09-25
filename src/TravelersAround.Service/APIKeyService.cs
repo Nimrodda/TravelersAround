@@ -16,12 +16,18 @@ namespace TravelersAround.Service
         public static string CurrentTravelerIPAddress { get; set; }
 
         private static ICache _apiKeys = DepenedencyRegistration.Get<ICache>();
-        private IRepository _repository = DepenedencyRegistration.Get<IRepository>();
+        private IRepository _repository;
+        private IAPIKeyGenerator _apiKeyGen;
 
         public static int IdleTime { get { return _apiKeys.IdleTime; } }
         public static int IdleUsersCleanUpTime { get { return _apiKeys.IdleUsersCleanUpTime; } }
 
-
+        public APIKeyService(IRepository respository,
+                            IAPIKeyGenerator apiKeyGen)
+        {
+            _repository = respository;
+            _apiKeyGen = apiKeyGen;
+        }
         /// <summary>
         /// Generates a unique API key
         /// </summary>

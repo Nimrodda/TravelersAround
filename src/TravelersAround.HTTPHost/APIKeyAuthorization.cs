@@ -22,8 +22,8 @@ namespace TravelersAround.HTTPHost
             
 
             string key = GetAPIKey(operationContext);
-            
-            APIKeyService apiKeyService = new APIKeyService();
+
+            APIKeyService apiKeyService = DepenedencyRegistration.Get<APIKeyService>();
 
             if (apiKeyService.IsValidAPIKey(key))
             {
