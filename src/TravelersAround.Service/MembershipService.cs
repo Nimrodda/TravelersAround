@@ -30,7 +30,6 @@ namespace TravelersAround.Service
                                 IMembership membership,
                                 IGeoCoder geoCoder,
                                 ILocationDeterminator locationDeterminator,
-                                IAPIKeyGenerator apiKeyGen,
                                 ILog log) 
             : base(log)
         {
@@ -38,7 +37,6 @@ namespace TravelersAround.Service
             _membership = membership;
             _locationDeterminator = locationDeterminator;
             _geoCoder = geoCoder;
-            _apiKeyGen = apiKeyGen;
         }
 
         public RegisterResponse Register(RegisterRequest registerReq)
@@ -50,18 +48,19 @@ namespace TravelersAround.Service
                 //Creating new membership for traveler
                 Guid newTravelerID = _membership.CreateUser(registerReq.Email, registerReq.Password, registerReq.Email);
 
-                //Getting traveler's location based on his IP address if possible
-                GeoCoordinates travelerGeoCoords = GetCoordinates();
-
                 //Issuing an API key and storing in cache
-                string travelerApiKey = GetUniqueApiKey(registerReq.Password);
                 APIKeyService apiKeySvc = new APIKeyService();
+                string travelerApiKey = apiKeySvc.GetUniqueApiKey(registerReq.Password);
                 apiKeySvc.Store(travelerApiKey, newTravelerID);
 
                 //Creating new traveler profile
                 Traveler newTraveler = TravelerFactory.CreateTraveler(
                     newTravelerID, registerReq.Firstname, registerReq.Lastname, DateTime.Parse(registerReq.Birthdate), 
-                    registerReq.Gender, travelerGeoCoords.Latitude, travelerGeoCoords.Longtitude, travelerApiKey, travelerGeoCoords.City, travelerGeoCoords.Country);
+                    registerReq.Gender, travelerApiKey);
+
+                //Updating traveler's location
+                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                locationSvc.UpdateTravelerCoordinates(newTraveler, APIKeyService.CurrentTravelerIPAddress);
 
                 //Persisting the new traveler profile to the database
                 _repository.Add<Traveler>(newTraveler);
@@ -96,22 +95,16 @@ namespace TravelersAround.Service
                     //Loading traveler's profile
                     Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
 
-                    //Getting traveler's location based on his IP address if possible
-                    GeoCoordinates travelerGeoCoords = GetCoordinates();
+                    //Updating traveler's location
+                    LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                    locationSvc.UpdateTravelerCoordinates(traveler, APIKeyService.CurrentTravelerIPAddress);
 
                     //Issuing an API key and storing in cache
-                    string travelerApiKey = GetUniqueApiKey(loginReq.Password);
                     APIKeyService apiKeySvc = new APIKeyService();
+                    string travelerApiKey = apiKeySvc.GetUniqueApiKey(loginReq.Password);
                     apiKeySvc.Store(travelerApiKey, traveler.TravelerID);
 
-                    //Updating traveler's location only if the location was changed since last login
-                    if (travelerGeoCoords.IsValid() && traveler.IsLocationChanged(travelerGeoCoords))
-                    {
-                        traveler.Latitude = travelerGeoCoords.Latitude;
-                        traveler.Longtitude = travelerGeoCoords.Longtitude;
-                        traveler.City = travelerGeoCoords.City;
-                        traveler.Country = travelerGeoCoords.Country;
-                    }
+                    
 
                     traveler.ApiKey = travelerApiKey;
 
@@ -131,39 +124,6 @@ namespace TravelersAround.Service
                 ReportError(ex, response);
             }
             return response;
-        }
-
-        /// <summary>
-        /// Retreives GeoCoodinates based on valid traveler's IP address only
-        /// </summary>
-        /// <returns>String representation of IP Address</returns>
-        private GeoCoordinates GetCoordinates()
-        {
-            if (APIKeyService.CurrentTravelerIPAddress != null)
-            {
-                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                return locationSvc.GetCurrentLocationWithIPAddress(APIKeyService.CurrentTravelerIPAddress);
-            }
-            else return new GeoCoordinates();
-        }
-
-        /// <summary>
-        /// Generates a unique API key
-        /// </summary>
-        /// <param name="password">Traveler's password</param>
-        /// <returns>String representation of API key</returns>
-        private string GetUniqueApiKey(string password)
-        {
-            string newTravelerApiKey;
-            APIKeyService apiKeySvc = new APIKeyService();
-            //Verifying that the newly generated key is unique by checking if it exists in the cache
-            do
-            {
-                newTravelerApiKey = _apiKeyGen.Generate(password);
-            }
-            while (apiKeySvc.IsValidAPIKey(newTravelerApiKey));
-
-            return newTravelerApiKey;
         }
 
         public LogoutResponse Logout(string apiKey)

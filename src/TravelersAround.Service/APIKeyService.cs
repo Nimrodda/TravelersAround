@@ -22,6 +22,25 @@ namespace TravelersAround.Service
         public static int IdleUsersCleanUpTime { get { return _apiKeys.IdleUsersCleanUpTime; } }
 
 
+        /// <summary>
+        /// Generates a unique API key
+        /// </summary>
+        /// <param name="password">Traveler's password</param>
+        /// <returns>String representation of API key</returns>
+        public string GetUniqueApiKey(string password)
+        {
+            IAPIKeyGenerator apiKeyGen = DepenedencyRegistration.Get <IAPIKeyGenerator>();
+            string newTravelerApiKey;
+
+            //Verifying that the newly generated key is unique by checking if it exists in the cache
+            do
+            {
+                newTravelerApiKey = apiKeyGen.Generate(password);
+            }
+            while (IsValidAPIKey(newTravelerApiKey));
+
+            return newTravelerApiKey;
+        }
 
         /// <summary>
         /// Validating API key by first looking in the cache and if not found then fallback to the Database

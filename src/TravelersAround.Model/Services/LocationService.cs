@@ -41,5 +41,21 @@ namespace TravelersAround.Model.Services
                 throw new InvalidTravelerLocationException();
 
         }
+
+        public void UpdateTravelerCoordinates(Traveler traveler, string ipAddress)
+        {
+            if (String.IsNullOrEmpty(ipAddress)) return;
+
+            GeoCoordinates travelerGeoCoords = GetCurrentLocationWithIPAddress(ipAddress);
+
+            //Updating traveler's location only if it's different than what's stored in the database
+            if (travelerGeoCoords.IsValid() && traveler.IsLocationChanged(travelerGeoCoords))
+            {
+                traveler.Latitude = travelerGeoCoords.Latitude;
+                traveler.Longtitude = travelerGeoCoords.Longtitude;
+                traveler.City = travelerGeoCoords.City;
+                traveler.Country = travelerGeoCoords.Country;
+            }
+        }
     }
 }

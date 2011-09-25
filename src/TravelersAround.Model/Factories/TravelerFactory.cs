@@ -13,11 +13,7 @@ namespace TravelersAround.Model.Factories
                                             string lastname, 
                                             DateTime birthdate, 
                                             string gender,
-                                            double latitude, 
-                                            double longtitude, 
-                                            string apiKey, 
-                                            string city, 
-                                            string country)
+                                            string apiKey)
         {
             return new Traveler
             {
@@ -26,11 +22,7 @@ namespace TravelersAround.Model.Factories
                 Lastname = lastname,
                 Gender = gender,
                 Birthdate = birthdate,
-                Latitude = latitude,
-                Longtitude = longtitude,
                 ApiKey = apiKey,
-                City = city,
-                Country = country
             };
         }
     }
