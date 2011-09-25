@@ -22,6 +22,7 @@ namespace TravelersAround.WebMvc.Controllers
             MessagesListView model = _taService.ListMessages(folder, p * PAGE_SIZE, PAGE_SIZE);
             model.Folder = folder;
             model.Page = p;
+            ViewBag.Messasge = TempData["SuccessMessage"];
             return View(model);
         }
 
@@ -42,6 +43,7 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _taService.SendMessage(model);
                 if (model.Success)
                 {
+                    TempData["SuccessMessage"] = "Message successfully sent!";
                     return RedirectToAction("Index");
                 }
                 else
@@ -73,6 +75,7 @@ namespace TravelersAround.WebMvc.Controllers
                 messageListView = _taService.DeleteMessage(String.Join(",", model.MessageIDs));
                 if (messageListView.Success)
                 {
+                    TempData["SuccessMessage"] = "Message(s) successfully deleted!";
                     return RedirectToAction("Index", new { folder = model.Folder, p = model.Page });
                 }
                 else

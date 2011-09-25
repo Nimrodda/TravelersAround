@@ -16,6 +16,7 @@
 <p>
     @Html.ValidationSummary(true)
     @Html.ValidationMessage("MessageIDs")
+    @ViewBag.Messasge
 </p>
 @using (Html.BeginForm("Delete", "Messages"))
 {
