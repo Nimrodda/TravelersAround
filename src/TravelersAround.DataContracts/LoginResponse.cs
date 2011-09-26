@@ -11,5 +11,7 @@ namespace TravelersAround.DataContracts
     {
         [DataMember]
         public string APIKey { get; set; }
+        [DataMember]
+        public int NewMessagesCount { get; set; }
     }
 }

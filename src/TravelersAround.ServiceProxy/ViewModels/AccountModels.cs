@@ -41,6 +41,8 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public bool RememberMe { get; set; }
 
         public string ApiKey { get; internal set; }
+
+        public int NewMessagesCount { get; internal set; }
     }
 
 

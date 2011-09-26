@@ -10,6 +10,8 @@
 <fieldset>
     <legend>Personal details</legend>
 
+    @*<img src="@Url.Content("~/Content/img/anonymous.jpg")" alt="Profile Picture" />*@
+    <img src="/Profile/LoadPicture/@Model.Profile.TravelerID" alt="Profile Picture" />
     <div class="display-label">Firstname</div>
     <div class="display-field">@Model.Profile.Firstname</div>
 
@@ -17,7 +19,7 @@
     <div class="display-field">@Model.Profile.Lastname</div>
 
     <div class="display-label">Birthdate</div>
-    <div class="display-field">@Model.Profile.Birthdate</div>
+    <div class="display-field">@DateTime.Parse(Model.Profile.Birthdate).ToShortDateString()</div>
 
     <div class="display-label">StatusMessage</div>
     <div class="display-field">@Model.Profile.StatusMessage</div>

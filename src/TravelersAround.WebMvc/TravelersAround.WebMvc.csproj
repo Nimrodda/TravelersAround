@@ -79,6 +79,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\anonymous.jpg" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\TravelersAround.js" />
     <Content Include="Web.config" />
@@ -135,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">

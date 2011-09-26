@@ -55,24 +55,30 @@ namespace TravelersAround.WebMvc.Controllers
 
         public ActionResult LoadPicture(string id)
         {
-            Stream picture = _taService.GetProfilePicture(id);
-
-            return new FileStreamResult(picture, "image/jpeg");
+            MemoryStream picture = _taService.GetProfilePicture(id) as MemoryStream;
+            return File(picture.ToArray(), "image/jpeg");
         }
 
         [HttpPost]
-        public ActionResult UploadPicture(HttpPostedFile uploadedFile)
+        public ActionResult UploadPicture(HttpPostedFileBase uploadedFile)
         {
-            ProfileUpdateView model = _taService.UploadProfilePicture(uploadedFile.InputStream);
-            if (model.Success)
+            string errorMessage = "Invalid file format";
+
+            if (uploadedFile != null && uploadedFile.ContentLength > 0 &&
+                (uploadedFile.ContentType.ToLower().Contains("jpeg") || uploadedFile.ContentType.ToLower().Contains("png")))
             {
-                return RedirectToAction("Edit");
+                ProfileUpdateView model = _taService.UploadProfilePicture(uploadedFile.InputStream);
+                if (model.Success)
+                {
+                    return RedirectToAction("Edit");
+                }
+                else
+                {
+                    errorMessage = model.ErrorMessage;
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", model.ErrorMessage);
-            }
-            return View("Edit", model);
+            ModelState.AddModelError("uploadedFile", errorMessage);
+            return View("Edit");
         }
     }
 }

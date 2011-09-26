@@ -54,11 +54,11 @@
                 <td>
                     @if (!message.IsRead)
                     {
-                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })</strong>
+                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder, isUnread = true })</strong>
                     }
                     else
                     {
-                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID })
+                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder, isUnread = false })
                     }
                 </td>
                 <td>
@@ -68,7 +68,7 @@
                     }
                     else
                     {
-                        @message.RecipientsNames.First()
+                        @message.RecipientsNames.FirstOrDefault()
                     }
                 </td>
                 <td>

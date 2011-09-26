@@ -26,6 +26,6 @@
 </fieldset>
 <p>
     @Html.ActionLink("Reply", "Send", new { id = Model.Message.SenderName }) |
-    @Html.ActionLink("Back to List", "Index", new { folder = "Inbox" })
+    @Html.ActionLink("Back to List", "Index", new { folder = Model.ReturnToFolder ?? "Inbox" })
 </p>
 

@@ -23,6 +23,7 @@ namespace TravelersAround.WebMvc.Controllers
             model.IPAddress = Request.UserHostAddress;
             model = _taService.Tick(model);
             model.IPAddress = Request.UserHostAddress;
+            ViewBag.NewMessagesCount = model.NewMessagesCount;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

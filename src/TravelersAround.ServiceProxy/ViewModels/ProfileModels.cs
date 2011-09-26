@@ -16,13 +16,15 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
         public ProfileUpdateView ConvertToProfileUpdateView()
         {
-            Mapper.CreateMap<ProfileDisplayView, ProfileUpdateView>();
-            return Mapper.Map<ProfileDisplayView, ProfileUpdateView>(this);
+            Mapper.CreateMap<TravelerView, ProfileUpdateView>();
+            return Mapper.Map<TravelerView, ProfileUpdateView>(this.Profile);
         }
     }
 
     public class ProfileUpdateView : BaseView
     {
+        public string TravelerID { get; internal set; }
+
         public string Firstname { get; set; }
         
         public string Lastname { get; set; }

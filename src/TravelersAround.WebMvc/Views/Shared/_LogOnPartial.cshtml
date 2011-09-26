@@ -1,7 +1,28 @@
-﻿@if(Request.IsAuthenticated) {
-    <text>Welcome <b></b>!
-    [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+﻿@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Logout", "LogOff", "Account")
 }
-else {
-    @:[ @Html.ActionLink("Log On", "LogOn", "Account") ]
+else
+{
+    Html.BeginForm("LogOn", "Account");
+    {
+    <div>
+        <fieldset>
+            <div class="editor-label">
+                @Html.Label("Email")
+                @Html.TextBox("Email")
+                @Html.CheckBox("RememberMe")
+                @Html.Label("RememberMe")
+            </div>
+            <div>
+                @Html.Label("Password")
+                @Html.Password("Password")
+            </div>
+            <div>
+                <input type="submit" value="Login" />
+            </div>
+        </fieldset>
+    </div>
+    }
+    @Html.ActionLink("Log On", "LogOn", "Account")
 }

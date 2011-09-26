@@ -108,14 +108,12 @@ namespace TravelersAround.Service
                     APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
                     string travelerApiKey = apiKeySvc.GetUniqueApiKey(loginReq.Password);
                     apiKeySvc.Store(travelerApiKey, traveler.TravelerID);
-
-                    
-
                     traveler.ApiKey = travelerApiKey;
 
                     _repository.Save<Traveler>(traveler);
                     _repository.Commit();
 
+                    response.NewMessagesCount = traveler.Messages.Count(m => m.IsRead == false && m.FolderID == (int)FolderType.Inbox);
                     response.APIKey = travelerApiKey;
                     response.MarkSuccess();
                 }

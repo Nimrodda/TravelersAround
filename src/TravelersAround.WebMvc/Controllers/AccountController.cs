@@ -40,6 +40,7 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _membershipService.Login(model);
                 if (model.Success)
                 {
+                    if (model.NewMessagesCount > 0) Session["NewMessagesCount"] = model.NewMessagesCount;
                     _formsService.SignIn(model.ApiKey, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
@@ -47,7 +48,7 @@ namespace TravelersAround.WebMvc.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Search");
                     }
                 }
                 else
