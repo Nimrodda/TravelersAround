@@ -313,12 +313,14 @@ namespace TravelersAround.Service
 
         }
 
-        public TickerResponse Tick()
+        public TickerResponse Tick(TickerRequest tickRequest)
         {
             TickerResponse response = new TickerResponse();
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                locationSvc.UpdateTravelerCoordinates(traveler, tickRequest.IPAddress);
                 response.NewMessagesCount = traveler.Messages.Count;
                 response.MarkSuccess();
             }

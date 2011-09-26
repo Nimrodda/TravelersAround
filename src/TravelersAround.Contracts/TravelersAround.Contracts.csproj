@@ -56,7 +56,6 @@
     <Compile Include="IMembershipService.cs" />
     <Compile Include="ITravelersAroundService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TickerRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.DataContracts\TravelersAround.DataContracts.csproj">

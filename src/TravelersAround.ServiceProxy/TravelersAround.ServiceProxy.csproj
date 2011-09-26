@@ -62,6 +62,7 @@
     <Compile Include="ViewModels\MessagesModels.cs" />
     <Compile Include="ViewModels\ProfileModels.cs" />
     <Compile Include="ViewModels\SearchModels.cs" />
+    <Compile Include="ViewModels\TickerModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">

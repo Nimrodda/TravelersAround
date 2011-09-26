@@ -95,9 +95,9 @@ namespace TravelersAround.ServiceProxy
             return HttpRequestAdapter.WebHttpRequest(_serviceBaseUrl, "Profile/Picture", queryString);
         }
 
-        public TickerResponse Tick()
+        public TickerResponse Tick(TickerRequest tickRequest)
         {
-            throw new NotImplementedException();
+            return HttpRequestAdapter.WebHttpPostRequest<TickerResponse>(_serviceBaseUrl, "Tick", tickRequest, String.Concat("?apikey=", _apiKey));
         }
     }
 }

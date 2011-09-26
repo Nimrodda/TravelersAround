@@ -9,6 +9,7 @@ namespace TravelersAround.DataContracts
     [DataContract]
     public class TickerResponse : ResponseBase
     {
+        [DataMember]
         public int NewMessagesCount { get; set; }
     }
 }

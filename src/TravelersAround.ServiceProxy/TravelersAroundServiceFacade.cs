@@ -79,5 +79,12 @@ namespace TravelersAround.ServiceProxy
         {
             return _travelersAroundService.GetProfilePicture(travelerID);
         }
+
+
+        public TickerModel Tick(TickerModel tick)
+        {
+            TickerRequest request = (TickerRequest)GetMappedObject(tick, typeof(TickerRequest));
+            return (TickerModel)GetMappedObject(_travelersAroundService.Tick(request), typeof(TickerModel));
+        }
     }
 }

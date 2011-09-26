@@ -78,4 +78,8 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
         public string ApiKey { get; internal set; }
     }
+
+    public class LogoutView : BaseView
+    {
+    }
 }

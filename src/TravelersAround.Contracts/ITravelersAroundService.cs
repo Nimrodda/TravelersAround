@@ -16,7 +16,7 @@ namespace TravelersAround.Contracts
         //Keep connetion alive and get notified for new messages
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Tick", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        TickerResponse Tick();
+        TickerResponse Tick(TickerRequest tickRequest);
  
         //Relationship service
         [OperationContract]

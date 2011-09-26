@@ -7,5 +7,6 @@ namespace TravelersAround.ServiceProxy
     {
         LoginView Login(LoginView view);
         RegisterView Register(RegisterView view);
+        LogoutView Logout(string apiKey);
     }
 }

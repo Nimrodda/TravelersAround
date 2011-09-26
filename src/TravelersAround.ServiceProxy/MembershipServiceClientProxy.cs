@@ -25,7 +25,8 @@ namespace TravelersAround.ServiceProxy
 
         public LogoutResponse Logout(string apiKey)
         {
-            throw new NotImplementedException();
+            string queryString = String.Concat("?apikey=", apiKey);
+            return HttpRequestAdapter.WebHttpRequest<LogoutResponse>(_serviceBaseUrl, "Logout", queryString, HttpRequestAdapter.Method.GET);
         }
     }
 }

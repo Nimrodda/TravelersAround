@@ -54,6 +54,7 @@
     <Compile Include="LogoutResponse.cs" />
     <Compile Include="ProfilePictureUploadResponse.cs" />
     <Compile Include="SendMessageRequest.cs" />
+    <Compile Include="TickerRequest.cs" />
     <Compile Include="TickerResponse.cs" />
     <Compile Include="UpdateProfileRequest.cs" />
     <Compile Include="LoginRequest.cs" />

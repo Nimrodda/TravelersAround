@@ -32,5 +32,7 @@ namespace TravelersAround.ServiceProxy
         ProfileUpdateView UploadProfilePicture(Stream pictureStream);
 
         Stream GetProfilePicture(string travelerID);
+
+        TickerModel Tick(TickerModel tick);
     }
 }

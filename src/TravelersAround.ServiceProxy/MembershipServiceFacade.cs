@@ -28,5 +28,11 @@ namespace TravelersAround.ServiceProxy
             RegisterRequest request = (RegisterRequest)GetMappedObject(view, typeof(RegisterRequest));
             return (RegisterView)GetMappedObject(_membershipService.Register(request), typeof(RegisterView));
         }
+
+
+        public LogoutView Logout(string apiKey)
+        {
+            return (LogoutView)GetMappedObject(_membershipService.Logout(apiKey), typeof(LogoutView));
+        }
     }
 }
