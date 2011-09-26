@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 
 namespace TravelersAround.WebMvc.Controllers
 {
+    [Authorize]
     public class MessagesController : ControllerBase
     {
         public MessagesController(ITravelersAroundServiceFacade taService) : base(taService)

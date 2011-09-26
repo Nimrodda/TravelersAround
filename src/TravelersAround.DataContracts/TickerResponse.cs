@@ -11,5 +11,17 @@ namespace TravelersAround.DataContracts
     {
         [DataMember]
         public int NewMessagesCount { get; set; }
+
+        [DataMember]
+        public string City { get; set; }
+
+        [DataMember]
+        public string Country { get; set; }
+
+        [DataMember]
+        public double Latitude { get; set; }
+
+        [DataMember]
+        public double Longtitude { get; set; }
     }
 }

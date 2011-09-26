@@ -9,6 +9,7 @@ using System.IO;
 
 namespace TravelersAround.WebMvc.Controllers
 {
+    [Authorize]
     public class ProfileController : ControllerBase
     {
         public ProfileController(ITravelersAroundServiceFacade taService) : base(taService)

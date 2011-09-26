@@ -13,6 +13,7 @@ using TravelersAround.Service.Mappers;
 
 using log4net;
 using System.IO;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
 
 namespace TravelersAround.Service
 {
@@ -316,12 +317,20 @@ namespace TravelersAround.Service
         public TickerResponse Tick(TickerRequest tickRequest)
         {
             TickerResponse response = new TickerResponse();
+            var validationResult = Validation.Validate<TickerRequest>(tickRequest);
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
-                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                locationSvc.UpdateTravelerCoordinates(traveler, tickRequest.IPAddress);
-                response.NewMessagesCount = traveler.Messages.Count;
+                if (validationResult.IsValid)
+                {
+                    LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                    locationSvc.UpdateTravelerCoordinates(traveler, tickRequest.IPAddress);
+                    response.City = traveler.City;
+                    response.Country = traveler.Country;
+                    response.Latitude = traveler.Latitude;
+                    response.Longtitude = traveler.Longtitude;
+                }
+                response.NewMessagesCount = traveler.Messages.Count(m => m.IsRead == false && m.FolderID == (int)FolderType.Inbox);
                 response.MarkSuccess();
             }
             catch (Exception ex)

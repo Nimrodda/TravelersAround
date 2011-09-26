@@ -59,10 +59,12 @@ namespace TravelersAround.WebMvc.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult LogOff()
         {
+            _membershipService.Logout(User.Identity.Name);
             _formsService.SignOut();
-
+            
             return RedirectToAction("Index", "Home");
         }
 

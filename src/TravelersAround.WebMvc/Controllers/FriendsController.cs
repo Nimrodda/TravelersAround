@@ -8,6 +8,7 @@ using TravelersAround.ServiceProxy;
 
 namespace TravelersAround.WebMvc.Controllers
 {
+    [Authorize]
     public class FriendsController : ControllerBase
     {
         public FriendsController(ITravelersAroundServiceFacade taService) : base(taService)

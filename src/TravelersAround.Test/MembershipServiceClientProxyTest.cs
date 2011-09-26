@@ -15,7 +15,7 @@ namespace TravelersAround.Test
     public class MembershipServiceClientProxyTest
     {
 
-        private const string _serviceBaseUrl = "http://localhost.:6149/MembershipService";
+        private const string _serviceBaseUrl = "http://localhost:2848/MembershipService";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace TravelersAround.Test
         {
             string serviceBaseUrl = _serviceBaseUrl;
             MembershipServiceClientProxy target = new MembershipServiceClientProxy(serviceBaseUrl);
-            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now.ToString(), ConfirmPassword = "123456", Password = "123456", Email = "test4@ta.com", Firstname = "Test4", Gender = "F", Lastname = "Test4" };
+            RegisterRequest registerReq = new RegisterRequest { Birthdate = DateTime.Now.ToString(), ConfirmPassword = "123456", Password = "123456", Email = "ta.com", Firstname = "Alfonzo", Gender = "M", Lastname = "Petrucci" };
             RegisterResponse actual = target.Register(registerReq);
         }
     }

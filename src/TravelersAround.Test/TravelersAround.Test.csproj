@@ -74,6 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TravelersAroundServiceClientProxyTest.cs" />
+    <Compile Include="TravelersAroundServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelersAround.Contracts\TravelersAround.Contracts.csproj">

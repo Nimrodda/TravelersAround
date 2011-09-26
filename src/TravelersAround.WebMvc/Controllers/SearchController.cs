@@ -8,6 +8,7 @@ using TravelersAround.ServiceProxy.ViewModels;
 
 namespace TravelersAround.WebMvc.Controllers
 {
+    [Authorize]
     public class SearchController : ControllerBase
     {
         public SearchController(ITravelersAroundServiceFacade taService)
