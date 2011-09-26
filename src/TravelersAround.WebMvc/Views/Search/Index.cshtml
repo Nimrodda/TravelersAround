@@ -8,7 +8,8 @@
 <h2>Travelers around you right now</h2>
 
 <div>
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         
         @Html.ValidationSummary(true)
         <fieldset>
@@ -27,74 +28,29 @@
     }
 </div>
 
-<table>
-    <tr>
-        <th>
-            IsOnline
-        </th>
-        <th>
-            Firstname
-        </th>
-        <th>
-            Lastname
-        </th>
-        <th>
-            Age
-        </th>
-        <th>
-            StatusMessage
-        </th>
-        <th>
-            Gender
-        </th>
-        <th>
-            City
-        </th>
-        <th>
-            Country
-        </th>
-        <th>
-            IsAvailable
-        </th>
-        <th></th>
-    </tr>
-
 @foreach (var traveler in Model.Travelers)
 {
-    <tr>
-        <td>
-            @traveler.IsOnline
-        </td>
-        <td>
-            @traveler.Firstname
-        </td>
-        <td>
-            @traveler.Lastname
-        </td>
-        <td>
-            @DateTime.Parse(traveler.Birthdate).ToShortDateString()
-        </td>
-        <td>
+    <div class="traveler_record">
+        <div>
+            <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+        </div>
+        <div>
+            <p>@traveler.Firstname @traveler.Lastname</p>
+            <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+            <p>@traveler.City, @traveler.Country</p>
+        </div>
+        <div>
             @traveler.StatusMessage
-        </td>
-        <td>
-            @traveler.Gender
-        </td>
-        <td>
-            @traveler.City
-        </td>
-        <td>
-            @traveler.Country
-        </td>
-        <td>
+        </div>
+        <div>
             @traveler.IsAvailable
-        </td>
-        <td>
-            @Html.ActionLink("Add to friends list", "Add", new { controller = "Friends", id = traveler.TravelerID }) |
-            @Html.ActionLink("Send message", "Send", new { controller = "Messages", id = traveler.TravelerID })
-        </td>
-    </tr>
+            <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">
+                <img src="@Url.Content("~/ContentResult/img/icons/plus.jpg")" alt="Add to friends list" /></a>
+            <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">
+                <img src="@Url.Content("~/ContentResult/img/icons/envelope.jpg")" alt="Send a message" /></a>
+        </div>
+    </div>
 }
 
-</table>
+
 

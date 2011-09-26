@@ -15,11 +15,18 @@
 
         <div id="header">
             <div id="title">
-                <h1>TravelersAround</h1>
+                <a href="@Url.Action("Index", "Home")" ><img src="@Url.Content("~/Content/img/logo.png")" alt="TravelersAround LOGO" /></a>
             </div>
 
             <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
+                @if (Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Home"))
+                {
+                    @Html.Partial("_LogOnPartial")
+                }
+                else if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Logout", "LogOff", "Account")
+                }
             </div>
 
             <div id="menucontainer">
@@ -43,6 +50,9 @@
         </div>
 
         <div id="main">
+            <div id="ui_message">
+                <span class="notification_message">@ViewBag.NotificationMessage</span>
+            </div>
             @RenderBody()
             <div id="footer">
             </div>

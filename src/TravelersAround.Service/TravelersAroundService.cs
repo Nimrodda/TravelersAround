@@ -302,7 +302,7 @@ namespace TravelersAround.Service
         {
             try
             {
-                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+                Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == new Guid(travelerID));
                 MemoryStream bufferStream = new MemoryStream(traveler.ProfilePicture);
                 return bufferStream;
             }

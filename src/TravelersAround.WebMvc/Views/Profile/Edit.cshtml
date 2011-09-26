@@ -14,7 +14,7 @@
 {
     <div>
         <div class="profilePicture">
-            <img src="/Profile/LoadPicture/@Model.TravelerID" alt="Profile Picture" />
+            <img class="profile_pic" src="@Url.Action("LoadPicture","Profile", new { id = Model.TravelerID})" alt="Profile Picture" />
         </div>
         <input type="file" name="uploadedFile"  />
         @Html.ValidationMessage("uploadedFile")    
@@ -65,8 +65,20 @@
             @Html.LabelFor(model => model.Gender)
         </div>
         <div class="editor-field">
-            <input type="radio" name="Gender" id="genderMale" value="M"/>
-            <label for="genderMale">Male</label>
+            @if (Model.Gender.ToLower().Equals("m"))
+            {
+                <input type="radio" name="Gender" id="genderMale1" value="M" checked="checked"/>
+                <label for="genderMale1">Male</label>
+                <input type="radio" name="Gender" id="genderFemale1" value="F"/>
+                <label for="genderFemale1">Female</label>
+            }
+            else
+            {
+                <input type="radio" name="Gender" id="genderMale2" value="M" />
+                <label for="genderMale2">Male</label>
+                <input type="radio" name="Gender" id="genderFemale2" value="F" checked="checked"/>
+                <label for="genderFemale2">Female</label>
+            }
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
 

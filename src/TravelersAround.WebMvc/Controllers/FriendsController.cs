@@ -19,6 +19,7 @@ namespace TravelersAround.WebMvc.Controllers
         public ActionResult Index(int p = 0)
         {
             FriendsListView model = _taService.ListFriends(p * PAGE_SIZE, PAGE_SIZE);
+            model.Page = p;
             return View(model);
         }
 

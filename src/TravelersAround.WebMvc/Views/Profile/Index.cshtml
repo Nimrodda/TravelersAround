@@ -11,7 +11,7 @@
     <legend>Personal details</legend>
 
     @*<img src="@Url.Content("~/Content/img/anonymous.jpg")" alt="Profile Picture" />*@
-    <img src="/Profile/LoadPicture/@Model.Profile.TravelerID" alt="Profile Picture" />
+    <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = Model.Profile.TravelerID })" alt="Profile Picture" />
     <div class="display-label">Firstname</div>
     <div class="display-field">@Model.Profile.Firstname</div>
 

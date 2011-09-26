@@ -16,7 +16,6 @@
 <p>
     @Html.ValidationSummary(true)
     @Html.ValidationMessage("MessageIDs")
-    @ViewBag.Messasge
 </p>
 @using (Html.BeginForm("Delete", "Messages"))
 {
@@ -78,3 +77,6 @@
         }
     </table>
 }
+
+@Html.ActionLink("Previous", "Index", new { folder = Model.Folder, p = Model.Page - 1 })
+@Html.ActionLink("Next", "Index", new { folder = Model.Folder, p = Model.Page + 1 })

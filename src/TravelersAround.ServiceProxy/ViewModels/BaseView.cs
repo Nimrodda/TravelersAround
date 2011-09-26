@@ -9,5 +9,6 @@ namespace TravelersAround.ServiceProxy.ViewModels
     {
         public string ErrorMessage { get; internal set; }
         public bool Success { get; internal set; }
+        public int Page { get; set; }
     }
 }

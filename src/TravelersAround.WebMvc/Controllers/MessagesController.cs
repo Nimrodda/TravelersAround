@@ -28,7 +28,7 @@ namespace TravelersAround.WebMvc.Controllers
             }
             model.Folder = folder;
             model.Page = p;
-            ViewBag.Messasge = TempData["SuccessMessage"];
+            ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
         }
 
@@ -49,7 +49,7 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _taService.SendMessage(model);
                 if (model.Success)
                 {
-                    TempData["SuccessMessage"] = "Message successfully sent!";
+                    TempData["NotificationMessage"] = "Message successfully sent!";
                     return RedirectToAction("Index");
                 }
                 else

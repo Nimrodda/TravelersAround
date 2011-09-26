@@ -24,7 +24,7 @@ namespace TravelersAround.WebMvc.Controllers
             {
                 ModelState.AddModelError("", model.ErrorMessage);
             }
-
+            ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
         }
         
@@ -43,7 +43,8 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _taService.UpdateProfile(model);
                 if (model.Success)
                 {
-                    return RedirectToAction("Index");
+                    TempData["NotificationMessage"] = R.String.SuccessMessages.SuccessProfileUpdate;
+                    return RedirectToAction("Edit");
                 }
                 else
                 {

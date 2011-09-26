@@ -10,59 +10,34 @@
 <p>
     
 </p>
-@if (Model.FriendsList != null)
+@if (Model.FriendsList.Count > 0)
 {
-    <table>
-        <tr>
-            <th>
-                Firstname
-            </th>
-            <th>
-                Lastname
-            </th>
-            <th>
-                Birthdate
-            </th>
-            <th>
-                StatusMessage
-            </th>
-            <th>
-                Gender
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var friend in Model.FriendsList)
+    
+    foreach (var friend in Model.FriendsList)
     {
-        <tr>
-            <td>
-                @friend.Firstname
-            </td>
-            <td>
-                @friend.Lastname
-            </td>
-            <td>
-                @friend.Birthdate
-            </td>
-            <td>
+        <div class="traveler_record">
+            <div >
+                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = friend.TravelerID })" alt="@String.Concat(friend.Firstname, " ", friend.Lastname)" />
+            </div>
+            <div>
+                <p>@friend.Firstname @friend.Lastname</p>
+                <p>@(DateTime.Now.Year-DateTime.Parse(friend.Birthdate).Year), @friend.Gender</p>
+            </div>
+            <div>
                 @friend.StatusMessage
-            </td>
-            <td>
-                @friend.Gender
-            </td>
-            <td>
+            </div>
+            <div>
                 @friend.IsAvailable
-            </td>
-            <td>
                 @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = friend.TravelerID }) |
                 @Html.ActionLink("Remove", "Remove", new { id = friend.TravelerID })
-            </td>
-        </tr>
+            </div>
+        </div>
     }
-
-    </table>
 }
 else
 {
-    <p>No friend in friends list</p>
+    <p>Friends list is empty</p>
 }
+
+@Html.ActionLink("Previous", "Index", new { p = Model.Page - 1 })
+@Html.ActionLink("Next", "Index", new { p = Model.Page + 1 })
