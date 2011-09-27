@@ -64,8 +64,8 @@ namespace TravelersAround.Service
                     registerReq.Gender, travelerApiKey);
 
                 //Updating traveler's location
-                LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                locationSvc.UpdateTravelerCoordinates(newTraveler, APIKeyService.CurrentTravelerIPAddress);
+                //LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                //locationSvc.UpdateTravelerCoordinates(newTraveler, APIKeyService.CurrentTravelerIPAddress);
 
                 //Persisting the new traveler profile to the database
                 _repository.Add<Traveler>(newTraveler);
@@ -101,8 +101,8 @@ namespace TravelersAround.Service
                     Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
 
                     //Updating traveler's location
-                    LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                    locationSvc.UpdateTravelerCoordinates(traveler, APIKeyService.CurrentTravelerIPAddress);
+                    //LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
+                    //locationSvc.UpdateTravelerCoordinates(traveler, APIKeyService.CurrentTravelerIPAddress);
 
                     //Issuing an API key and storing in cache
                     APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);

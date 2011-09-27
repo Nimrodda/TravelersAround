@@ -1,5 +1,7 @@
-﻿@using(Html.BeginForm("LogOn", "Account"))
+﻿@if (!Request.IsAuthenticated)
 {
+    using (Html.BeginForm("LogOn", "Account"))
+    {
     <div>
         <fieldset>
             <div class="editor-label">
@@ -23,5 +25,10 @@
         </fieldset>
         
     </div>
-}
+    }
 
+}
+else
+{
+    @Html.ActionLink("Logout", "LogOff", "Account")
+}

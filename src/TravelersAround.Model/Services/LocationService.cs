@@ -32,11 +32,10 @@ namespace TravelersAround.Model.Services
             return _geoCoder.ConvertStreetAddressToGeoCoordinates(streetAddress);
         }
 
-        public IEnumerable<Traveler> GetListOfTravelersWithin(int kmDistance, int index, int count, Guid travelerID)
+        public IEnumerable<Traveler> GetListOfTravelersWithin(int kmDistance, int index, int count, Traveler traveler)
         {
-            Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-            if (traveler.Latitude > 0 && traveler.Longtitude > 0) 
-                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Where(t => t.TravelerID != travelerID).Skip(index).Take(count);
+            if (traveler.Latitude > 0 && traveler.Longtitude > 0)
+                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Where(t => t.TravelerID != traveler.TravelerID).Skip(index).Take(count);
             else
                 throw new InvalidTravelerLocationException();
 
@@ -57,5 +56,11 @@ namespace TravelersAround.Model.Services
                 traveler.Country = travelerGeoCoords.Country;
             }
         }
+
+        public void UpdateTravelerCoordinates(Traveler traveler, GeoCoordinates coords)
+        {
+
+        }
+
     }
 }

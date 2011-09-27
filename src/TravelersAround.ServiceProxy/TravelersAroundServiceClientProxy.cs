@@ -78,9 +78,9 @@ namespace TravelersAround.ServiceProxy
             return HttpRequestAdapter.WebHttpRequest<DisplayProfileResponse>(_serviceBaseUrl, "Profile/Display", String.Concat("?apikey=", _apiKey));
         }
 
-        public SearchResponse Search(bool includeOfflineTravelers, int index, int count)
+        public SearchResponse Search(bool includeOfflineTravelers, int index, int count, string ipAddress = null, double lat = 0, double lon = 0)
         {
-            string queryString = HttpRequestAdapter.ConstructQueryString(MethodBase.GetCurrentMethod().GetParameters(), includeOfflineTravelers, index, count) + apiKeyQueryString;
+            string queryString = HttpRequestAdapter.ConstructQueryString(MethodBase.GetCurrentMethod().GetParameters(), includeOfflineTravelers, index, count, ipAddress, lat, lon) + apiKeyQueryString;
             return HttpRequestAdapter.WebHttpRequest<SearchResponse>(_serviceBaseUrl, "Search", queryString);
         }
 

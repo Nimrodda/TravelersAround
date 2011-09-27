@@ -12,5 +12,8 @@ namespace TravelersAround.ServiceProxy.ViewModels
     {
         public IList<TravelerView> Travelers { get; set; }
         public bool IncludeOfflineTravelers { get; set; }
+        public string IPAddress { get; set; }
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
     }
 }

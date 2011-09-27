@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompareAttribute.cs" />
     <Compile Include="DropDownListItem.cs" />
     <Compile Include="ITravelersAroundServiceFacade.cs" />
     <Compile Include="ServiceFacadeBase.cs" />
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\TravelersAround.DataContracts\TravelersAround.DataContracts.csproj">
       <Project>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</Project>
       <Name>TravelersAround.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.Resources\TravelersAround.Resources.csproj">
+      <Project>{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}</Project>
+      <Name>TravelersAround.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

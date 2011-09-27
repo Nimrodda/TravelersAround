@@ -67,10 +67,13 @@
             @Html.LabelFor(model => model.Gender)
         </div>
         <div class="editor-field">
-            <input type="radio" name="Gender" id="genderMale1" value="M"/>
-            <label for="genderMale1">Male</label>
-            <input type="radio" name="Gender" id="genderFemale1" value="F"/>
-            <label for="genderFemale1">Female</label>
+            @Html.RadioButtonFor(model => model.Gender, "M", new { id = "gender_male" })
+            <label for="gender_male">Male</label>
+            @Html.RadioButtonFor(model => model.Gender, "F", new { id = "gender_female" })
+            <label for="gender_female">Female</label>
+            
+            
+            @Html.ValidationMessageFor(model => model.Gender)
         </div>
 
         <p>

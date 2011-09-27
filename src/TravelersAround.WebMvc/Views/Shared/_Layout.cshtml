@@ -19,14 +19,7 @@
             </div>
 
             <div id="logindisplay">
-                @if (Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Home"))
-                {
-                    @Html.Partial("_LogOnPartial")
-                }
-                else if (Request.IsAuthenticated)
-                {
-                    @Html.ActionLink("Logout", "LogOff", "Account")
-                }
+                @Html.Partial("_LogOnPartial")
             </div>
 
             <div id="menucontainer">

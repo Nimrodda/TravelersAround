@@ -18,7 +18,12 @@ namespace TravelersAround.WebMvc.Controllers
 
         public ActionResult Index(SearchView model, int p = 0)
         {
-            model = _taService.Search(model.IncludeOfflineTravelers, p * PAGE_SIZE, PAGE_SIZE);
+            model.IPAddress = Request.UserHostAddress;
+            
+#if DEBUG
+            model.IPAddress = "80.221.20.181";
+#endif
+            model = _taService.Search(model.IncludeOfflineTravelers, p * PAGE_SIZE, PAGE_SIZE, model.IPAddress);
             
             if (!model.Success)
             {

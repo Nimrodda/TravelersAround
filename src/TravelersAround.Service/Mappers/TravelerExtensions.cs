@@ -32,9 +32,12 @@ namespace TravelersAround.Service.Mappers
         public static IList<TravelerView> ConvertToTravelerViewList(this IEnumerable<Traveler> travelers)
         {
             IList<TravelerView> travelerViewList = new List<TravelerView>();
-            foreach (Traveler traveler in travelers)
+            if (travelers != null)
             {
-                travelerViewList.Add(traveler.ConvertToTravelerView());
+                foreach (Traveler traveler in travelers)
+                {
+                    travelerViewList.Add(traveler.ConvertToTravelerView());
+                }
             }
             return travelerViewList;
         }

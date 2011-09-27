@@ -27,7 +27,7 @@ namespace TravelersAround.ServiceProxy
 
         ProfileDisplayView DisplayProfile();
 
-        SearchView Search(bool availabilityMark, int index, int count);
+        SearchView Search(bool availabilityMark, int index, int count, string ipAddress = null, double lat = 0, double lon = 0);
 
         ProfileUpdateView UploadProfilePicture(Stream pictureStream);
 

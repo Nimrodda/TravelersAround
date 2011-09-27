@@ -65,9 +65,9 @@ namespace TravelersAround.ServiceProxy
             return (ProfileDisplayView)GetMappedObject(_travelersAroundService.DisplayProfile(), typeof(ProfileDisplayView));
         }
 
-        public SearchView Search(bool includeOfflineTravelers, int index, int count)
+        public SearchView Search(bool includeOfflineTravelers, int index, int count, string ipAddress = null, double lat = 0, double lon = 0)
         {
-            return (SearchView)GetMappedObject(_travelersAroundService.Search(includeOfflineTravelers, index, count), typeof(SearchView));
+            return (SearchView)GetMappedObject(_travelersAroundService.Search(includeOfflineTravelers, index, count, ipAddress, lat, lon), typeof(SearchView));
         }
 
         public ProfileUpdateView UploadProfilePicture(Stream pictureStream)

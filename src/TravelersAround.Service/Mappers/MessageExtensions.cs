@@ -26,9 +26,12 @@ namespace TravelersAround.Service.Mappers
         public static IList<MessageView> ConvertToMessageViewList(this IEnumerable<TravelerMessage> travelerMessages)
         {
             IList<MessageView> msgViewList = new List<MessageView>();
-            foreach (TravelerMessage travMsg in travelerMessages)
+            if (travelerMessages != null)
             {
-                msgViewList.Add(travMsg.ConvertToMessageView());
+                foreach (TravelerMessage travMsg in travelerMessages)
+                {
+                    msgViewList.Add(travMsg.ConvertToMessageView());
+                }
             }
             return msgViewList;
         }

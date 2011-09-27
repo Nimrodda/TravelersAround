@@ -59,8 +59,9 @@ namespace TravelersAround.Contracts
 
         //Search service
         [OperationContract]
-        [WebGet(UriTemplate = "Search?includeOfflineTravelers={includeOfflineTravelers}&index={index}&count={count}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        SearchResponse Search(bool includeOfflineTravelers,int index, int count);
+        [WebGet(UriTemplate = "Search?includeOfflineTravelers={includeOfflineTravelers}&index={index}&count={count}&ipAddress={ipAddress}&lat={lat}&lon={lon}", 
+            BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        SearchResponse Search(bool includeOfflineTravelers, int index, int count, string ipAddress = null, double lat = 0, double lon = 0);
 
         //Profile picture management
         [OperationContract]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-
+using TravelersAround.ServiceProxy;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
@@ -49,23 +49,29 @@ namespace TravelersAround.ServiceProxy.ViewModels
     public class RegisterView : BaseView
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", 
+            ErrorMessageResourceType = typeof(R.String.ErrorMessages),
+            ErrorMessageResourceName = "InvalidEmail")]
         [Display(Name = "Email address")]
         public string Email { get; set; }
 
         [Required]
-        //[ValidatePasswordLength]
+        [StringLength(12, MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
+        [StringLength(12, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DisplayName("Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [RegularExpression("[mfMF]")]
+        [RegularExpression("[mfMF]",
+            ErrorMessageResourceType = typeof(R.String.ErrorMessages),
+            ErrorMessageResourceName = "InvalidGender")]
         public string Gender { get; set; }
 
         [Required]

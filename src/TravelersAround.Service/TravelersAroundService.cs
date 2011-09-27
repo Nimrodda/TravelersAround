@@ -241,7 +241,7 @@ namespace TravelersAround.Service
             return response;
         }
 
-        public SearchResponse Search(bool includeOfflineTravelers, int index, int count)
+        public SearchResponse Search(bool includeOfflineTravelers, int index, int count, string ipAddress = null, double lat = 0, double lon = 0)
         {
             SearchResponse response = new SearchResponse();
             LocationService locSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
@@ -249,7 +249,38 @@ namespace TravelersAround.Service
 
             try
             {
-                IEnumerable<Traveler> travelersAround = locSvc.GetListOfTravelersWithin(RADIUS, index, count, _currentTravelerId);
+                Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
+                if (!String.IsNullOrEmpty(ipAddress) || (lat != 0 && lon != 0))
+                {
+                    //This part is optional. It will happen only if the client will explicitly the location, either by IP address or coordinates
+                    //otherwise the IP address of the client who made the request will be used to determine the location
+
+                    GeoCoordinates coords = new GeoCoordinates { Latitude = lat, Longtitude = lon };
+
+                    if (!String.IsNullOrEmpty(ipAddress))
+                    {
+                        locSvc.UpdateTravelerCoordinates(currentTraveler, ipAddress);
+                    }
+                    else if (currentTraveler.IsLocationChanged(coords))
+                    {
+                        currentTraveler.Latitude = coords.Latitude;
+                        currentTraveler.Longtitude = coords.Longtitude;
+                        //TODO: obtain city and country by given coords otherwise coords.City and coords.Country are always null
+                        currentTraveler.City = coords.City;
+                        currentTraveler.Country = coords.Country;
+                    }
+                }
+                else
+                {
+                    //Normally this will happen
+                    locSvc.UpdateTravelerCoordinates(currentTraveler, APIKeyService.CurrentTravelerIPAddress);
+                }
+                //Updating traveler's location
+                _repository.Save<Traveler>(currentTraveler);
+                _repository.Commit();
+
+                //Searching for nearby travelers
+                IEnumerable<Traveler> travelersAround = locSvc.GetListOfTravelersWithin(RADIUS, index, count, currentTraveler);
                 //Loading currently online travelers from the cache
                 IEnumerable<Guid> currentlyActiveTravelers = apiKeySvc.GetCurrentlyActiveTravelers();
 
@@ -303,8 +334,11 @@ namespace TravelersAround.Service
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == new Guid(travelerID));
-                MemoryStream bufferStream = new MemoryStream(traveler.ProfilePicture);
-                return bufferStream;
+                if (traveler.ProfilePicture != null)
+                {
+                    MemoryStream bufferStream = new MemoryStream(traveler.ProfilePicture);
+                    return bufferStream;
+                }
             }
             catch (Exception ex)
             {

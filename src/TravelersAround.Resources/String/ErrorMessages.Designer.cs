@@ -223,6 +223,15 @@ namespace R.String {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your location cannot be determined at that moment. Please try again later..
+        /// </summary>
+        public static string InvalidTravelerLocationException {
+            get {
+                return ResourceManager.GetString("InvalidTravelerLocationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email format.
         /// </summary>
         public static string InvalidUserName {
