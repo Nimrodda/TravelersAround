@@ -27,30 +27,33 @@
         </fieldset>
     }
 </div>
-
-@foreach (var traveler in Model.Travelers)
-{
-    <div class="traveler_record">
-        <div>
-            <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
-        </div>
-        <div>
-            <p>@traveler.Firstname @traveler.Lastname</p>
-            <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
-            <p>@traveler.City, @traveler.Country</p>
-        </div>
-        <div>
-            @traveler.StatusMessage
-        </div>
-        <div>
-            @traveler.IsAvailable
-            <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">
-                <img src="@Url.Content("~/ContentResult/img/icons/plus.jpg")" alt="Add to friends list" /></a>
-            <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">
-                <img src="@Url.Content("~/ContentResult/img/icons/envelope.jpg")" alt="Send a message" /></a>
-        </div>
-    </div>
-}
-
-
+<div>
+    <ul>
+    @foreach (var traveler in Model.Travelers)
+    {
+        <li>
+            <div class="traveler_record">
+                <div>
+                    <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+                </div>
+                <div>
+                    <p>@traveler.Firstname @traveler.Lastname</p>
+                    <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+                    <p>@traveler.City, @traveler.Country</p>
+                </div>
+                <div>
+                    @traveler.StatusMessage
+                </div>
+                <div>
+                    @traveler.IsAvailable
+                    <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">
+                        <img src="@Url.Content("~/ContentResult/img/icons/plus.jpg")" alt="Add to friends list" /></a>
+                    <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">
+                        <img src="@Url.Content("~/ContentResult/img/icons/envelope.jpg")" alt="Send a message" /></a>
+                </div>
+            </div>
+        </li>
+    }
+    </ul>
+</div>
 

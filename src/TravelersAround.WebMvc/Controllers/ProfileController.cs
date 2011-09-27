@@ -32,6 +32,7 @@ namespace TravelersAround.WebMvc.Controllers
         public ActionResult Edit()
         {
             ProfileUpdateView model = _taService.DisplayProfile().ConvertToProfileUpdateView();
+            ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
         }
 
@@ -57,7 +58,14 @@ namespace TravelersAround.WebMvc.Controllers
         public ActionResult LoadPicture(string id)
         {
             MemoryStream picture = _taService.GetProfilePicture(id) as MemoryStream;
-            return File(picture.ToArray(), "image/jpeg");
+            byte[] buffer = picture.ToArray();
+            if (buffer.Length == 0)
+            {
+                FileStream tempImage = new FileStream(Server.MapPath("~/Content/img/anonymous.jpg"), FileMode.Open, FileAccess.Read);
+                buffer = new byte[tempImage.Length];
+                tempImage.Read(buffer, 0, (int)tempImage.Length);
+            }
+            return File(buffer, "image/jpeg");
         }
 
         [HttpPost]

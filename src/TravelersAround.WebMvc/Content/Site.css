@@ -235,6 +235,8 @@ table th
   border: solid 1px #e8eef4;   
 }
 
+
+
 /* MISC  
 ----------------------------------------------------------*/
 .clear
@@ -286,6 +288,11 @@ div#title
     text-decoration: none;
 }
 
+.profile_pic
+{
+    width: 100px;
+    height: 100px;
+}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error
