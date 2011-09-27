@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D99128CC-ECAD-4AD0-A4E7-40DBEBA4161F}</ProjectGuid>
+    <ProjectGuid>{E3687668-11DE-45E8-B712-47DC8206D23B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TravelersAround.Repository</RootNamespace>
-    <AssemblyName>TravelersAround.Repository</AssemblyName>
+    <RootNamespace>TravelersAround.Infrastructure</RootNamespace>
+    <AssemblyName>TravelersAround.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,12 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,27 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFLocationDeterminator.cs" />
-    <Compile Include="EFRepository.cs" />
+    <Compile Include="PagedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLiteCache.cs" />
-    <Compile Include="TravelersAroundEntities.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TravelersAround.Infrastructure\TravelersAround.Infrastructure.csproj">
-      <Project>{E3687668-11DE-45E8-B712-47DC8206D23B}</Project>
-      <Name>TravelersAround.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TravelersAround.Model\TravelersAround.Model.csproj">
-      <Project>{72284192-C787-4F25-A88B-EBDF769EE695}</Project>
-      <Name>TravelersAround.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="TravelersAround.edmx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

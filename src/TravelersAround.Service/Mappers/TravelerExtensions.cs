@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using TravelersAround.DataContracts.Views;
 using TravelersAround.Model.Entities;
+using TravelersAround.DataContracts;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.Service.Mappers
 {
@@ -29,17 +31,22 @@ namespace TravelersAround.Service.Mappers
             };
         }
 
-        public static IList<TravelerView> ConvertToTravelerViewList(this IEnumerable<Traveler> travelers)
+        public static PagedList<TravelerView> ConvertToTravelerViewList(this PagedList<Traveler> travelers)
         {
-            IList<TravelerView> travelerViewList = new List<TravelerView>();
+            PagedList<TravelerView> travelersViewList = new PagedList<TravelerView>();
+            travelersViewList.HasNext = travelers.HasNext;
+            travelersViewList.HasPrevious = travelers.HasPrevious;
+            travelersViewList.TotalEntitiesCount = travelers.TotalEntitiesCount;
+            travelersViewList.TotalPageCount = travelers.TotalPageCount;
+            travelersViewList.Entities = new List<TravelerView>();
             if (travelers != null)
             {
-                foreach (Traveler traveler in travelers)
+                foreach (Traveler traveler in travelers.Entities)
                 {
-                    travelerViewList.Add(traveler.ConvertToTravelerView());
+                    travelersViewList.Entities.Add(traveler.ConvertToTravelerView());
                 }
             }
-            return travelerViewList;
+            return travelersViewList;
         }
     }
 }

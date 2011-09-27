@@ -10,10 +10,10 @@
 <p>
     
 </p>
-@if (Model.FriendsList.Count > 0)
+@if (Model.FriendsList.Entities.Count > 0)
 {
     
-    foreach (var friend in Model.FriendsList)
+    foreach (var friend in Model.FriendsList.Entities)
     {
         <div class="traveler_record">
             <div >

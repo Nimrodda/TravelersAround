@@ -5,6 +5,7 @@ using System.Text;
 using TravelersAround.Model.Entities;
 using TravelersAround.Model.Factories;
 using TravelersAround.Model.Exceptions;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.Model.Services
 {
@@ -17,13 +18,13 @@ namespace TravelersAround.Model.Services
             _repository = repository;
         }
 
-        public IEnumerable<TravelerMessage> ListMessages(Guid travelerID, FolderType folder, int index = 0, int count = 10)
+        public PagedList<TravelerMessage> ListMessages(Guid travelerID, FolderType folder, int index = 0, int count = 10)
         {
             Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
             if (traveler == null) throw new TravelerNotFoundException();
             if (traveler.HasMessagesInFolder(folder))
-                return traveler.Messages.Where(m => m.FolderID == (int)folder).Skip(index).Take(count);
-            else 
+                return traveler.Messages.Where(m => m.FolderID == (int)folder).ToPagedList(index, count);
+            else
                 return null;
         }
 

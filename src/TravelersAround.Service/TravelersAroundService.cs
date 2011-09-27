@@ -10,7 +10,7 @@ using TravelersAround.Model;
 using TravelersAround.Model.Services;
 using TravelersAround.Model.Entities;
 using TravelersAround.Service.Mappers;
-
+using TravelersAround.Infrastructure;
 using log4net;
 using System.IO;
 using Microsoft.Practices.EnterpriseLibrary.Validation;
@@ -89,7 +89,7 @@ namespace TravelersAround.Service
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);
                 if (traveler.HasFriends())
                 {
-                    response.FriendsList = traveler.Relationships.Skip(index).Take(count).ConvertToTravelerViewList();
+                    response.FriendsList = traveler.Relationships.ToPagedList(index, count).ConvertToTravelerViewList();
                     response.MarkSuccess();
                 }
                 else
@@ -118,7 +118,7 @@ namespace TravelersAround.Service
             {
                 try
                 {
-                    response.MessagesList = msgSvc.ListMessages(_currentTravelerId, folderType, index, count).ConvertToMessageViewList();
+                    response.MessagesList = msgSvc.ListMessages(_currentTravelerId, folderType, index, count).ConvertToMessageViewPagedList();
                     response.MarkSuccess();
                 }
                 catch (Exception ex)
@@ -280,24 +280,45 @@ namespace TravelersAround.Service
                 _repository.Save<Traveler>(currentTraveler);
                 _repository.Commit();
 
-                //Searching for nearby travelers
-                IEnumerable<Traveler> travelersAround = locSvc.GetListOfTravelersWithin(RADIUS, index, count, currentTraveler);
-                //Loading currently online travelers from the cache
-                IEnumerable<Guid> currentlyActiveTravelers = apiKeySvc.GetCurrentlyActiveTravelers();
+                //All online travelers in the system 
+                IEnumerable<Guid> allOnlineTravelersFromCache = apiKeySvc.GetCurrentlyActiveTravelers();
+                
+                //Raw results of travelers around - including offline users
+                PagedList<Traveler> travelersAroundRawResults = locSvc.GetListOfTravelersWithin(RADIUS, index, count, currentTraveler);
 
                 if (!includeOfflineTravelers)
                 {
-                    //Gets only travelers around who are online at this moment
-                    travelersAround = travelersAround.Where(t => currentlyActiveTravelers.Contains(t.TravelerID));
-                }
+                    //Gets only travelers around who are online at this moment out of the 10 rows from the DB
+                    var onlineTravelersAround = travelersAroundRawResults.Entities.Where(t => allOnlineTravelersFromCache.Contains(t.TravelerID));
+                    
+                    //if we have another page from the DB (10 more travelers) and the maximum rows for the page hasn't been reached then loop until
+                    //all the rows for the page are full or until the last page has reached
+                    while (travelersAroundRawResults.HasNext && onlineTravelersAround.Count() < count)
+                    {
+                        index = index + count; //index for the next page
+                        //get next page from the DB
+                        travelersAroundRawResults = locSvc.GetListOfTravelersWithin(RADIUS, index, count, currentTraveler);
+                        //take only as many as needed to fill up the page
+                        var onlineTravelersFromNextPage = travelersAroundRawResults.Entities.Where(t => allOnlineTravelersFromCache.Contains(t.TravelerID)).Take(count - onlineTravelersAround.Count());
+                        //pile up the results
+                        onlineTravelersAround = onlineTravelersAround.Concat(onlineTravelersFromNextPage);
 
+                    }
+                    travelersAroundRawResults = onlineTravelersAround.ToPagedList(index, count);
+                }
+                
                 //Marks which travelers are online
-                travelersAround
-                    .ToList()
-                    .ForEach(traveler => traveler.IsOnline = currentlyActiveTravelers.Contains(traveler.TravelerID));
+                for (int i = 0; i < travelersAroundRawResults.Entities.Count; i++)
+			    {
+                    if (allOnlineTravelersFromCache.Contains(travelersAroundRawResults.Entities[i].TravelerID))
+                    {
+                        travelersAroundRawResults.Entities[i].IsOnline = true;
+                    }
+			    }
+
                 
                 //Converts to the suitable data contract for serialization                
-                response.Travelers = travelersAround.ConvertToTravelerViewList();
+                response.Travelers = travelersAroundRawResults.ConvertToTravelerViewList();
                 response.MarkSuccess();
             }
             catch (Exception ex)

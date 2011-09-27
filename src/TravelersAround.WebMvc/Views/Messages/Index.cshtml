@@ -44,7 +44,7 @@
             </th>
         </tr>
 
-        @foreach (var message in Model.MessagesList)
+        @foreach (var message in Model.MessagesList.Entities)
         {
             <tr>
                 <td>
@@ -53,11 +53,11 @@
                 <td>
                     @if (!message.IsRead)
                     {
-                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder, isUnread = true })</strong>
+                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })</strong>
                     }
                     else
                     {
-                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder, isUnread = false })
+                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })
                     }
                 </td>
                 <td>

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using TravelersAround.DataContracts.Views;
 using System.Collections.Specialized;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
@@ -13,7 +14,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
     {
         public string Folder { get; set; }
 
-        public IList<MessageView> MessagesList { get; set; }
+        public PagedList<MessageView> MessagesList { get; set; }
 
     }
 

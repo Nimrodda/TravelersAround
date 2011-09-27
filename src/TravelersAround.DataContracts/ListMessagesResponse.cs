@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TravelersAround.DataContracts.Views;
 using System.Runtime.Serialization;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.DataContracts
 {
@@ -11,7 +12,7 @@ namespace TravelersAround.DataContracts
     public class ListMessagesResponse : ResponseBase
     {
         [DataMember]
-        public IList<MessageView> MessagesList { get; set; }
+        public PagedList<MessageView> MessagesList { get; set; }
    }
 }
 

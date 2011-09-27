@@ -20,6 +20,8 @@ namespace TravelersAround.DataContracts.Views
         [DataMember]
         public string SenderName { get; set; }
         [DataMember]
+        public string SenderID { get; set; }
+        [DataMember]
         public IList<string> RecipientsNames { get; set; }
         [DataMember]
         public bool IsRead { get; set; }

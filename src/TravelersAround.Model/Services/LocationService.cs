@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TravelersAround.Model.Entities;
 using TravelersAround.Model.Exceptions;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.Model.Services
 {
@@ -32,10 +33,11 @@ namespace TravelersAround.Model.Services
             return _geoCoder.ConvertStreetAddressToGeoCoordinates(streetAddress);
         }
 
-        public IEnumerable<Traveler> GetListOfTravelersWithin(int kmDistance, int index, int count, Traveler traveler)
+        public PagedList<Traveler> GetListOfTravelersWithin(int kmDistance, int index, int count, Traveler traveler)
         {
             if (traveler.Latitude > 0 && traveler.Longtitude > 0)
-                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude).Where(t => t.TravelerID != traveler.TravelerID).Skip(index).Take(count);
+                return _locationDeterminator.FindNearByTravelers(kmDistance, traveler.Latitude, traveler.Longtitude, index, count, traveler.TravelerID);
+
             else
                 throw new InvalidTravelerLocationException();
 

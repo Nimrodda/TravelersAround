@@ -21,11 +21,7 @@ namespace TravelersAround.WebMvc.Controllers
         public ActionResult Index(string folder = "Inbox", int p = 0)
         {
             MessagesListView model = _taService.ListMessages(folder, p * PAGE_SIZE, PAGE_SIZE);
-            if (folder.Equals("inbox", StringComparison.CurrentCultureIgnoreCase))
-            {
-                int unreadMessagesCount = model.MessagesList.Count(message => !message.IsRead);
-                if (unreadMessagesCount > 0) Session["NewMessagesCount"] = unreadMessagesCount;
-            }
+            
             model.Folder = folder;
             model.Page = p;
             ViewBag.NotificationMessage = TempData["NotificationMessage"];
@@ -60,7 +56,7 @@ namespace TravelersAround.WebMvc.Controllers
             return View(model);
         }
 
-        public ActionResult Read(string id, string returnToFolder, bool isUnread)
+        public ActionResult Read(string id, string returnToFolder)
         {
             MessageReadView model = _taService.ReadMessage(id);
             model.ReturnToFolder = returnToFolder;
@@ -68,14 +64,15 @@ namespace TravelersAround.WebMvc.Controllers
             {
                 ModelState.AddModelError("", model.ErrorMessage);
             }
-            //Setting new messages counter
-            if (Session["NewMessagesCount"] != null && isUnread && returnToFolder.Equals("inbox", StringComparison.CurrentCultureIgnoreCase))
-            {
-                int count = (int)Session["NewMessagesCount"];
-                count--;
-                Session["NewMessagesCount"] = count;
-            }
+            
             return View(model);
+        }
+
+        public ActionResult Delete(string id)
+        {
+            MessageDeleteView model = new MessageDeleteView();
+            model.MessageIDs = new string[] { id };
+            return Delete(model);
         }
 
         [HttpPost]

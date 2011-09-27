@@ -147,6 +147,10 @@
       <Project>{77D25D95-C514-4AD6-B763-E52F1ABA4C05}</Project>
       <Name>TravelersAround.DataContracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TravelersAround.Infrastructure\TravelersAround.Infrastructure.csproj">
+      <Project>{E3687668-11DE-45E8-B712-47DC8206D23B}</Project>
+      <Name>TravelersAround.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TravelersAround.Resources\TravelersAround.Resources.csproj">
       <Project>{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}</Project>
       <Name>TravelersAround.Resources</Name>

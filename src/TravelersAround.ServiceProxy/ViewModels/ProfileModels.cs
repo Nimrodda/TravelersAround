@@ -25,18 +25,24 @@ namespace TravelersAround.ServiceProxy.ViewModels
     {
         public string TravelerID { get; internal set; }
 
+        [Required]
         public string Firstname { get; set; }
-        
+
+        [Required]
         public string Lastname { get; set; }
-        
+
+        [Required]
         [DataType(DataType.Date)]
         public string Birthdate { get; set; }
-        
+
+        [Required]
         public string StatusMessage { get; set; }
-        
+
+        [Required]
         [RegularExpression("[mfMF]")]
         public string Gender { get; set; }
 
+        [Required]
         public bool IsAvailable { get; set; }
     }
    

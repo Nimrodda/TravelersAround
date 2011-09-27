@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TravelersAround.DataContracts.Views;
 using System.Runtime.Serialization;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.DataContracts
 {
@@ -11,6 +12,6 @@ namespace TravelersAround.DataContracts
     public class SearchResponse : ResponseBase
     {
         [DataMember]
-        public IList<TravelerView> Travelers { get; set; }
+        public PagedList<TravelerView> Travelers { get; set; }
     }
 }

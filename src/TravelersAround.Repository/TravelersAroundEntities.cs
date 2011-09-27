@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using TravelersAround.Model.Entities;
+using System;
 
 namespace TravelersAround.Repository
 {
@@ -93,12 +94,13 @@ namespace TravelersAround.Repository
 
         #endregion
 
-        public ObjectResult<Traveler> FindNearByTravelers(int distance, double travelerLatitude, double travelerLongtitude)
+        public ObjectResult<Traveler> FindNearByTravelers(int distance, double travelerLatitude, double travelerLongtitude, Guid travelerID)
         {
             return ExecuteFunction<Traveler>("FindNearByTravelers", 
                 new ObjectParameter("distance", distance), 
                 new ObjectParameter("travelerLatitude", travelerLatitude), 
-                new ObjectParameter("travelerLongtitude", travelerLongtitude));
+                new ObjectParameter("travelerLongtitude", travelerLongtitude),
+                new ObjectParameter("travelerId", travelerID));
         }
     } 
 

@@ -30,10 +30,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Find travelers around you", "Index", "Search")</li>
-                        <li>
-                            @Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" })
-                            <span id="newMessagesCounter">@Session["NewMessagesCount"]</span>
-                        </li>
+                        <li>@Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" })</li>
                         <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
                         <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
                     }

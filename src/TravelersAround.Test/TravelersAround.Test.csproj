@@ -67,7 +67,6 @@
     <Compile Include="MembershipServiceTest.cs" />
     <Compile Include="MessageServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageServiceIntegrationTest.cs" />
     <Compile Include="GeoCoderTest.cs" />
     <Compile Include="SendMessageResponseTest.cs" />
     <Compile Include="SQLiteCacheTest.cs">

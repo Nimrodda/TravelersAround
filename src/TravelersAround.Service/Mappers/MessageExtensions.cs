@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TravelersAround.DataContracts.Views;
 using TravelersAround.Model.Entities;
+using TravelersAround.Infrastructure;
 
 namespace TravelersAround.Service.Mappers
 {
@@ -19,21 +20,27 @@ namespace TravelersAround.Service.Mappers
                 SenderName = travelerMessage.Message.Author.Fullname,
                 SentDate = travelerMessage.Message.SentDate.ToString(),
                 Subject = travelerMessage.Message.Subject,
-                RecipientsNames = travelerMessage.Message.Recipients.Where(x => x.TravelerID != travelerMessage.TravelerID).Select(t => t.Traveler.Fullname).ToList()
+                RecipientsNames = travelerMessage.Message.Recipients.Where(x => x.TravelerID != travelerMessage.TravelerID).Select(t => t.Traveler.Fullname).ToList(),
+                SenderID = travelerMessage.Message.AuthorID.ToString()
             };
         }
 
-        public static IList<MessageView> ConvertToMessageViewList(this IEnumerable<TravelerMessage> travelerMessages)
+        public static PagedList<MessageView> ConvertToMessageViewPagedList(this PagedList<TravelerMessage> travelerMessages)
         {
-            IList<MessageView> msgViewList = new List<MessageView>();
+            PagedList<MessageView> msgViewPagedList = new PagedList<MessageView>();
+            msgViewPagedList.HasNext = travelerMessages.HasNext;
+            msgViewPagedList.HasPrevious = travelerMessages.HasPrevious;
+            msgViewPagedList.TotalEntitiesCount = travelerMessages.TotalEntitiesCount;
+            msgViewPagedList.TotalPageCount = travelerMessages.TotalPageCount;
+            msgViewPagedList.Entities = new List<MessageView>();
             if (travelerMessages != null)
             {
-                foreach (TravelerMessage travMsg in travelerMessages)
+                foreach (TravelerMessage travMsg in travelerMessages.Entities)
                 {
-                    msgViewList.Add(travMsg.ConvertToMessageView());
+                    msgViewPagedList.Entities.Add(travMsg.ConvertToMessageView());
                 }
             }
-            return msgViewList;
+            return msgViewPagedList;
         }
     }
 }
