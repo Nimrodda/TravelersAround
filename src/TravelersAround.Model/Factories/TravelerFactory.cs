@@ -23,6 +23,9 @@ namespace TravelersAround.Model.Factories
                 Gender = gender,
                 Birthdate = birthdate,
                 ApiKey = apiKey,
+                StatusMessage = R.String.Default.StatusMessage,
+                IsAvailable = true,
+                IsOnline = true
             };
         }
     }

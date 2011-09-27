@@ -65,20 +65,10 @@
             @Html.LabelFor(model => model.Gender)
         </div>
         <div class="editor-field">
-            @if (Model.Gender.ToLower().Equals("m"))
-            {
-                <input type="radio" name="Gender" id="genderMale1" value="M" checked="checked"/>
-                <label for="genderMale1">Male</label>
-                <input type="radio" name="Gender" id="genderFemale1" value="F"/>
-                <label for="genderFemale1">Female</label>
-            }
-            else
-            {
-                <input type="radio" name="Gender" id="genderMale2" value="M" />
-                <label for="genderMale2">Male</label>
-                <input type="radio" name="Gender" id="genderFemale2" value="F" checked="checked"/>
-                <label for="genderFemale2">Female</label>
-            }
+            @Html.RadioButtonFor(model => model.Gender, "M", new { id = "gender_male" })
+            <label for="gender_male">Male</label>
+            @Html.RadioButtonFor(model => model.Gender, "F", new { id = "gender_female" })
+            <label for="gender_female">Female</label>
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
 

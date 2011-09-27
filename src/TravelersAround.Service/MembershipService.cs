@@ -63,10 +63,6 @@ namespace TravelersAround.Service
                     newTravelerID, registerReq.Firstname, registerReq.Lastname, DateTime.Parse(registerReq.Birthdate), 
                     registerReq.Gender, travelerApiKey);
 
-                //Updating traveler's location
-                //LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                //locationSvc.UpdateTravelerCoordinates(newTraveler, APIKeyService.CurrentTravelerIPAddress);
-
                 //Persisting the new traveler profile to the database
                 _repository.Add<Traveler>(newTraveler);
                 _repository.Commit();
@@ -99,10 +95,6 @@ namespace TravelersAround.Service
                     Guid travelerID = _membership.GetUserTravelerID(loginReq.Email);
                     //Loading traveler's profile
                     Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == travelerID);
-
-                    //Updating traveler's location
-                    //LocationService locationSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
-                    //locationSvc.UpdateTravelerCoordinates(traveler, APIKeyService.CurrentTravelerIPAddress);
 
                     //Issuing an API key and storing in cache
                     APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);

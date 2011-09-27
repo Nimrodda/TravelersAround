@@ -212,6 +212,7 @@ namespace TravelersAround.Service
                 traveler.Lastname = updateProfileReq.Lastname ?? traveler.Lastname;
                 traveler.StatusMessage = updateProfileReq.StatusMessage ?? traveler.StatusMessage;
                 traveler.Gender = updateProfileReq.Gender ?? traveler.Gender;
+                traveler.Birthdate = (!String.IsNullOrEmpty(updateProfileReq.Birthdate)) ? DateTime.Parse(updateProfileReq.Birthdate) : traveler.Birthdate;
                 traveler.IsAvailable = updateProfileReq.IsAvailable ?? traveler.IsAvailable;
                 _repository.Save<Traveler>(traveler);
                 _repository.Commit();

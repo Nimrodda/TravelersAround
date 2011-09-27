@@ -72,6 +72,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BootStraper.cs" />
     <Compile Include="Models\MessageSendViewExtensions.cs" />
     <Compile Include="Models\WebMvcModule.cs" />
     <Compile Include="Models\FormsAuthentication.cs" />

@@ -84,6 +84,12 @@
     <Compile Include="Services\RelationshipService.cs" />
     <Compile Include="Services\LocationService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelersAround.Resources\TravelersAround.Resources.csproj">
+      <Project>{EA3817BC-77E8-4F2D-98B8-0E9FE5B2BEAB}</Project>
+      <Name>TravelersAround.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

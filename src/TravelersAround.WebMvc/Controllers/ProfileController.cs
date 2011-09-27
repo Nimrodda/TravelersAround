@@ -71,7 +71,7 @@ namespace TravelersAround.WebMvc.Controllers
         [HttpPost]
         public ActionResult UploadPicture(HttpPostedFileBase uploadedFile)
         {
-            string errorMessage = "Invalid file format";
+            string errorMessage = "File format not supposed. Only JPEG and PNG are accepted. Max size is 1.5MB";
 
             if (uploadedFile != null && uploadedFile.ContentLength > 0 &&
                 (uploadedFile.ContentType.ToLower().Contains("jpeg") || uploadedFile.ContentType.ToLower().Contains("png")))
