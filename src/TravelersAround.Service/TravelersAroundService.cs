@@ -247,7 +247,7 @@ namespace TravelersAround.Service
             SearchResponse response = new SearchResponse();
             LocationService locSvc = new LocationService(_locationDeterminator, _repository, _geoCoder);
             APIKeyService apiKeySvc = new APIKeyService(_repository, _apiKeyGen);
-
+            //TODO: split up method to separate methods
             try
             {
                 Traveler currentTraveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);

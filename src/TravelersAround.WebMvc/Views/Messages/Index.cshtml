@@ -77,6 +77,21 @@
         }
     </table>
 }
-
-@Html.ActionLink("Previous", "Index", new { folder = Model.Folder, p = Model.Page - 1 })
-@Html.ActionLink("Next", "Index", new { folder = Model.Folder, p = Model.Page + 1 })
+@if (Model.MessagesList.TotalPageCount > 0)
+{
+    if (Model.MessagesList.HasPrevious)
+    {
+        @Html.ActionLink("<", "Index", new { p = Model.Page - 1 })
+    }
+    if (Model.MessagesList.TotalPageCount > 0)
+    {
+        for (int i = 0; i < Model.MessagesList.TotalPageCount + 1; i++)
+        {
+            @Html.ActionLink((i + 1).ToString(), "Index", new { p = i })      
+        }
+    }
+    if (Model.MessagesList.HasNext)
+    {
+        @Html.ActionLink(">", "Index", new { p = Model.Page + 1 })
+    }
+}

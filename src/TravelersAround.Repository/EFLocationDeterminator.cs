@@ -16,7 +16,7 @@ namespace TravelersAround.Repository
             TravelersAroundEntities dataContext = new TravelersAroundEntities();
             using (dataContext)
             {
-                return dataContext.FindNearByTravelers(distance, travelerLatitude, travelerLongtitude, travelerID).ToPagedList(index, count);
+                return dataContext.FindNearByTravelers(distance, travelerLatitude, travelerLongtitude, travelerID).ToList().ToPagedList(index, count);
             }
         }
     }

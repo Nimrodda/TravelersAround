@@ -38,6 +38,21 @@ else
 {
     <p>Friends list is empty</p>
 }
-
-@Html.ActionLink("Previous", "Index", new { p = Model.Page - 1 })
-@Html.ActionLink("Next", "Index", new { p = Model.Page + 1 })
+@if (Model.FriendsList.TotalPageCount > 0)
+{
+    if (Model.FriendsList.HasPrevious)
+    {
+        @Html.ActionLink("Previous", "Index", new { p = Model.Page - 1 })
+    }
+    if (Model.FriendsList.TotalPageCount > 0)
+    {
+        for (int i = 0; i < Model.FriendsList.TotalPageCount + 1; i++)
+        {
+            @Html.ActionLink((i + 1).ToString(), "Index", new { p = i })      
+        }
+    }
+    if (Model.FriendsList.HasNext)
+    {
+        @Html.ActionLink("Next", "Index", new { p = Model.Page + 1 })
+    }
+}

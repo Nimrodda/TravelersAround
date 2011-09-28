@@ -40,6 +40,7 @@ namespace TravelersAround.WebMvc.Controllers
         [HttpPost]
         public ActionResult Send(MessageSendView model)
         {
+            string recipientId = model.RecipientID;
             if (ModelState.IsValid)
             {
                 model = _taService.SendMessage(model);
@@ -53,6 +54,7 @@ namespace TravelersAround.WebMvc.Controllers
                     ModelState.AddModelError("", model.ErrorMessage);
                 }
             }
+            model.RecipientID = recipientId;
             return View(model);
         }
 
