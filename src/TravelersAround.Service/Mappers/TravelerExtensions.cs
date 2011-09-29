@@ -38,7 +38,6 @@ namespace TravelersAround.Service.Mappers
             travelersViewList.HasPrevious = travelers.HasPrevious;
             travelersViewList.TotalEntitiesCount = travelers.TotalEntitiesCount;
             travelersViewList.TotalPageCount = travelers.TotalPageCount;
-            travelersViewList.Entities = new List<TravelerView>();
             if (travelers != null)
             {
                 foreach (Traveler traveler in travelers.Entities)

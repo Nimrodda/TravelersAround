@@ -32,7 +32,6 @@ namespace TravelersAround.Service.Mappers
             msgViewPagedList.HasPrevious = travelerMessages.HasPrevious;
             msgViewPagedList.TotalEntitiesCount = travelerMessages.TotalEntitiesCount;
             msgViewPagedList.TotalPageCount = travelerMessages.TotalPageCount;
-            msgViewPagedList.Entities = new List<MessageView>();
             if (travelerMessages != null)
             {
                 foreach (TravelerMessage travMsg in travelerMessages.Entities)

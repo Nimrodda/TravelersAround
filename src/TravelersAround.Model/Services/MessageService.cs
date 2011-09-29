@@ -25,7 +25,7 @@ namespace TravelersAround.Model.Services
             if (traveler.HasMessagesInFolder(folder))
                 return traveler.Messages.Where(m => m.FolderID == (int)folder).ToPagedList(index, count);
             else
-                return null;
+                return new PagedList<TravelerMessage>();
         }
 
         public void SendMessage(string subject, string body, Guid authorID, Guid[] recipientIDs)

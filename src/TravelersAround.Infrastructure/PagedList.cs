@@ -19,6 +19,11 @@ namespace TravelersAround.Infrastructure
         public int TotalPageCount { get; set; }
         [DataMember]
         public IList<TSource> Entities { get; set; }
+
+        public PagedList()
+        {
+            Entities = new List<TSource>();
+        }
     }
 
     public static class PagedListExtensions
