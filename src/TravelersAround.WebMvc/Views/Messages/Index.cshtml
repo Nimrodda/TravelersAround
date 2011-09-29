@@ -5,93 +5,118 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Model.Folder</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Send")
-    @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
-    @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
-    @Html.ActionLink("Trash", "Index", new { folder = "Trash" })
-</p>
+<div class="toolbar">
+    <a href="@Url.Action("Send")" title="Send a new message">Create New</a>
+</div>
+
 <p>
     @Html.ValidationSummary(true)
     @Html.ValidationMessage("MessageIDs")
 </p>
-@using (Html.BeginForm("Delete", "Messages"))
-{
-    <input type="hidden" value="@Model.Folder" name="Folder" />
-    <input type="hidden" value="@Model.Page" name="Page" />
-    <table>
-        <tr>
-            <th>
-                <input type="submit" value="Delete" />
-            </th>
-            <th>
-                Subject
-            </th>
-            <th>
-                @if (Model.Folder.Equals("Sent", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    @: Recipient
-                }
-                else
-                {
-                    @: From
-                }
-            </th>
-            <th>
-                Sent Date
-            </th>
-        </tr>
 
-        @foreach (var message in Model.MessagesList.Entities)
+<div class="main-area">
+    <div class="side-menu">
+        <div>
+            @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
+        </div>
+        <div>
+            @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
+        </div>
+        <div>
+            @Html.ActionLink("Trash", "Index", new { folder = "Trash" })
+        </div>
+    </div>
+    <div class="list">
+        @if (Model.MessagesList.TotalEntitiesCount > 0)
         {
-            <tr>
-                <td>
-                    <input type="checkbox" value="@message.MessageID" name="MessageIDs" />
-                </td>
-                <td>
-                    @if (!message.IsRead)
+            using (Html.BeginForm("Delete", "Messages"))
+            {
+            <input type="hidden" value="@Model.Folder" name="Folder" />
+            <input type="hidden" value="@Model.Page" name="Page" />
+            <table>
+                <colgroup></colgroup>
+                <colgroup id="subject"></colgroup>
+                <colgroup id="from-to"></colgroup>
+                <colgroup id="send-date"></colgroup>
+                <tr>
+                    <th>
+                        <input type="submit" value="Delete" />
+                    </th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        @if (Model.Folder.Equals("Sent", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            @: Recipient
+                        }
+                        else
+                        {
+                            @: From
+                        }
+                    </th>
+                    <th>
+                        Sent Date
+                    </th>
+                </tr>
+
+                @foreach (var message in Model.MessagesList.Entities)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="@message.MessageID" name="MessageIDs" />
+                        </td>
+                        <td>
+                            @if (!message.IsRead)
+                            {
+                                <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })</strong>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })
+                            }
+                        </td>
+                        <td>
+                            @if (!Model.Folder.Equals("Sent", StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                @message.SenderName
+                            }
+                            else
+                            {
+                                @message.RecipientsNames.FirstOrDefault()
+                            }
+                        </td>
+                        <td>
+                            @message.SentDate
+                        </td>
+                    </tr>
+                }
+            </table>
+            }
+            if (Model.MessagesList.TotalPageCount > 0)
+            {
+                if (Model.MessagesList.HasPrevious)
+                {
+                    @Html.ActionLink("<", "Index", new { p = Model.Page - 1 })
+                }
+                if (Model.MessagesList.TotalPageCount > 0)
+                {
+                    for (int i = 0; i < Model.MessagesList.TotalPageCount + 1; i++)
                     {
-                        <strong>@Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })</strong>
+                        @Html.ActionLink((i + 1).ToString(), "Index", new { p = i })      
                     }
-                    else
-                    {
-                        @Html.ActionLink(message.Subject, "Read", new { id = message.MessageID, returnToFolder = Model.Folder })
-                    }
-                </td>
-                <td>
-                    @if (Model.Folder.Equals("Inbox", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        @message.SenderName
-                    }
-                    else
-                    {
-                        @message.RecipientsNames.FirstOrDefault()
-                    }
-                </td>
-                <td>
-                    @message.SentDate
-                </td>
-            </tr>
+                }
+                if (Model.MessagesList.HasNext)
+                {
+                    @Html.ActionLink(">", "Index", new { p = Model.Page + 1 })
+                }
+            }
         }
-    </table>
-}
-@if (Model.MessagesList.TotalPageCount > 0)
-{
-    if (Model.MessagesList.HasPrevious)
-    {
-        @Html.ActionLink("<", "Index", new { p = Model.Page - 1 })
-    }
-    if (Model.MessagesList.TotalPageCount > 0)
-    {
-        for (int i = 0; i < Model.MessagesList.TotalPageCount + 1; i++)
+        else
         {
-            @Html.ActionLink((i + 1).ToString(), "Index", new { p = i })      
+            <p>You don't have any messages in this folder</p>
         }
-    }
-    if (Model.MessagesList.HasNext)
-    {
-        @Html.ActionLink(">", "Index", new { p = Model.Page + 1 })
-    }
-}
+    </div>
+</div>

@@ -8,31 +8,32 @@
 <h2>Friends List</h2>
 
 <p>
-    
+    @Html.ValidationSummary()
 </p>
-@if (Model.FriendsList.Entities.Count > 0)
+@if (Model.FriendsList.TotalEntitiesCount > 0)
 {
-    
-    foreach (var friend in Model.FriendsList.Entities)
+    <table>
+    @foreach (var traveler in Model.FriendsList.Entities)
     {
-        <div class="traveler_record">
-            <div >
-                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = friend.TravelerID })" alt="@String.Concat(friend.Firstname, " ", friend.Lastname)" />
-            </div>
-            <div>
-                <p>@friend.Firstname @friend.Lastname</p>
-                <p>@(DateTime.Now.Year-DateTime.Parse(friend.Birthdate).Year), @friend.Gender</p>
-            </div>
-            <div>
-                @friend.StatusMessage
-            </div>
-            <div>
-                @friend.IsAvailable
-                @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = friend.TravelerID }) |
-                @Html.ActionLink("Remove", "Remove", new { id = friend.TravelerID })
-            </div>
-        </div>
+        <tr>
+            <td>
+                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+            </td>
+            <td>
+                <p>@traveler.Firstname @traveler.Lastname</p>
+                <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+                <p>@traveler.City, @traveler.Country</p>
+            </td>
+            <td>
+                @traveler.StatusMessage
+            </td>
+            <td>
+                @Html.ActionLink("Send Message", "Send", new { controller = "Messages", id = traveler.TravelerID })
+                @Html.ActionLink("Remove", "Remove", new { id = traveler.TravelerID })
+            </td>
+        </tr>
     }
+    </table>
 }
 else
 {

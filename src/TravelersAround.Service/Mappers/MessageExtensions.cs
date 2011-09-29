@@ -21,7 +21,7 @@ namespace TravelersAround.Service.Mappers
                 SentDate = travelerMessage.Message.SentDate.ToString(),
                 Subject = travelerMessage.Message.Subject,
                 RecipientsNames = travelerMessage.Message.Recipients.Where(x => x.TravelerID != travelerMessage.TravelerID).Select(t => t.Traveler.Fullname).ToList(),
-                SenderID = travelerMessage.Message.AuthorID.ToString()
+                SenderID = travelerMessage.Message.Author.TravelerID.ToString()
             };
         }
 

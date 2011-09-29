@@ -20,6 +20,7 @@ namespace TravelersAround.WebMvc.Controllers
         {
             FriendsListView model = _taService.ListFriends(p * PAGE_SIZE, PAGE_SIZE);
             model.Page = p;
+            ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
         }
 
@@ -28,12 +29,14 @@ namespace TravelersAround.WebMvc.Controllers
             FriendsListView model = _taService.AddFriend(id);
             if (model.Success)
             {
+                TempData["NotificationMessage"] = "Traveler has been added to your friends list";
                 return RedirectToAction("Index");
             }
             else
             {
                 ModelState.AddModelError("", model.ErrorMessage);
             }
+            model = _taService.ListFriends(0, PAGE_SIZE);
             return View("Index", model);
         }
 
@@ -42,6 +45,7 @@ namespace TravelersAround.WebMvc.Controllers
             FriendsListView model = _taService.RemoveFriend(id);
             if (model.Success)
             {
+                TempData["NotificationMessage"] = "Traveler has been removed from your friends list";
                 return RedirectToAction("Index");
             }
             else

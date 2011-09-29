@@ -13,6 +13,9 @@
     <div class="display-label">From</div>
     <div class="display-field">@Model.Message.SenderName</div>
 
+    <div class="display-label">To</div>
+    <div class="display-field">@Model.Message.RecipientsNames.FirstOrDefault()</div>
+
     <div class="display-label">Sent Date</div>
     <div class="display-field">@Model.Message.SentDate</div>
 
@@ -25,7 +28,7 @@
 
 </fieldset>
 <p>
-    @Html.ActionLink("Reply", "Send", new { id = Model.Message.SenderName }) |
+    @Html.ActionLink("Reply", "Send", new { id = Model.Message.SenderID }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.Message.MessageID }) |
     @Html.ActionLink("Back to List", "Index", new { folder = Model.ReturnToFolder ?? "Inbox" })
 </p>

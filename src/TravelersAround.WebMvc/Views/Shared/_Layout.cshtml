@@ -14,25 +14,27 @@
     <div class="page">
 
         <div id="header">
-            <div id="title">
+            <div id="logo">
                 <a href="@Url.Action("Index", "Home")" ><img src="@Url.Content("~/Content/img/logo.png")" alt="TravelersAround LOGO" /></a>
             </div>
 
             <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
+                @if (!Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("logon"))
+                {
+                    @Html.Partial("_LogOnPartial")
+                }
             </div>
 
             <div id="menucontainer">
 
                 <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Find travelers around you", "Index", "Search")</li>
                         <li>@Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" })</li>
                         <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
                         <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+                        <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
                     }
                 </ul>
 
@@ -44,8 +46,11 @@
                 <span class="notification_message">@ViewBag.NotificationMessage</span>
             </div>
             @RenderBody()
-            <div id="footer">
-            </div>
+        </div>
+        <div id="footer">
+            <ul>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+            </ul>
         </div>
     </div>
 </body>

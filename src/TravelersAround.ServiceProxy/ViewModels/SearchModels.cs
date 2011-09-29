@@ -12,6 +12,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
     public class SearchView : BaseView
     {
         public PagedList<TravelerView> Travelers { get; set; }
+        [DisplayName("Include offline travelers")]
         public bool IncludeOfflineTravelers { get; set; }
         public string IPAddress { get; set; }
         public double Latitude { get; set; }

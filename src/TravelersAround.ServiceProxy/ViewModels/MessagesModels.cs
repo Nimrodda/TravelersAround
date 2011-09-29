@@ -31,6 +31,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public string Body { get; set; }
 
         [Required]
+        [DisplayNameAttribute("To")]
         public string RecipientID { get; set; }
     }
 

@@ -36,6 +36,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public string Birthdate { get; set; }
 
         [Required]
+        [DisplayName("Staus message")]
         public string StatusMessage { get; set; }
 
         [Required]
@@ -43,6 +44,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public string Gender { get; set; }
 
         [Required]
+        [DisplayName("Available?")]
         public bool IsAvailable { get; set; }
     }
    

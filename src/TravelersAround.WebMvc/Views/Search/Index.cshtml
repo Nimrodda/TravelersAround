@@ -5,15 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Travelers around you right now</h2>
+<h2>Travelers around you</h2>
 
 <div>
     @using (Html.BeginForm())
     {
         
         @Html.ValidationSummary(true)
-        <fieldset>
-            <legend>Define your search</legend>
 
             <div class="editor-field">
                 @Html.EditorFor(model => model.IncludeOfflineTravelers)
@@ -21,39 +19,37 @@
                 @Html.ValidationMessageFor(model => model.IncludeOfflineTravelers)
             </div>
 
-            <p>
+            <div>
                 <input type="submit" value="Search" />
-            </p>
-        </fieldset>
+            </div>
     }
 </div>
-<div>
-    <ul>
+<div class="main-area">
+    @if (Model.Travelers.Entities.Count == 0)
+    {
+        <p>It seems that currently now there are no travelers around you</p>
+    }
+    <table>
     @foreach (var traveler in Model.Travelers.Entities)
     {
-        <li>
-            <div class="traveler_record">
-                <div>
-                    <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
-                </div>
-                <div>
-                    <p>@traveler.Firstname @traveler.Lastname</p>
-                    <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
-                    <p>@traveler.City, @traveler.Country</p>
-                </div>
-                <div>
-                    @traveler.StatusMessage
-                </div>
-                <div>
-                    @traveler.IsAvailable
-                    <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">
-                        <img src="@Url.Content("~/ContentResult/img/icons/plus.jpg")" alt="Add to friends list" /></a>
-                    <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">
-                        <img src="@Url.Content("~/ContentResult/img/icons/envelope.jpg")" alt="Send a message" /></a>
-                </div>
-            </div>
-        </li>
+        <tr>
+            <td>
+                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+            </td>
+            <td>
+                <p>@traveler.Firstname @traveler.Lastname</p>
+                <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+                <p>@traveler.City, @traveler.Country</p>
+            </td>
+            <td>
+                @traveler.StatusMessage
+            </td>
+            <td>
+                <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">+</a>
+                <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">Send message</a>
+            </td>
+        </tr>
     }
-    </ul>
+    </table>
 </div>
 

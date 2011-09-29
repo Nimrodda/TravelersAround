@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\anonymous.jpg" />
+    <Content Include="Content\img\icons\accessories-text-editor-7.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\TravelersAround.js" />
