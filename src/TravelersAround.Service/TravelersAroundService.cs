@@ -94,7 +94,7 @@ namespace TravelersAround.Service
                 }
                 else
                 {
-                    response.ErrorMessage = String.Format(R.String.ErrorMessages.FriendListEmpty, traveler.TravelerID);
+                    response.ResponseMessage = String.Format(R.String.ErrorMessages.FriendListEmpty, traveler.TravelerID);
                 }
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace TravelersAround.Service
             FolderType folderType;
             if (!Enum.TryParse<FolderType>(folderName, out folderType))
             {
-                response.ErrorMessage = String.Format(R.String.ErrorMessages.InvalidFolderName, folderName);
+                response.ResponseMessage = String.Format(R.String.ErrorMessages.InvalidFolderName, folderName);
             }
             else
             {
@@ -217,7 +217,7 @@ namespace TravelersAround.Service
                 _repository.Save<Traveler>(traveler);
                 _repository.Commit();
                 response.Profile = traveler.ConvertToTravelerView();
-                response.MarkSuccess();
+                response.MarkSuccess(R.String.SuccessMessages.SuccessProfileUpdate);
             }
             catch (Exception ex)
             {
@@ -331,7 +331,7 @@ namespace TravelersAround.Service
 
         public ProfilePictureUploadResponse UploadProfilePicture(Stream pictureStream)
         {
-            ProfilePictureUploadResponse response = new ProfilePictureUploadResponse { ErrorMessage = R.String.ErrorMessages.InvalidImageFormatException };
+            ProfilePictureUploadResponse response = new ProfilePictureUploadResponse { ResponseMessage = R.String.ErrorMessages.InvalidImageFormatException };
             try
             {
                 Traveler traveler = _repository.FindBy<Traveler>(t => t.TravelerID == _currentTravelerId);

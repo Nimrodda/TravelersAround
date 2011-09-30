@@ -22,7 +22,7 @@ namespace TravelersAround.WebMvc.Controllers
             ProfileDisplayView model = _taService.DisplayProfile();
             if (!model.Success)
             {
-                ModelState.AddModelError("", model.ErrorMessage);
+                ModelState.AddModelError("", model.ResponseMessage);
             }
             ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
@@ -33,7 +33,11 @@ namespace TravelersAround.WebMvc.Controllers
         {
             ProfileUpdateView model = _taService.DisplayProfile().ConvertToProfileUpdateView();
             ViewBag.NotificationMessage = TempData["NotificationMessage"];
-            return View(model);
+            
+            if (IsAsyncRequest) 
+                return Json(model, JsonRequestBehavior.AllowGet);
+            else 
+                return View(model);
         }
 
         [HttpPost]
@@ -44,12 +48,13 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _taService.UpdateProfile(model);
                 if (model.Success)
                 {
+                    if (IsAsyncRequest) return Json(model);
                     TempData["NotificationMessage"] = R.String.SuccessMessages.SuccessProfileUpdate;
                     return RedirectToAction("Edit");
                 }
                 else
                 {
-                    ModelState.AddModelError("", model.ErrorMessage);
+                    ModelState.AddModelError("", model.ResponseMessage);
                 }
             }
             return View(model);
@@ -83,7 +88,7 @@ namespace TravelersAround.WebMvc.Controllers
                 }
                 else
                 {
-                    errorMessage = model.ErrorMessage;
+                    errorMessage = model.ResponseMessage;
                 }
             }
             ModelState.AddModelError("uploadedFile", errorMessage);

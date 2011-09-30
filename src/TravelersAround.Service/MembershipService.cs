@@ -72,7 +72,7 @@ namespace TravelersAround.Service
             }
             catch (MembershipCreationFailedException ex)
             {
-                response.ErrorMessage = R.String.ErrorMessages.ResourceManager.GetString(ex.Message);
+                response.ResponseMessage = R.String.ErrorMessages.ResourceManager.GetString(ex.Message);
             }
             catch (Exception ex)
             {
@@ -111,7 +111,7 @@ namespace TravelersAround.Service
                 }
                 else
                 {
-                    response.ErrorMessage = R.String.ErrorMessages.InvalidCredentials;
+                    response.ResponseMessage = R.String.ErrorMessages.InvalidCredentials;
                 }
             }
             catch (Exception ex)
@@ -146,7 +146,7 @@ namespace TravelersAround.Service
                 }
                 else
                 {
-                    response.ErrorMessage = R.String.ErrorMessages.InvalidAPIKey;
+                    response.ResponseMessage = R.String.ErrorMessages.InvalidAPIKey;
                 }
             }
             catch (Exception ex)

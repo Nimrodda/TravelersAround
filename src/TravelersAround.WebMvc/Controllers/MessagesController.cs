@@ -51,7 +51,7 @@ namespace TravelersAround.WebMvc.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", model.ErrorMessage);
+                    ModelState.AddModelError("", model.ResponseMessage);
                 }
             }
             model.RecipientID = recipientId;
@@ -64,7 +64,7 @@ namespace TravelersAround.WebMvc.Controllers
             model.ReturnToFolder = returnToFolder;
             if (!model.Success)
             {
-                ModelState.AddModelError("", model.ErrorMessage);
+                ModelState.AddModelError("", model.ResponseMessage);
             }
             
             return View(model);
@@ -92,7 +92,7 @@ namespace TravelersAround.WebMvc.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", messageListView.ErrorMessage);
+                    ModelState.AddModelError("", messageListView.ResponseMessage);
                 }
             }
             messageListView = _taService.ListMessages(model.Folder, model.Page * PAGE_SIZE, PAGE_SIZE);

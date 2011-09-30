@@ -34,7 +34,7 @@ namespace TravelersAround.WebMvc.Controllers
             }
             else
             {
-                ModelState.AddModelError("", model.ErrorMessage);
+                ModelState.AddModelError("", model.ResponseMessage);
             }
             model = _taService.ListFriends(0, PAGE_SIZE);
             return View("Index", model);
@@ -50,7 +50,7 @@ namespace TravelersAround.WebMvc.Controllers
             }
             else
             {
-                ModelState.AddModelError("", model.ErrorMessage);
+                ModelState.AddModelError("", model.ResponseMessage);
             }
             return View("Index", model);
         }

@@ -14,7 +14,7 @@ namespace TravelersAround.Test
         public void TestMethod1()
         {
             SendMessageResponse res = new SendMessageResponse();
-            Assert.IsNotNull(res.ErrorMessage);
+            Assert.IsNotNull(res.ResponseMessage);
         }
     }
 }

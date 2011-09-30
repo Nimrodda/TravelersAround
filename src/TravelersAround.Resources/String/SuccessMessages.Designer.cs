@@ -97,7 +97,7 @@ namespace R.String {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profile update save successfully!.
+        ///   Looks up a localized string similar to Profile updated successfully!.
         /// </summary>
         public static string SuccessProfileUpdate {
             get {

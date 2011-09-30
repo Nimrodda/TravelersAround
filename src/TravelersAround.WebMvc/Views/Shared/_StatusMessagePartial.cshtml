@@ -1,0 +1,14 @@
+﻿<div id="status-message-container">
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { onsubmit = "javascript:return statusMessageAsyncSubmit(this);" }))
+    {
+        <div class="editor-label">
+            <label for="StatusMessage">Your current status message:</label>
+        </div>
+        <div class="editor-field">
+            <textarea name="StatusMessage" rows="2" cols="1"></textarea>
+        </div>
+        <div class="submit-button">
+            <input type="submit" value="Post" />
+        </div>
+    }
+</div>

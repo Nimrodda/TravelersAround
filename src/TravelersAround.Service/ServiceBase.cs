@@ -17,7 +17,7 @@ namespace TravelersAround.Service
         }
 
         /// <summary>
-        /// Sets the response ErrorMessage if a key found by the exception type name in R.ErrorMessages
+        /// Sets the response Message if a key found by the exception type name in R.ErrorMessages
         /// otherwise, logs the exception
         /// </summary>
         /// <param name="exception"></param>
@@ -29,7 +29,7 @@ namespace TravelersAround.Service
             {
                 _log.Error(response, exception);
             }
-            else response.ErrorMessage = errorMessage;
+            else response.ResponseMessage = errorMessage;
         }
     }
 }

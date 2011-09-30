@@ -13,18 +13,18 @@ namespace TravelersAround.DataContracts
         public bool Success { get; set; }
 
         [DataMember]
-        public string ErrorMessage { get; set; }
+        public string ResponseMessage { get; set; }
 
         public ResponseBase()
         {
             Success = false;
-            ErrorMessage = "An error has occured while processing your request";
+            ResponseMessage = "An error has occured while processing your request";
         }
 
-        public void MarkSuccess()
+        public void MarkSuccess(string responseMessage = null)
         {
             Success = true;
-            ErrorMessage = null;
+            ResponseMessage = responseMessage;
         }
     }
 

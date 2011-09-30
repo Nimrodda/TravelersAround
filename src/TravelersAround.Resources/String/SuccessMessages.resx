@@ -130,6 +130,6 @@
     <value>Message sent successfully!</value>
   </data>
   <data name="SuccessProfileUpdate" xml:space="preserve">
-    <value>Profile update save successfully!</value>
+    <value>Profile updated successfully!</value>
   </data>
 </root>

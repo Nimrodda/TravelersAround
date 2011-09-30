@@ -53,7 +53,7 @@ namespace TravelersAround.WebMvc.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", model.ErrorMessage);
+                    ModelState.AddModelError("", model.ResponseMessage);
                 }
             }
 
@@ -88,7 +88,7 @@ namespace TravelersAround.WebMvc.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", model.ErrorMessage);
+                    ModelState.AddModelError("", model.ResponseMessage);
                 }
             }
 

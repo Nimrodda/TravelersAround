@@ -27,7 +27,7 @@ namespace TravelersAround.WebMvc.Controllers
             
             if (!model.Success)
             {
-                ModelState.AddModelError("", model.ErrorMessage);
+                ModelState.AddModelError("", model.ResponseMessage);
             }
 
             return View(model);

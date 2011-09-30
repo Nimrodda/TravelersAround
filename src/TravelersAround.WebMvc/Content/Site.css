@@ -373,6 +373,10 @@ div#logo img
     width: 6em;
 }
 
+.submit-button
+{
+}
+
 /* Styles for specific editors and display helpers
 -----------------------------------------------------*/
 
@@ -430,6 +434,14 @@ fieldset.send-message input[type="text"]
 .toolbar
 {
     padding-left:85px;
+}
+
+/* Search
+------------*/
+
+#status-message-container textarea
+{
+    min-height:50px;
 }
 
 /* Icons
