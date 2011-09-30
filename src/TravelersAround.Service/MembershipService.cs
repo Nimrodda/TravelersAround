@@ -11,6 +11,7 @@ using TravelersAround.Model.Entities;
 using TravelersAround.Model.Factories;
 using TravelersAround.Model.Services;
 using TravelersAround.Model.Exceptions;
+using TravelersAround.Service.Mappers;
 using Ninject;
 using log4net;
 
@@ -107,6 +108,7 @@ namespace TravelersAround.Service
 
                     response.NewMessagesCount = traveler.Messages.Count(m => m.IsRead == false && m.FolderID == (int)FolderType.Inbox);
                     response.APIKey = travelerApiKey;
+                    response.Traveler = traveler.ConvertToTravelerView();
                     response.MarkSuccess();
                 }
                 else

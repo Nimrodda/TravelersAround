@@ -285,6 +285,11 @@ div#logo img
     height:80px;
 }
 
+#status-message-container
+{
+    padding-left:150px;
+}
+
 #logindisplay
 {
     font-size:1.1em;

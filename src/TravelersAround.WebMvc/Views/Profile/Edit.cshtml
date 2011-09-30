@@ -23,7 +23,8 @@
     </div>
 }
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <div class="editor-label">
@@ -46,7 +47,15 @@
             @Html.LabelFor(model => model.Birthdate)
         </div>
         <div class="editor-field">
-            <input type="text" name="Birthdate" value="@DateTime.Parse(Model.Birthdate).ToShortDateString()" />
+            @{ 
+                DateTime temp;
+                string birthdate = "";
+                if (DateTime.TryParse(Model.Birthdate, out temp))
+                {
+                    birthdate = temp.ToShortDateString();
+                }
+            }
+            <input type="text" name="Birthdate" value="@birthdate" />
             @Html.ValidationMessageFor(model => model.Birthdate)
         </div>
 

@@ -33,6 +33,8 @@ namespace TravelersAround.DataContracts.Views
         public string Country { get; set; }
         [DataMember]
         public string City { get; set; }
+        [DataMember]
+        public int UnderMessages { get; set; }
 
 
     }
