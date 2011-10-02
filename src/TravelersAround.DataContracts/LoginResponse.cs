@@ -15,6 +15,6 @@ namespace TravelersAround.DataContracts
         [DataMember]
         public int NewMessagesCount { get; set; }
         [DataMember]
-        public TravelerView Traveler { get; set; }
+        public TravelerView Profile { get; set; }
     }
 }

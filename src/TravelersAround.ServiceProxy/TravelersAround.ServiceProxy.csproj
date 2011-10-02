@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BootStraper.cs" />
     <Compile Include="CompareAttribute.cs" />
     <Compile Include="DropDownListItem.cs" />
     <Compile Include="ITravelersAroundServiceFacade.cs" />

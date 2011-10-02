@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using TravelersAround.ServiceProxy;
+using TravelersAround.DataContracts.Views;
+using AutoMapper;
 
 namespace TravelersAround.ServiceProxy.ViewModels
 {
@@ -41,8 +43,14 @@ namespace TravelersAround.ServiceProxy.ViewModels
         public bool RememberMe { get; set; }
 
         public string ApiKey { get; internal set; }
+        public TravelerView Profile { get; internal set; }
 
         public int NewMessagesCount { get; internal set; }
+
+        public ProfileDisplayView MapToProfileDisplayView()
+        {
+            return Mapper.Map<LoginView, ProfileDisplayView>(this);
+        }
     }
 
 

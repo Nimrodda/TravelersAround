@@ -108,7 +108,7 @@ namespace TravelersAround.Service
 
                     response.NewMessagesCount = traveler.Messages.Count(m => m.IsRead == false && m.FolderID == (int)FolderType.Inbox);
                     response.APIKey = travelerApiKey;
-                    response.Traveler = traveler.ConvertToTravelerView();
+                    response.Profile = traveler.ConvertToTravelerView();
                     response.MarkSuccess();
                 }
                 else

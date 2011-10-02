@@ -26,8 +26,7 @@ namespace TravelersAround.Service.Mappers
                 Longtitude = traveler.Longtitude,
                 IsOnline = traveler.IsOnline,
                 City = traveler.City,
-                Country = traveler.Country,
-                UnderMessages = traveler.Messages.Count(t => t.FolderID == (int)FolderType.Inbox && !t.IsRead)
+                Country = traveler.Country
                 
             };
         }
