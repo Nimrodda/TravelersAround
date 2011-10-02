@@ -5,25 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_StatusMessagePartial")
-
 <h2>Travelers around you</h2>
 
-<div>
+@Html.Partial("_StatusMessagePartial")
+
+<div class="rounded-box">
     @using (Html.BeginForm())
     {
-        
+        <h3>Customize the search results by adding the following filters</h3>        
         @Html.ValidationSummary(true)
+            <ul>
+                <li class="editor-field">
+                    @Html.EditorFor(model => model.IncludeOfflineTravelers)
+                    @Html.LabelFor(model => model.IncludeOfflineTravelers)
+                    @Html.ValidationMessageFor(model => model.IncludeOfflineTravelers)
+                </li>
 
-            <div class="editor-field">
-                @Html.EditorFor(model => model.IncludeOfflineTravelers)
-                @Html.LabelFor(model => model.IncludeOfflineTravelers)
-                @Html.ValidationMessageFor(model => model.IncludeOfflineTravelers)
-            </div>
-
-            <div>
-                <input type="submit" value="Search" />
-            </div>
+                <li class="editor-field">
+                    <input class="submit-button" type="submit" value="Search" />
+                </li>
+            </ul>
     }
 </div>
 <div class="main-area">
@@ -31,27 +32,25 @@
     {
         <p>It seems that currently now there are no travelers around you</p>
     }
-    <table>
+    <ul id="search-results" class="rounded-box">
     @foreach (var traveler in Model.Travelers.Entities)
     {
-        <tr>
-            <td>
-                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
-            </td>
-            <td>
+        <li>
+            <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+            <div class="traveler-info">
                 <p>@traveler.Firstname @traveler.Lastname</p>
                 <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
                 <p>@traveler.City, @traveler.Country</p>
-            </td>
-            <td>
-                @traveler.StatusMessage
-            </td>
-            <td>
+            </div>
+            <div class="traveler-statusmsg">
+                <p>@traveler.StatusMessage</p>
+            </div>
+            <div class="search-buttons">
                 <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">+</a>
                 <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">Send message</a>
-            </td>
-        </tr>
+            </div>
+        </li>
     }
-    </table>
+    </ul>
 </div>
 

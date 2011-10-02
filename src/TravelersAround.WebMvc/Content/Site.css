@@ -84,7 +84,7 @@ ul li
 page width. Or, you can specify an exact pixel width. */
 .page
 {
-    width:900px;
+    width:940px;
 	margin:0px auto;
 	text-align:left;
 	
@@ -99,7 +99,6 @@ page width. Or, you can specify an exact pixel width. */
     float: left;
     width: 100%;
     padding-left:30;
-    margin-bottom:50px;
     margin-top:20px;
 }
 
@@ -180,6 +179,7 @@ ul#menu li a:hover
 {
     background-color: #99CCFF;
     text-decoration: none;
+    color: White;
 }
 
 ul#menu li a:active
@@ -202,6 +202,7 @@ fieldset
     border:1px solid #ddd;
     padding:0 1.4em 1.4em 1.4em;
     margin:0 0 1.5em 0;
+    border-radius:15px;
 }
 
 legend 
@@ -234,6 +235,7 @@ input[type="password"]
 table 
 {
   border: solid 1px #e8eef4;
+  
   border-collapse: collapse;
 }
 
@@ -286,13 +288,7 @@ div#logo img
 
 #status-message-container
 {
-    background-color: #e8eef4;
-    border-radius: 15px 15px 15px 15px;
     margin-left: 150px;
-    padding-top: 5px;
-    padding-bottom:10px;
-    padding-left:25px;
-    padding-right:25px;
     width: 406px;
 }
 
@@ -304,15 +300,19 @@ div#logo img
 .rounded-box
 {
     background-color:#e8eef4;
+    border:1px solid #ddd;
     margin-left:20px;
     padding:5px;
     border-radius:15px;
+    padding: 20px;
+    margin:10px 0px 10px 0px;
 }
 
 #content-container
 {
     background-color:White;
 }
+
 #logindisplay
 {
     font-size:1.1em;
@@ -404,7 +404,19 @@ div#logo img
 
 .submit-button
 {
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #5B74A8;
+    border: 0 none;
+    color: White;
 }
+
+.submit-button:active
+{
+    background-color: #ADADAD;
+}    
 
 /* Styles for specific editors and display helpers
 -----------------------------------------------------*/
@@ -426,7 +438,7 @@ fieldset.send-message input[type="text"]
 
 .side-menu
 {
-    width:100px;
+    width:50px;
     float:inherit;
 }
 
@@ -473,6 +485,35 @@ fieldset.send-message input[type="text"]
     min-height:50px;
 }
 
+ul#search-results li
+{
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #ddd;
+    margin-bottom:10px;
+}
+
+ul#search-results li:hover
+{
+    background-color: #CFDCE9;
+}
+
+ul#search-results div
+{
+    display:inline-block;
+    padding-left:10px;
+}
+
+ul#search-results div.traveler-info
+{
+    
+}
+ul#search-results div.traveler-statusmsg
+{
+    width: 390px;
+    text-align:left;
+    vertical-align:top;   
+}
 /* Icons
 -----------*/
 

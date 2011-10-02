@@ -12,73 +12,75 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend></legend>
+    <div class="rounded-box">
+        <fieldset>
+            <legend></legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ConfirmPassword)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ConfirmPassword)
-            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ConfirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Firstname)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Firstname)
-            @Html.ValidationMessageFor(model => model.Firstname)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Firstname)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Firstname)
+                @Html.ValidationMessageFor(model => model.Firstname)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Lastname)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Lastname)
-            @Html.ValidationMessageFor(model => model.Lastname)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Lastname)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Lastname)
+                @Html.ValidationMessageFor(model => model.Lastname)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Birthdate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Birthdate)
-            @Html.ValidationMessageFor(model => model.Birthdate)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Birthdate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Birthdate)
+                @Html.ValidationMessageFor(model => model.Birthdate)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gender)
-        </div>
-        <div class="editor-field">
-            @Html.RadioButtonFor(model => model.Gender, "M", new { id = "gender_male" })
-            <label for="gender_male">Male</label>
-            @Html.RadioButtonFor(model => model.Gender, "F", new { id = "gender_female" })
-            <label for="gender_female">Female</label>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Gender)
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.Gender, "M", new { id = "gender_male" })
+                <label for="gender_male">Male</label>
+                @Html.RadioButtonFor(model => model.Gender, "F", new { id = "gender_female" })
+                <label for="gender_female">Female</label>
             
             
-            @Html.ValidationMessageFor(model => model.Gender)
-        </div>
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+            <p>
+                <input class="submit-button" type="submit" value="Create" />
+            </p>
+        </fieldset>
+    </div>
 }
 

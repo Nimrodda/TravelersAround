@@ -17,17 +17,17 @@
 </p>
 
 <div class="main-area">
-    <div class="side-menu">
-        <div>
+    <ul class="side-menu rounded-box">
+        <li>
             @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
-        </div>
-        <div>
+        </li>
+        <li>
             @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
-        </div>
-        <div>
+        </li>
+        <li>
             @Html.ActionLink("Trash", "Index", new { folder = "Trash" })
-        </div>
-    </div>
+        </li>
+    </ul>
     <div class="list">
         @if (Model.MessagesList.TotalEntitiesCount > 0)
         {
