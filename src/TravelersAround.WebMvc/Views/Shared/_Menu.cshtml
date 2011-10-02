@@ -1,0 +1,10 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <ul id="menu">
+        <li>@Html.ActionLink("Search", "Index", "Search", null, new { @class = "search-icon" })</li>
+        <li>@Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" }, new { @class = "mail-icon" })</li>
+        <li>@Html.ActionLink("Friends", "Index", "Friends", null, new { @class = "friends-icon" })</li>
+        <li>@Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "profile-icon" })</li>
+        <li>@Html.ActionLink("Logout", "LogOff", "Account", null, new { @class = "logout-icon" })</li>
+    </ul>
+}

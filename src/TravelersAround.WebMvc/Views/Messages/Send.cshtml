@@ -12,54 +12,53 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <fieldset class="send-message">
-        <legend></legend>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RecipientID)
-        </div>
-        <div class="editor-label">
-            @if (Model.FriendsDropDownList != null)
-            {
-                <select class="editor-field" name="RecipientID">
-                @foreach (var item in Model.FriendsDropDownList)
+    <div class="rounded-box">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RecipientID)
+            </div>
+            <div class="editor-label">
+                @if (Model.FriendsDropDownList != null)
                 {
-                    <option value="@item.Value" @if (item.Value == Model.RecipientID) { <text>selected="selected"</text> }>@item.Name</option>
+                    <select class="editor-field" name="RecipientID">
+                    @foreach (var item in Model.FriendsDropDownList)
+                    {
+                        <option value="@item.Value" @if (item.Value == Model.RecipientID) { <text>selected="selected"</text> }>@item.Name</option>
+                    }
+                    </select>
                 }
-                </select>
-            }
-            else if (!String.IsNullOrEmpty(Model.RecipientID))
-            {
-                @Html.HiddenFor(model => model.RecipientID)
-                @Model.RecipientName
-            }
-            else
-            {
-                @: Friend list is empty or invalid traveler ID
-            }
-            @Html.ValidationMessageFor(model => model.RecipientID)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Subject)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Subject)
-            @Html.ValidationMessageFor(model => model.Subject)
-        </div>
+                else if (!String.IsNullOrEmpty(Model.RecipientID))
+                {
+                    @Html.HiddenFor(model => model.RecipientID)
+                    @Model.RecipientName
+                }
+                else
+                {
+                    @: Friend list is empty or invalid traveler ID
+                }
+                @Html.ValidationMessageFor(model => model.RecipientID)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Subject)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Subject)
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Body)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Body)
-            @Html.ValidationMessageFor(model => model.Body)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Body)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Body)
+                @Html.ValidationMessageFor(model => model.Body)
+            </div>
 
         
 
-        <p>
-            <input type="submit" value="Send" />
-        </p>
-    </fieldset>
+            <p>
+                <input class="submit-button" type="submit" value="Send" />
+            </p>
+    </div>
 }
 
 <div>

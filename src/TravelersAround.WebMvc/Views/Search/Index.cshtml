@@ -32,25 +32,46 @@
     {
         <p>It seems that currently now there are no travelers around you</p>
     }
-    <ul id="search-results" class="rounded-box">
-    @foreach (var traveler in Model.Travelers.Entities)
+    else
     {
-        <li>
-            <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
-            <div class="traveler-info">
-                <p>@traveler.Firstname @traveler.Lastname</p>
-                <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
-                <p>@traveler.City, @traveler.Country</p>
-            </div>
-            <div class="traveler-statusmsg">
-                <p>@traveler.StatusMessage</p>
-            </div>
-            <div class="search-buttons">
-                <a href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">+</a>
-                <a href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">Send message</a>
-            </div>
-        </li>
+        <ul id="search-results" class="rounded-box">
+        @foreach (var traveler in Model.Travelers.Entities)
+        {
+            <li>
+                <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
+                <div class="traveler-info">
+                    <p>@traveler.Firstname @traveler.Lastname</p>
+                    <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+                    <p>@traveler.City, @traveler.Country</p>
+                </div>
+                <div class="traveler-statusmsg">
+                    <p>@traveler.StatusMessage</p>
+                </div>
+                <div class="search-buttons">
+                    <a class="add-icon" title="Add to friends list" href="@Url.Action("Add", "Friends", new { id = traveler.TravelerID })">Add to friends</a>
+                    <a class="send-message-icon" title="Send a message" href="@Url.Action("Send", "Messages", new { id = traveler.TravelerID })">Send message</a>
+                </div>
+            </li>
+        }
+        </ul>
     }
-    </ul>
+    @if (Model.Travelers.TotalPageCount > 0)
+{
+    if (Model.Travelers.HasPrevious)
+    {
+        @Html.ActionLink("Previous", "Index", new { p = Model.Page - 1 })
+    }
+    if (Model.Travelers.TotalPageCount > 0)
+    {
+        for (int i = 0; i < Model.Travelers.TotalPageCount + 1; i++)
+        {
+            @Html.ActionLink((i + 1).ToString(), "Index", new { p = i })      
+        }
+    }
+    if (Model.Travelers.HasNext)
+    {
+        @Html.ActionLink("Next", "Index", new { p = Model.Page + 1 })
+    }
+}
 </div>
 

@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Read</h2>
+<h2>@Model.Message.Subject</h2>
 
-<fieldset>
-    <legend>MessageView</legend>
-
+<div class="rounded-box">
     <div class="display-label">From</div>
     <div class="display-field">@Model.Message.SenderName</div>
 
@@ -19,17 +17,16 @@
     <div class="display-label">Sent Date</div>
     <div class="display-field">@Model.Message.SentDate</div>
 
-    <div class="display-label">Subject</div>
-    <div class="display-field">@Model.Message.Subject</div>
+</div>
+<div class="rounded-box">
 
-    <div class="display-label">Body</div>
     <div class="display-field">@Model.Message.Body</div>
 
 
-</fieldset>
+</div>
 <p>
     @Html.ActionLink("Reply", "Send", new { id = Model.Message.SenderID }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.Message.MessageID }) |
-    @Html.ActionLink("Back to List", "Index", new { folder = Model.ReturnToFolder ?? "Inbox" })
+    @Html.ActionLink("Back to list", "Index", new { folder = Model.ReturnToFolder ?? "Inbox" })
 </p>
 

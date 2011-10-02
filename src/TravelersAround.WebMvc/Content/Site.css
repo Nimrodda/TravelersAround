@@ -6,13 +6,13 @@
     padding: 0;
     margin:0px 0px;
 	text-align:center;
-    color: #696969;
+    color: black;
 }
 
 a:link
 {
     color: #034af3;
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:visited
 {
@@ -21,11 +21,12 @@ a:visited
 a:hover
 {
     color: #1d60ff;
-    text-decoration: none;
+    
+    text-decoration: underline;
 }
 a:active
 {
-    color: #12eb87;
+    color: #000099;
 }
 
 p, ul
@@ -131,7 +132,16 @@ page width. Or, you can specify an exact pixel width. */
     width:100%;
 }
 
-ul#footer li
+#footer div
+{
+    display: inline-block;
+}
+#footer ul
+{
+    float:right;
+    margin-top:0px;
+}
+#footer ul li
 {
     display:inline;
     list-style: none;
@@ -141,16 +151,15 @@ ul#footer li
 ----------------------------------------------------------*/
 ul#menu
 {
-    border-bottom: 1px #5C87B2 solid;
     padding: 0 0 2px;
     position: relative;
-    margin: 0;
+    margin-top: 102px;
     text-align: left;
 }
 
 ul#menu li
 {
-    display: inline;
+    display: inline-block;
     list-style: none;
 }
 
@@ -165,21 +174,20 @@ ul#menu li#greeting
 
 ul#menu li a
 {
-    padding: 10px 20px;
+    border-radius: 15px;
+    padding: 10px 20px 15px 35px;
     font-weight: bold;
     text-decoration: none;
     line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-    border-top-left-radius:15px 15px;
-    border-top-right-radius:15px 15px;
+    background-color: #E8EEF4;
+    color: black;
 }
 
 ul#menu li a:hover
 {
-    background-color: #99CCFF;
+    background-color: #ADADAD;
     text-decoration: none;
-    color: White;
+    color: white;
 }
 
 ul#menu li a:active
@@ -269,7 +277,6 @@ table th
 
 #menucontainer
 {
-    margin-top:62px;
     float:left;
 }
 
@@ -348,6 +355,8 @@ div#logo img
 .field-validation-error
 {
     color: #ff0000;
+    background: transparent url(/content/img/icons/note.png) no-repeat center left;
+    padding-left: 20px;
 }
 
 .field-validation-valid
@@ -439,7 +448,11 @@ fieldset.send-message input[type="text"]
 .side-menu
 {
     width:50px;
+    margin-right:10px;
     float:inherit;
+    padding-left: 10px;
+    padding-right: 30px;
+    
 }
 
 .side-menu div
@@ -458,9 +471,13 @@ fieldset.send-message input[type="text"]
 /* Messages List
 -----------------------*/
 
-#subject
+ul.side-menu li
 {
-    width:300px;
+    margin-bottom:10px;
+}
+#Subject
+{
+    width:400px;
 }
 
 #from-to
@@ -510,16 +527,101 @@ ul#search-results div.traveler-info
 }
 ul#search-results div.traveler-statusmsg
 {
-    width: 390px;
+    width: 380px;
     text-align:left;
     vertical-align:top;   
 }
 /* Icons
 -----------*/
 
-a[href $='Send'] 
+.add-icon, .logout-icon, .search-icon,
+.trash-icon, .remove-icon, .new-icon, .inbox-icon,
+.sent-icon, .send-message-icon, mail-icon, .edit-icon,
+profile-icon, friends-icon
 {
-   background: transparent url(/content/img/icons/accessories-text-editor-7.png) no-repeat center right;
-   padding:26px;
+    padding-left: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+
+.add-icon
+{
+   
+   background: transparent url(/content/img/icons/add.png) no-repeat center center;
    font-size:0px;
+}
+
+.logout-icon
+{
+   
+   background: transparent url(/content/img/icons/door.png) no-repeat center left;
+}
+
+.search-icon
+{
+    background: transparent url(/content/img/icons/search.png) no-repeat center left;
+    
+}
+
+.trash-icon
+{
+    background: transparent url(/content/img/icons/trash-empty.png) no-repeat center left;
+}
+
+.remove-icon
+{
+    background: transparent url(/content/img/icons/cancel.png) no-repeat center left;
+    font-size:0px;
+}
+
+.new-icon
+{
+    background: transparent url(/content/img/icons/document-empty.png) no-repeat center left;
+}
+
+.inbox-icon
+{
+    background: transparent url(/content/img/icons/mail-inbox.png) no-repeat center left;
+}
+
+.sent-icon, .send-message-icon
+{
+    background: transparent url(/content/img/icons/mail-sent.png) no-repeat center left;
+}
+
+.send-message-icon
+{
+    font-size:0px;
+}
+.mail-icon
+{
+    background: transparent url(/content/img/icons/mail.png) no-repeat center left;
+}
+
+.edit-icon
+{
+    background: transparent url(/content/img/icons/pen.png) no-repeat center left;
+    font-size:0px;
+}
+
+.profile-icon
+{
+    background: transparent url(/content/img/icons/user.png) no-repeat center left;
+}
+
+.friends-icon
+{
+    background: transparent url(/content/img/icons/users.png) no-repeat center left;
+}
+
+
+
+
+/* Profile
+-----------*/
+
+div#profile-edit textarea
+{
+    min-height: 50px;
 }

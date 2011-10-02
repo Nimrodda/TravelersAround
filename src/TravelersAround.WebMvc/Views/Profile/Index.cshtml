@@ -7,31 +7,29 @@
 
 <h2>Your traveler profile</h2>
 <div class="rounded-box">
-    <fieldset>
-        <legend>Personal details</legend>
+    <div style="float:right;">@Html.ActionLink("Modify", "Edit", null, new { @class = "edit-icon", title = "Edit your profile" })</div>
 
-        <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = Model.Profile.TravelerID })" alt="Profile Picture" />
-        <div class="display-label">Firstname</div>
-        <div class="display-field">@Model.Profile.Firstname</div>
+    <img class="profile_pic display-field" src="@Url.Action("LoadPicture", "Profile", new { id = Model.Profile.TravelerID })" alt="Profile Picture" />
+    <div class="display-label">Firstname</div>
+    <div class="display-field">@Model.Profile.Firstname</div>
 
-        <div class="display-label">Lastname</div>
-        <div class="display-field">@Model.Profile.Lastname</div>
+    <div class="display-label">Lastname</div>
+    <div class="display-field">@Model.Profile.Lastname</div>
 
-        <div class="display-label">Birthdate</div>
-        <div class="display-field">@DateTime.Parse(Model.Profile.Birthdate).ToShortDateString()</div>
+    <div class="display-label">Birthdate</div>
+    <div class="display-field">@DateTime.Parse(Model.Profile.Birthdate).ToShortDateString()</div>
 
-        <div class="display-label">Status message</div>
-        <div class="display-field">@Model.Profile.StatusMessage</div>
+    <div class="display-label">Status message</div>
+    <div class="display-field">@Model.Profile.StatusMessage</div>
 
-        <div class="display-label">Gender</div>
-        <div class="display-field">@Model.Profile.Gender</div>
+    <div class="display-label">Gender</div>
+    <div class="display-field">@Model.Profile.Gender</div>
 
-        <div class="display-label">Available?</div>
-        <div class="display-field">@Model.Profile.IsAvailable</div>
-    </fieldset>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { @class = "submit-button" })
-    </p>
+    <div class="display-label">Available?</div>
+    <div class="display-field">@Model.Profile.IsAvailable</div>
+    
+        
+   
 
 </div>
 

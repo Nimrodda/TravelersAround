@@ -8,7 +8,7 @@
 <h2>@Model.Folder</h2>
 
 <div class="toolbar">
-    <a href="@Url.Action("Send")" title="Send a new message">Create New</a>
+    <a class="new-icon" href="@Url.Action("Send")">Send a message</a>
 </div>
 
 <p>
@@ -19,13 +19,13 @@
 <div class="main-area">
     <ul class="side-menu rounded-box">
         <li>
-            @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" })
+            @Html.ActionLink("Inbox", "Index", new { folder = "Inbox" }, new { @class = "inbox-icon" })
         </li>
         <li>
-            @Html.ActionLink("Sent", "Index", new { folder = "Sent" })
+            @Html.ActionLink("Sent", "Index", new { folder = "Sent" }, new { @class = "sent-icon" })
         </li>
         <li>
-            @Html.ActionLink("Trash", "Index", new { folder = "Trash" })
+            @Html.ActionLink("Trash", "Index", new { folder = "Trash" }, new { @class = "trash-icon" })
         </li>
     </ul>
     <div class="list">
@@ -42,7 +42,7 @@
                 <colgroup id="send-date"></colgroup>
                 <tr>
                     <th>
-                        <input type="submit" value="Delete" />
+                        <input class="submit-button" type="submit" value="Delete" />
                     </th>
                     <th>
                         Subject

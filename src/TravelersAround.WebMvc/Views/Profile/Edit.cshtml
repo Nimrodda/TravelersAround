@@ -9,21 +9,20 @@
 
 <h2>Edit profile</h2>
 <div class="rounded-box">
-
+<h3>Your current profile picture</h3>
 @using (Html.BeginForm("UploadPicture", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
         <div class="profilePicture">
             <img class="profile_pic" src="@Url.Action("LoadPicture","Profile", new { id = Model.TravelerID})" alt="Profile Picture" />
         </div>
-        <p>If you like, you can choose another picture for your profile</p>
         <input type="file" name="uploadedFile"  />
         @Html.ValidationMessage("uploadedFile")
-        <input type="submit" value="Upload" />
+        <input class="submit-button" type="submit" value="Upload" />
     </div>
 }
 </div>
-<div class="rounded-box">
+<div id="profile-edit" class="rounded-box">
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -64,7 +63,7 @@
             @Html.LabelFor(model => model.StatusMessage, "Status message")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StatusMessage)
+            @Html.TextAreaFor(model => model.StatusMessage)
             @Html.ValidationMessageFor(model => model.StatusMessage)
         </div>
 
@@ -88,12 +87,8 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input class="submit-button" type="submit" value="Save" />
         </p>
     </fieldset>
 }
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-

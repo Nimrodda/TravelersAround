@@ -24,17 +24,7 @@
             </div>
 
             <div id="menucontainer">
-                
-                <ul id="menu">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Find travelers around you", "Index", "Search")</li>
-                        <li>@Html.ActionLink("Messages", "Index", new { controller = "Messages", folder = "Inbox" })</li>
-                        <li>@Html.ActionLink("Friends", "Index", "Friends")</li>
-                        <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-                        <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
-                    }
-                </ul>
+                @Html.Partial("_Menu")
             </div>
         </div>
 
@@ -47,9 +37,17 @@
             </div>
         </div>
         <div id="footer">
+            <div id="copyright">
+                TravelersAround (c) 2011 developed by <a href="http://fi.linkedin.com/in/nimroddayan">Nimrod Dayan</a>
+            </div>
             <ul>
                 <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Rules</a></li>
+                @*<li><a href="https://github.com/Nimrodda/TravelersAround">Sorce code</a></li>*@
             </ul>
+            
         </div>
     </div>
 </body>
