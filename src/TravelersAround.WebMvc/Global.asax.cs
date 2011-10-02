@@ -5,12 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TravelersAround.WebMvc.Models;
+using TravelersAround.ServiceProxy;
 
 namespace TravelersAround.WebMvc
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -37,6 +35,7 @@ namespace TravelersAround.WebMvc
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ControllerBuilder.Current.SetControllerFactory(new IoCControllerFactory());
+            BootStraper.Initialize();
         }
     }
 }

@@ -13,14 +13,16 @@ using TravelersAround.ServiceProxy.ViewModels;
 
 namespace TravelersAround.WebMvc.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
 
         private IFormsAuthenticationService _formsService;
         private IMembershipServiceFacade _membershipService;
 
         public AccountController(IMembershipServiceFacade membershipService,
-                                IFormsAuthenticationService formsService)
+                                IFormsAuthenticationService formsService,
+                                ITravelersAroundServiceFacade taService)
+            :base(taService)
         {
             _membershipService = membershipService;
             _formsService = formsService;
@@ -40,7 +42,8 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _membershipService.Login(model);
                 if (model.Success)
                 {
-                    if (model.NewMessagesCount > 0) Session["NewMessagesCount"] = model.NewMessagesCount;
+                    CurrentTravelerProfileCache = model.MapToProfileDisplayView();
+                    
                     _formsService.SignIn(model.ApiKey, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {

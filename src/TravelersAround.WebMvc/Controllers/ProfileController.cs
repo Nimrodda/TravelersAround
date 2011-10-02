@@ -19,8 +19,12 @@ namespace TravelersAround.WebMvc.Controllers
         //ProfileDisplay
         public ActionResult Index()
         {
-            ProfileDisplayView model = _taService.DisplayProfile();
-            if (!model.Success)
+            ProfileDisplayView model = CurrentTravelerProfileCache ?? _taService.DisplayProfile();
+            if (model.Success)
+            {
+                CurrentTravelerProfileCache = model;
+            }
+            else
             {
                 ModelState.AddModelError("", model.ResponseMessage);
             }
@@ -31,10 +35,18 @@ namespace TravelersAround.WebMvc.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            ProfileUpdateView model = _taService.DisplayProfile().ConvertToProfileUpdateView();
+            //TODO: change mapping from ProfileDispaly to ProfileUpdate instead of TravaelerView and configure 
+            ProfileUpdateView model = (CurrentTravelerProfileCache ?? _taService.DisplayProfile()).MapToProfileUpdateView();
+            if (model.Success)
+            {
+                CurrentTravelerProfileCache = model.MapToProfileDisplayView();
+            }
+            else
+            {
+                ModelState.AddModelError("", model.ResponseMessage);
+            }
             ViewBag.NotificationMessage = TempData["NotificationMessage"];
-            
-            if (IsAsyncRequest) 
+            if (Request.IsAjaxRequest()) 
                 return Json(model, JsonRequestBehavior.AllowGet);
             else 
                 return View(model);
@@ -48,6 +60,7 @@ namespace TravelersAround.WebMvc.Controllers
                 model = _taService.UpdateProfile(model);
                 if (model.Success)
                 {
+                    CurrentTravelerProfileCache = null;
                     if (IsAsyncRequest) return Json(model);
                     TempData["NotificationMessage"] = R.String.SuccessMessages.SuccessProfileUpdate;
                     return RedirectToAction("Edit");
@@ -96,3 +109,4 @@ namespace TravelersAround.WebMvc.Controllers
         }
     }
 }
+

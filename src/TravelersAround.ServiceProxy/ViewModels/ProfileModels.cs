@@ -14,10 +14,12 @@ namespace TravelersAround.ServiceProxy.ViewModels
     {
         public TravelerView Profile { get; set; }
 
-        public ProfileUpdateView ConvertToProfileUpdateView()
+        public ProfileUpdateView MapToProfileUpdateView()
         {
-            Mapper.CreateMap<TravelerView, ProfileUpdateView>();
-            return Mapper.Map<TravelerView, ProfileUpdateView>(this.Profile);
+            //TODO: Fix mapping. Success is always false
+            ProfileUpdateView destObj = Mapper.Map<ProfileDisplayView, ProfileUpdateView>(this);
+            destObj = Mapper.Map<TravelerView, ProfileUpdateView>(this.Profile);
+            return destObj;
         }
     }
 
@@ -46,6 +48,12 @@ namespace TravelersAround.ServiceProxy.ViewModels
         [Required]
         [DisplayName("Available?")]
         public bool IsAvailable { get; set; }
+
+        public ProfileDisplayView MapToProfileDisplayView()
+        {
+            ProfileDisplayView destObj = Mapper.Map<ProfileUpdateView, ProfileDisplayView>(this);
+            return destObj;
+        }
     }
    
 }

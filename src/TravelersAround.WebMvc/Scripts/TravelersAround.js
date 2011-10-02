@@ -62,6 +62,12 @@ function statusMessageAsyncSubmit(formData) {
     return false;
 }
 
+function getTravelerInfoCallback() {
+}
+
+/* UI manipulators
+---------------------*/
+
 
 /* initializers
 ------------------*/
@@ -70,12 +76,15 @@ function getTravelerInfo() {
     var data;
     $.get("/profile/edit?async=true", null, function (data) {
         traveler = data;
+        getTravelerInfoCallback();
     });
 }
 
+//page init
 $(document).ready(function () {
     ticker();
     getTravelerInfo();
+    
 });  
     
     

@@ -17,7 +17,15 @@
     <div class="display-field">@Model.Profile.Lastname</div>
 
     <div class="display-label">Birthdate</div>
-    <div class="display-field">@DateTime.Parse(Model.Profile.Birthdate).ToShortDateString()</div>
+    @{ 
+        DateTime temp;
+        string birthdate = "";
+        if (DateTime.TryParse(Model.Profile.Birthdate, out temp))
+        {
+            birthdate = temp.ToShortDateString();
+        }
+    }
+    <div class="display-field">@birthdate</div>
 
     <div class="display-label">Status message</div>
     <div class="display-field">@Model.Profile.StatusMessage</div>

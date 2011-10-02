@@ -4,12 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TravelersAround.ServiceProxy;
+using TravelersAround.ServiceProxy.ViewModels;
 
 namespace TravelersAround.WebMvc.Controllers
 {
     public abstract class ControllerBase : Controller
     {
         protected const int PAGE_SIZE = 10;
+        protected ProfileDisplayView CurrentTravelerProfileCache
+        {
+            get
+            {
+                return (ProfileDisplayView)Session["CurrentTravelerProfile"];
+            }
+            set
+            {
+                Session["CurrentTravelerProfile"] = value;
+            }
+        }
 
         protected ITravelersAroundServiceFacade _taService;
         protected bool IsAsyncRequest { get; private set; }
@@ -28,5 +40,7 @@ namespace TravelersAround.WebMvc.Controllers
             
             base.OnActionExecuting(filterContext);
         }
+
+        
     }
 }

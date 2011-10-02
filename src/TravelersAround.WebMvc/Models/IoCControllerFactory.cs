@@ -12,7 +12,10 @@ namespace TravelersAround.WebMvc.Models
     {
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return (new StandardKernel(new WebMvcModule()).Get(controllerType)) as IController;
+            if (controllerType != null)
+                return (new StandardKernel(new WebMvcModule()).Get(controllerType)) as IController;
+            else
+                return base.GetControllerInstance(requestContext, controllerType);
         }
     }
 }
