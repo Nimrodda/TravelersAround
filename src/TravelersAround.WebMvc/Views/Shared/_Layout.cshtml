@@ -30,9 +30,7 @@
 
         <div id="main">
             <div id="content-container">
-                <div id="ui_message">
-                    <span class="notification_message">@ViewBag.NotificationMessage</span>
-                </div>
+                @Html.Partial("_UiNotification")
                 @RenderBody()
             </div>
         </div>
