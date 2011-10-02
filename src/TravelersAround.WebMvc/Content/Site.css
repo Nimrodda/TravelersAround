@@ -1,9 +1,4 @@
-﻿/*----------------------------------------------------------
-The base color for this template is #5c87b2. If you'd like
-to use a different color start by replacing all instances of
-#5c87b2 with your new color.
-----------------------------------------------------------*/
-body
+﻿body
 {
     background-color: #FFFFFF;
     font-size: 75%;
@@ -99,11 +94,13 @@ page width. Or, you can specify an exact pixel width. */
 #header
 {
     position: relative;
-    margin-bottom: 30px;
     color: #000;
     padding: 0;
     float: left;
     width: 100%;
+    padding-left:30;
+    margin-bottom:50px;
+    margin-top:20px;
 }
 
 #header h1
@@ -119,19 +116,20 @@ page width. Or, you can specify an exact pixel width. */
 
 #main
 {
-    padding: 30px 0px 0px 30px;
-    background-color: #fff;
+    padding-left:100px;
     margin-bottom: 30px;
     _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
-    width:100%;
+    width:800px;
     min-height:500px;
+    float:left;
 }
 
 #footer
 {
     border-style: solid none none none;
     border-top-width: 1px;
-    display:block;
+    float:left;
+    width:100%;
 }
 
 ul#footer li
@@ -174,17 +172,19 @@ ul#menu li a
     line-height: 2.8em;
     background-color: #e8eef4;
     color: #034af3;
+    border-top-left-radius:15px 15px;
+    border-top-right-radius:15px 15px;
 }
 
 ul#menu li a:hover
 {
-    background-color: #fff;
+    background-color: #99CCFF;
     text-decoration: none;
 }
 
 ul#menu li a:active
 {
-    background-color: #a6e2a6;
+    background-color: #99CCFF;
     text-decoration: none;
 }
 
@@ -267,9 +267,8 @@ table th
 
 #menucontainer
 {
-    text-align:right;
-    float:right;
-    padding-top:10px;
+    margin-top:62px;
+    float:left;
 }
 
 div#logo
@@ -287,9 +286,33 @@ div#logo img
 
 #status-message-container
 {
-    padding-left:150px;
+    background-color: #e8eef4;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 150px;
+    padding-top: 5px;
+    padding-bottom:10px;
+    padding-left:25px;
+    padding-right:25px;
+    width: 406px;
 }
 
+#login-display-container
+{
+    float:right;
+}
+
+.rounded-box
+{
+    background-color:#e8eef4;
+    margin-left:20px;
+    padding:5px;
+    border-radius:15px;
+}
+
+#content-container
+{
+    background-color:White;
+}
 #logindisplay
 {
     font-size:1.1em;
@@ -297,6 +320,7 @@ div#logo img
     text-align:right;
     margin:10px;
     width:auto;
+    float:right;
 }
 
 #logindisplay a:link

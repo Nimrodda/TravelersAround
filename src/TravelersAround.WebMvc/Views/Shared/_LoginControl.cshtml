@@ -1,0 +1,27 @@
+﻿@if (!Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("logon"))
+{
+    if (!Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOn", "Account"))
+        {
+        <div id="logindisplay" class="rounded-box">
+            <div class="editor-label">
+                @Html.Label("Email")
+                @Html.TextBox("Email")
+            </div>    
+            <div class="editor-label">
+                @Html.Label("Password")
+                @Html.Password("Password")
+            </div>
+            <div class="editor-label">
+                @Html.CheckBox("RememberMe")
+                @Html.Label("RememberMe")
+                <input type="submit" value="Login" />
+            </div>
+            <div>
+                @Html.ActionLink("Register", "Register", "Account")
+            </div>
+        </div>
+        }
+    }
+}

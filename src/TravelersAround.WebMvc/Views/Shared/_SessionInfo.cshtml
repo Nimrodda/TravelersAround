@@ -1,0 +1,12 @@
+﻿@if (Request.IsAuthenticated)
+{
+    TravelersAround.ServiceProxy.ViewModels.ProfileDisplayView TravelerProfile =
+        (TravelersAround.ServiceProxy.ViewModels.ProfileDisplayView)Session["CurrentTravelerProfile"];
+    
+    <div class="rounded-box">
+        <p>Hello @String.Concat(TravelerProfile.Profile.Firstname, " ", TravelerProfile.Profile.Lastname)</p>
+        
+        <p>You have @TravelerProfile.Profile.UnreadMessages unread messages!</p>
+    </div>
+
+}
