@@ -315,6 +315,11 @@ div#logo img
     margin:10px 0px 10px 0px;
 }
 
+#session-info
+{
+    width:230px;
+    height:89px;
+}
 #content-container
 {
     background-color:White;
@@ -515,7 +520,7 @@ fieldset.send-message input[type="text"]
 
 .toolbar
 {
-    padding-left:85px;
+    padding-left:100px;
 }
 
 /* Search
@@ -646,4 +651,10 @@ profile-icon, friends-icon, .notification_message,
 div#profile-edit textarea
 {
     min-height: 50px;
+}
+
+div#birthday fieldset
+{
+    border: 0 none;
+    padding: 0px;
 }

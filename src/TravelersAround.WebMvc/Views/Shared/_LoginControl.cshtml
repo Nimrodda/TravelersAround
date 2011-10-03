@@ -1,8 +1,8 @@
-﻿@if (!Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("logon"))
+﻿@if (!Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("login"))
 {
     if (!Request.IsAuthenticated)
     {
-        using (Html.BeginForm("LogOn", "Account"))
+        using (Html.BeginForm("Login", "Account"))
         {
         <div id="logindisplay" class="rounded-box">
             <div class="editor-label">

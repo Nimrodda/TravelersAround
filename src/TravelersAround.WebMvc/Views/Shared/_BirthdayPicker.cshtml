@@ -1,0 +1,18 @@
+﻿<select name="day">
+    @for (int day = 1; day <= 31; day++)
+    {
+        <option value="@day"></option>    
+    }
+</select>
+<select name="month">
+    @for (int month = 1; month <= 12; month++)
+    {
+        <option value="@month"></option>    
+    }
+</select>
+<select name="year">
+    @for (int year = DateTime.Now.Year; year > DateTime.Now.Year - 100; year--)
+    {
+        <option value="@year"></option>    
+    }
+</select>

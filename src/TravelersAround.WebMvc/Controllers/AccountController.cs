@@ -29,13 +29,13 @@ namespace TravelersAround.WebMvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult LogOn()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LogOn(LoginView model, string returnUrl)
+        public ActionResult Login(LoginView model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace TravelersAround.WebMvc.Controllers
         }
 
         [Authorize]
-        public ActionResult LogOff()
+        public ActionResult Logout()
         {
             _membershipService.Logout(User.Identity.Name);
             _formsService.SignOut();
@@ -87,7 +87,7 @@ namespace TravelersAround.WebMvc.Controllers
                 if (model.Success)
                 {
                     _formsService.SignIn(model.ApiKey, true);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Search");
                 }
                 else
                 {

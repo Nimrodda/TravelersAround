@@ -43,7 +43,7 @@ function ticker() {
 /* Ajax submit handlers
 -----------------------*/
 function printAsyncResponse(message, container) {
-    $(container).find('div.submit-button')
+    $(container).find('.submit-button').parent()
                 .append('<span>' + message.ResponseMessage + '</span>')
                 .find('span')
                 .fadeOut(2000, function () {
@@ -56,17 +56,25 @@ function printAsyncResponse(message, container) {
 function statusMessageAsyncSubmit(formData) {
     var data;
     traveler.StatusMessage = $(formData.StatusMessage).val();
-    $.post('/profile/edit?async=true', traveler, function (data) {
+    $.post('/profile/edit', traveler, function (data) {
         printAsyncResponse(data, $('#status-message-container'));
     });
     return false;
 }
 
 function getTravelerInfoCallback() {
+    updateStatusMessage();
+    
+
 }
 
 /* UI manipulators
 ---------------------*/
+
+function updateStatusMessage() {
+    $('#status-message-container textarea').html(traveler.StatusMessage);
+}
+
 
 
 /* initializers
@@ -74,7 +82,7 @@ function getTravelerInfoCallback() {
 
 function getTravelerInfo() {
     var data;
-    $.get("/profile/edit?async=true", null, function (data) {
+    $.get("/profile/edit", null, function (data) {
         traveler = data;
         getTravelerInfoCallback();
     });

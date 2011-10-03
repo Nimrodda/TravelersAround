@@ -16,10 +16,11 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
         public ProfileUpdateView MapToProfileUpdateView()
         {
-            //TODO: Fix mapping. Success is always false
-            ProfileUpdateView destObj = Mapper.Map<ProfileDisplayView, ProfileUpdateView>(this);
-            destObj = Mapper.Map<TravelerView, ProfileUpdateView>(this.Profile);
-            return destObj;
+             ProfileUpdateView destObj = Mapper.Map<TravelerView, ProfileUpdateView>(this.Profile);
+             destObj.Success = this.Success;
+             return destObj;
+            
+                
         }
     }
 
@@ -51,8 +52,11 @@ namespace TravelersAround.ServiceProxy.ViewModels
 
         public ProfileDisplayView MapToProfileDisplayView()
         {
-            ProfileDisplayView destObj = Mapper.Map<ProfileUpdateView, ProfileDisplayView>(this);
-            return destObj;
+            return new ProfileDisplayView
+            {
+                Profile = Mapper.Map<ProfileUpdateView, TravelerView>(this),
+                Success = this.Success
+            };
         }
     }
    

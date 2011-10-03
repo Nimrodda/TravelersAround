@@ -31,7 +31,14 @@ namespace TravelersAround.WebMvc.Controllers
             ViewBag.NotificationMessage = TempData["NotificationMessage"];
             return View(model);
         }
-        
+
+        [ChildActionOnly]
+        public ActionResult SessionInfo()
+        {
+            ProfileDisplayView model = CurrentTravelerProfileCache ?? _taService.DisplayProfile();
+            return PartialView("_SessionInfo", model);
+        }
+
         [HttpGet]
         public ActionResult Edit()
         {
@@ -61,7 +68,7 @@ namespace TravelersAround.WebMvc.Controllers
                 if (model.Success)
                 {
                     CurrentTravelerProfileCache = null;
-                    if (IsAsyncRequest) return Json(model);
+                    if (Request.IsAjaxRequest()) return Json(model);
                     TempData["NotificationMessage"] = R.String.SuccessMessages.SuccessProfileUpdate;
                     return RedirectToAction("Edit");
                 }

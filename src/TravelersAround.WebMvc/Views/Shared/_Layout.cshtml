@@ -15,12 +15,15 @@
 
         <div id="header">
             <div id="logo">
-                <a href="@Url.Action("Index", "Home")" ><img src="@Url.Content("~/Content/img/logo.png")" alt="TravelersAround LOGO" /></a>
+                <a href="@Url.Action("Index", "Home")" ><img border="0" src="@Url.Content("~/Content/img/logo.png")" alt="TravelersAround LOGO" /></a>
             </div>
 
             <div id="login-display-container">
                 @Html.Partial("_LoginControl")
-                @Html.Partial("_SessionInfo")
+                @if (Request.IsAuthenticated)
+                {
+                    Html.RenderAction("SessionInfo", "Profile");
+                }
             </div>
 
             <div id="menucontainer">

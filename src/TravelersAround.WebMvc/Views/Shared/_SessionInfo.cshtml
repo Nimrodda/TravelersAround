@@ -1,11 +1,8 @@
-﻿@if (Request.IsAuthenticated)
-{
-    
-    
-    <div class="rounded-box">
-        <p>Hello </p>
+﻿@model TravelersAround.ServiceProxy.ViewModels.ProfileDisplayView
+           
+<div id="session-info" class="rounded-box">
+    <p>Hello <span id="traveler-name">@Model.Profile.Firstname</span></p>
         
-        <p>You have  unread messages!</p>
-    </div>
+    <p><span id=""></span></p>
+</div>
 
-}

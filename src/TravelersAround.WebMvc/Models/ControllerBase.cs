@@ -24,23 +24,10 @@ namespace TravelersAround.WebMvc.Controllers
         }
 
         protected ITravelersAroundServiceFacade _taService;
-        protected bool IsAsyncRequest { get; private set; }
-        private bool _isAsync;
 
         public ControllerBase(ITravelersAroundServiceFacade taService)
         {
             _taService = taService;
         }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            string async = Request.QueryString["async"];
-            bool.TryParse(async, out _isAsync);
-            IsAsyncRequest = _isAsync;
-            
-            base.OnActionExecuting(filterContext);
-        }
-
-        
     }
 }
