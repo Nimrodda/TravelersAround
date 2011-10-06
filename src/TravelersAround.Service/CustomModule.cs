@@ -26,7 +26,7 @@ namespace TravelersAround.Service
             Bind<ICache>().To<SQLiteCache>()
                 .WithConstructorArgument("idleTime", Int32.Parse(ConfigurationManager.AppSettings["IdleTime"]))
                 .WithConstructorArgument("idleUsersCleanUpTime", Int32.Parse(ConfigurationManager.AppSettings["IdleUsersCleanUpTime"]));
-            Bind<ILog>().ToMethod(x => LogManager.GetLogger("TEST"));
+            Bind<ILog>().ToMethod(x => LogManager.GetLogger("WebService"));
         }
     }
 }

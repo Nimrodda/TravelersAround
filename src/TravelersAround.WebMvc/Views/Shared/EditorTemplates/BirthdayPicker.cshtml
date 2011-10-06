@@ -1,0 +1,8 @@
+﻿@model TravelersAround.ServiceProxy.BirthdayPicker
+
+@Html.DropDownListFor(model => model.Day, Enumerable.Range(1, 31).Select(day => new SelectListItem { Text = day.ToString(), Value = day.ToString(), Selected = (Model != null) ? Model.Day  == day: false }), "Day")
+@Html.DropDownListFor(model => model.Month, Enumerable.Range(1, 12).Select(month => new SelectListItem { Text = month.ToString(), Value = month.ToString(), Selected = (Model != null) ? Model.Month == month : false }), "Month")
+@Html.DropDownListFor(model => model.Year, Enumerable.Range(DateTime.Now.Year - 99, 100).Select(year => new SelectListItem { Text = year.ToString(), Value = year.ToString(), Selected = (Model != null) ? Model.Year == year : false }).Reverse(), "Year")
+@Html.ValidationMessageFor(model => model.Day)
+@Html.ValidationMessageFor(model => model.Month)
+@Html.ValidationMessageFor(model => model.Year)

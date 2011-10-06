@@ -15,7 +15,7 @@ namespace TravelersAround.ServiceProxy
             Mapper.CreateMap<ProfileDisplayView, ProfileUpdateView>();
             Mapper.CreateMap<ProfileUpdateView, TravelerView>();
             Mapper.CreateMap<LoginView, ProfileDisplayView>();
-            Mapper.CreateMap<TravelerView, ProfileUpdateView>();
+            Mapper.CreateMap<TravelerView, ProfileUpdateView>().ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => new BirthdayPicker(src.Birthdate)));
         }
         
     }

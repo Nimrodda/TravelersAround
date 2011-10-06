@@ -10,7 +10,7 @@ var traveler = { "TravelerID": "", "Firstname": "", "Lastname": "", "Birthdate":
 
 function tick() {
     var data;
-    $.post("ajax/tick", null, function (data) {
+    $.post("/ajax/tick", null, function (data) {
         tickCallback(data);
     });
     

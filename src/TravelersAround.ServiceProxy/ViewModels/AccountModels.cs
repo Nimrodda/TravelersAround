@@ -88,9 +88,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         [Required]
         public string Lastname { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime Birthdate { get; set; }
+        public BirthdayPicker Birthdate { get; set; }
 
         public string ApiKey { get; internal set; }
     }

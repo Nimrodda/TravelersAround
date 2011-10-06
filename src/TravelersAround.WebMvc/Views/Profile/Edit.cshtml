@@ -47,15 +47,7 @@
             @Html.LabelFor(model => model.Birthdate)
         </div>
         <div class="editor-field">
-            @{ 
-                DateTime temp;
-                string birthdate = "";
-                if (DateTime.TryParse(Model.Birthdate, out temp))
-                {
-                    birthdate = temp.ToShortDateString();
-                }
-            }
-            <input type="text" name="Birthdate" value="@birthdate" />
+            @Html.EditorFor(model => model.Birthdate)
             @Html.ValidationMessageFor(model => model.Birthdate)
         </div>
 

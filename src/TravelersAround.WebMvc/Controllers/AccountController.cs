@@ -68,6 +68,7 @@ namespace TravelersAround.WebMvc.Controllers
         {
             _membershipService.Logout(User.Identity.Name);
             _formsService.SignOut();
+            Session.Abandon();
             
             return RedirectToAction("Index", "Home");
         }

@@ -22,12 +22,13 @@ namespace TravelersAround.WebMvc.Controllers
                 Session["CurrentTravelerProfile"] = value;
             }
         }
-
+        
         protected ITravelersAroundServiceFacade _taService;
 
         public ControllerBase(ITravelersAroundServiceFacade taService)
         {
             _taService = taService;
+            
         }
     }
 }

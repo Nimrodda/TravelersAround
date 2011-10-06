@@ -100,7 +100,6 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bday-picker.min.js" />
     <Content Include="Scripts\TravelersAround.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -215,7 +214,7 @@
     <Content Include="Views\Shared\_UiNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_BirthdayPicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BirthdayPicker.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

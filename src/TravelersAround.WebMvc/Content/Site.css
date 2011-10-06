@@ -361,7 +361,9 @@ div#logo img
 {
     color: #ff0000;
     background: transparent url(/content/img/icons/note.png) no-repeat center left;
+    padding-top:10px;
     padding-left: 20px;
+    display:block;
 }
 
 .field-validation-valid
@@ -379,6 +381,7 @@ div#logo img
 {
     font-weight: bold;
     color: #ff0000;
+    background: transparent url(/content/img/icons/note.png) no-repeat center left;
 }
 
 .validation-summary-valid
@@ -388,8 +391,9 @@ div#logo img
 
 #ui_message
 {
-    width:75%;
+    width: 75%;
     margin-left: 50px;
+    background-color: #FFFFCC;
 }
 p.notification_message
 {

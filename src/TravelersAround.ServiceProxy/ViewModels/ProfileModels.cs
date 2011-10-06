@@ -34,9 +34,7 @@ namespace TravelersAround.ServiceProxy.ViewModels
         [Required]
         public string Lastname { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public string Birthdate { get; set; }
+        public BirthdayPicker Birthdate { get; set; }
 
         [Required]
         [DisplayName("Staus message")]

@@ -42,7 +42,6 @@ namespace TravelersAround.WebMvc.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            //TODO: change mapping from ProfileDispaly to ProfileUpdate instead of TravaelerView and configure 
             ProfileUpdateView model = (CurrentTravelerProfileCache ?? _taService.DisplayProfile()).MapToProfileUpdateView();
             if (model.Success)
             {
