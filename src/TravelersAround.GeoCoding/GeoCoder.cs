@@ -14,7 +14,7 @@ namespace TravelersAround.GeoCoding
     {
         public GeoCoordinates ConvertIPAddressToGeoCoordinates(string ipAddress)
         {
-            string path = Path.Combine(Path.GetDirectoryName(new System.Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath), "GeoLiteCity.dat");
+            string path = Path.Combine(Path.GetDirectoryName(new System.Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath), "App_Data\\GeoLiteCity.dat");
             if (!File.Exists(path)) throw new FileNotFoundException(path);
             LookupService ls = new LookupService(path, LookupService.GEOIP_STANDARD);
             Location loc = ls.getLocation(ipAddress);

@@ -27,7 +27,6 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-GeoLiteCity.dat
 *.svclog
 testimpactdata.sdf
 log*.txt
