@@ -76,6 +76,7 @@ namespace TravelersAround.WebMvc.Controllers
                     ModelState.AddModelError("", model.ResponseMessage);
                 }
             }
+            //TODO: handle situation when model is not valid and return proper error for ajax calls
             return View(model);
         }
 

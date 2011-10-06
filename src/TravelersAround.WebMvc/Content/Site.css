@@ -382,6 +382,7 @@ div#logo img
     font-weight: bold;
     color: #ff0000;
     background: transparent url(/content/img/icons/note.png) no-repeat center left;
+    padding-left: 20px;
 }
 
 .validation-summary-valid

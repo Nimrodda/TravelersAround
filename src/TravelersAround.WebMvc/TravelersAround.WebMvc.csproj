@@ -100,6 +100,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\postify.js" />
     <Content Include="Scripts\TravelersAround.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

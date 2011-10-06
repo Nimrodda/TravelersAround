@@ -56,7 +56,7 @@ function printAsyncResponse(message, container) {
 function statusMessageAsyncSubmit(formData) {
     var data;
     traveler.StatusMessage = $(formData.StatusMessage).val();
-    $.post('/profile/edit', traveler, function (data) {
+    $.post('/profile/edit', $.postify(traveler), function (data) {
         printAsyncResponse(data, $('#status-message-container'));
     });
     return false;
