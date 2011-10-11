@@ -19,7 +19,7 @@
             <img class="profile_pic" src="@Url.Action("LoadPicture", "Profile", new { id = traveler.TravelerID })" alt="@String.Concat(traveler.Firstname, " ", traveler.Lastname)" />
             <div class="traveler-info">
                 <p>@traveler.Firstname @traveler.Lastname</p>
-                <p>@(DateTime.Now.Year - DateTime.Parse(traveler.Birthdate).Year), @traveler.Gender</p>
+                <p>@traveler.Age, @traveler.Gender</p>
                 <p>@traveler.City, @traveler.Country</p>
             </div>
             <div class="traveler-statusmsg">

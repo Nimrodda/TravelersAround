@@ -18,7 +18,7 @@ namespace TravelersAround.WebMvc.Controllers
 
         public ActionResult Index(SearchView model, int p = 0)
         {
-            model.IPAddress = Request.UserHostAddress;
+            model.IPAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             
 #if DEBUG
             model.IPAddress = "80.221.20.181";

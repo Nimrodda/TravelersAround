@@ -35,6 +35,8 @@ namespace TravelersAround.DataContracts.Views
         public string City { get; set; }
         [DataMember]
         public int UnreadMessages { get; set; }
+        [DataMember]
+        public int Age { get; set; }
 
 
     }

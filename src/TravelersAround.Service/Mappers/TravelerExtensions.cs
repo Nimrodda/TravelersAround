@@ -26,7 +26,8 @@ namespace TravelersAround.Service.Mappers
                 Longtitude = traveler.Longtitude,
                 IsOnline = traveler.IsOnline,
                 City = traveler.City,
-                Country = traveler.Country
+                Country = traveler.Country,
+                Age = DateTime.Now.Year - traveler.Birthdate.Year
                 
             };
         }

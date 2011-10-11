@@ -172,7 +172,7 @@
     <value>An error has occured while processing your request, try again later</value>
   </data>
   <data name="InvalidTravelerLocationException" xml:space="preserve">
-    <value>Your location cannot be determined at that moment. Please try again later.</value>
+    <value>Your location cannot be determined right now. Please try again later.</value>
   </data>
   <data name="InvalidUserName" xml:space="preserve">
     <value>Invalid email format</value>
